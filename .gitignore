@@ -1,0 +1,36 @@
+# Dependency directories
+node_modules/
+node_modules
+
+# TypeScript cache
+*.tsbuildinfo
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Optional stylelint cache
+.stylelintcache
+
+# dotenv environment variable files
+.env
+.env.development.local
+.env.test.local
+.env.production.local
+.env.local
+
+# Nova editor
+.nova
+
+# @cre-ative/kram intermediate files
+kram_modules/
+
+# MacOS
+.DS_Store
+
+# Yalc
+/.yalc
+.yalc
+yalc.lock

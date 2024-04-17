@@ -8,37 +8,37 @@
 <body>
   <header class="navbar">
     <div class="navbar-content">
-      <a class="logo"></a>
-      <h1>SLOStudySpots</h1>
+      <a class="logo" href="index.html">
+        <img src="icons/lamp.svg" alt="SLOStudySpots Logo" width="50px" />
+        <h1>SLOStudySpots</h1>
+      </a>
 
       <section class="search-box">
         <form>
           <input
             type="text"
-            name="search"
             placeholder="Search for study spots..."
           />
         </form>
       </section>
 
       <div class="right-navbar">
+
+        <a class="group-icon" href="ranking.html">
+          <img src="icons/ranking.svg" alt="ranking-icon" width="40px" />
+        </a>
+        
         <a class="group-icon" href="create.html">
           <img src="icons/create.svg" alt="create-icon" width="40px" />
         </a>
 
         <a class="navbar-menu" href="profile.html">
-
-          <img src="images/avatar.png" alt="Profile" width="40px" />
+          <img src="icons/avatar.svg" alt="profile-icon" width="40px" />
         </a>
+
       </div>
     </div>
   </header>
-
-  <!-- <nav class="search-container">
-    <label for="searchInput" class="visually-hidden">Search study spots</label>
-    <input type="search" placeholder="Search for study spots..." id="searchInput" class="form-control">
-    <button onclick="searchSpots()" class="btn btn-primary mt-2">Search</button>
-  </nav> -->
 
   <section class="content-container">
     <h3>Welcome to SLOStudySpots</h3>
@@ -47,17 +47,30 @@
     <div id="spotsList">
 
       <div class="study-spot">
-        <h2>SloDoCo Donuts</h2>
-        <img src="./images/slodoco.jpeg"/>
-        <p><strong>Rating:</strong> ★★★★☆ 4/5 (12 reviews)</p>
-        <p><strong>Review:</strong> Spacious and comfortable, with excellent donuts. A bit crowded at times but still a good spot.</p>
+        <a href="study-spots/spot1.html">
+          <h2>SloDoCo Donuts</h2>
+          <img src="./images/slodoco.jpeg" width="500px"/>
+          <p><strong>Rating:</strong> ★★★★☆ 4/5 (12 reviews)</p>
+          <p><strong>Review:</strong> Spacious and comfortable, with excellent donuts. A bit crowded at times but still a good spot.</p>
+        </a>
       </div>
 
       <div class="study-spot">
-        <h2>Robert E. Kennedy Library</h2>
-        <img src="./images/kennedylib.jpeg"/>
-        <p><strong>Rating:</strong> ★★★☆☆ 3/5 (5 reviews)</p>
-        <p><strong>Review:</strong> Great quiet place with plenty of natural light and ample seating. Perfect for long study sessions.</p>
+        <a href="study-spots/spot1.html">
+          <h2>Robert E. Kennedy Library</h2>
+          <img src="./images/kennedylib.jpeg" width="500px"/>
+          <p><strong>Rating:</strong> ★★★☆☆ 3/5 (5 reviews)</p>
+          <p><strong>Review:</strong> Great quiet place with plenty of natural light and ample seating. Perfect for long study sessions.</p>
+        </a>
+      </div>
+
+      <div class="study-spot">
+        <a href="study-spots/spot1.html">
+          <h2>Kreuzberg California</h2>
+          <img src="./images/kreuzberg.jpeg" width="500px"/>
+          <p><strong>Rating:</strong> ★★★★★ 5/5 (10 reviews)</p>
+          <p><strong>Review:</strong> Cozy, artsy, and social study atmosphere! </p>
+        </a>
       </div>
 
     </div>

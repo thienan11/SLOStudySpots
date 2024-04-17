@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SLOStudySpots</title>
+</head>
+<body>
+  <header class="navbar">
+    <div class="navbar-content">
+      <a class="logo" href="../index.html">
+        <img src="../icons/lamp.svg" alt="SLOStudySpots Logo" width="50px" />
+        <h1>SLOStudySpots</h1>
+      </a>
+
+      <section class="search-box">
+        <form>
+          <input
+            type="text"
+            placeholder="Search for study spots..."
+          />
+        </form>
+      </section>
+
+      <div class="right-navbar">
+
+        <a class="group-icon" href="ranking.html">
+          <img src="../icons/ranking.svg" alt="ranking-icon" width="40px" />
+        </a>
+        
+        <a class="group-icon" href="create.html">
+          <img src="../icons/create.svg" alt="create-icon" width="40px" />
+        </a>
+
+        <a class="navbar-menu" href="profile.html">
+          <img src="../icons/avatar.svg" alt="profile-icon" width="40px" />
+        </a>
+
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="photo-upload">
+      <h2>Upload Your Photos</h2>
+      <form action="/submit-photo" method="post" enctype="multipart/form-data">
+        <input type="file" id="photo" name="photo" accept="image/*">
+        <button type="submit">Upload Photo</button>
+      </form>
+    </section>
+
+    <section class="gallery">
+      <h2>Gallery</h2>
+      <div class="photo">
+        <img src="../images/slodoco.jpeg" alt="Inside view" width="300px">
+      </div>
+      <div class="photo">
+          <img src="../images/slodoco2.jpeg" alt="Donut selection" width="300px">
+      </div>
+      <div class="photo">
+        <img src="../images/slodoco3.jpeg" alt="Study area" width="300px">
+      </div>
+      <!-- Additional photos can be added here -->
+    </section>
+  </main>
+
+  <footer>
+      <p>© 2024 SLOStudySpots. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>

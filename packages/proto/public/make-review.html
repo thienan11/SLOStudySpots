@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SLOStudySpots</title>
+</head>
+<body>
+  <header class="navbar">
+    <div class="navbar-content">
+      <a class="logo" href="index.html">
+        <img src="icons/lamp.svg" alt="SLOStudySpots Logo" width="50px" />
+        <h1>SLOStudySpots</h1>
+      </a>
+
+      <section class="search-box">
+        <form>
+          <input
+            type="text"
+            placeholder="Search for study spots..."
+          />
+        </form>
+      </section>
+
+      <div class="right-navbar">
+
+        <a class="group-icon" href="ranking.html">
+          <img src="icons/ranking.svg" alt="ranking-icon" width="40px" />
+        </a>
+        
+        <a class="group-icon" href="create.html">
+          <img src="icons/create.svg" alt="create-icon" width="40px" />
+        </a>
+
+        <a class="navbar-menu" href="profile.html">
+          <img src="icons/avatar.svg" alt="profile-icon" width="40px" />
+        </a>
+
+      </div>
+    </div>
+  </header>
+
+  <section class="add-review">
+    <h3>Add Your Review</h3>
+    <form>
+      <div class="form-group">
+        <label>Quietness:</label>
+        <div class="star-rating">
+          <input type="radio" id="quietness-5" name="quietness" value="5"><label for="quietness-5" class="fa fa-star"></label>
+          <input type="radio" id="quietness-4" name="quietness" value="4"><label for="quietness-4" class="fa fa-star"></label>
+          <input type="radio" id="quietness-3" name="quietness" value="3"><label for="quietness-3" class="fa fa-star"></label>
+          <input type="radio" id="quietness-2" name="quietness" value="2"><label for="quietness-2" class="fa fa-star"></label>
+          <input type="radio" id="quietness-1" name="quietness" value="1"><label for="quietness-1" class="fa fa-star"></label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Wifi Quality:</label>
+        <div class="star-rating">
+          <input type="radio" id="wifi-5" name="wifi" value="5"><label for="wifi-5" class="fa fa-star"></label>
+          <input type="radio" id="wifi-4" name="wifi" value="4"><label for="wifi-4" class="fa fa-star"></label>
+          <input type="radio" id="wifi-3" name="wifi" value="3"><label for="wifi-3" class="fa fa-star"></label>
+          <input type="radio" id="wifi-2" name="wifi" value="2"><label for="wifi-2" class="fa fa-star"></label>
+          <input type="radio" id="wifi-1" name="wifi" value="1"><label for="wifi-1" class="fa fa-star"></label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Crowdedness:</label>
+        <div class="star-rating">
+          <input type="radio" id="crowdedness-5" name="crowdedness" value="5"><label for="crowdedness-5" class="fa fa-star"></label>
+          <input type="radio" id="crowdedness-4" name="crowdedness" value="4"><label for="crowdedness-4" class="fa fa-star"></label>
+          <input type="radio" id="crowdedness-3" name="crowdedness" value="3"><label for="crowdedness-3" class="fa fa-star"></label>
+          <input type="radio" id="crowdedness-2" name="crowdedness" value="2"><label for="crowdedness-2" class="fa fa-star"></label>
+          <input type="radio" id="crowdedness-1" name="crowdedness" value="1"><label for="crowdedness-1" class="fa fa-star"></label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Power Outlets:</label>
+        <div class="star-rating">
+          <input type="radio" id="power-5" name="power" value="5"><label for="power-5" class="fa fa-star"></label>
+          <input type="radio" id="power-4" name="power" value="4"><label for="power-4" class="fa fa-star"></label>
+          <input type="radio" id="power-3" name="power" value="3"><label for="power-3" class="fa fa-star"></label>
+          <input type="radio" id="power-2" name="power" value="2"><label for="power-2" class="fa fa-star"></label>
+          <input type="radio" id="power-1" name="power" value="1"><label for="power-1" class="fa fa-star"></label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Safety:</label>
+        <div class="star-rating">
+          <input type="radio" id="safety-5" name="safety" value="5"><label for="safety-5" class="fa fa-star"></label>
+          <input type="radio" id="safety-4" name="safety" value="4"><label for="safety-4" class="fa fa-star"></label>
+          <input type="radio" id="safety-3" name="safety" value="3"><label for="safety-3" class="fa fa-star"></label>
+          <input type="radio" id="safety-2" name="safety" value="2"><label for="safety-2" class="fa fa-star"></label>
+          <input type="radio" id="safety-1" name="safety" value="1"><label for="safety-1" class="fa fa-star"></label>
+        </div>
+      </div>
+
+      <div class="photo-upload">
+        <p>Add Photos:</p>
+        <form action="/submit-photo" method="post" enctype="multipart/form-data">
+          <input type="file" id="photo" name="photo" accept="image/*">
+        </form>
+      </div>
+
+      <div class="form-group">
+        <label for="comment">Comment:</label>
+        <textarea id="comment" name="comment" rows="4" cols="50"></textarea>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Submit Review</button>
+      
+    </form>
+  </section>
+
+  <div class="footer">
+      <p>© 2024 SLOStudySpots. All rights reserved.</p>
+  </div>
+
+</body>
+</html>
+

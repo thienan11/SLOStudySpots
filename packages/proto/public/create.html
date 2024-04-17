@@ -1,90 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SLOStudySpots</title>
-</head>
-<body>
-  <header class="navbar">
-    <div class="navbar-content">
-      <a class="logo" href="index.html">
-        <img src="icons/lamp.svg" alt="SLOStudySpots Logo" width="50px" />
-        <h1>SLOStudySpots</h1>
-      </a>
-
-      <section class="search-box">
-        <form>
-          <input
-            type="text"
-            placeholder="Search for study spots..."
-          />
-        </form>
-      </section>
-
-      <div class="right-navbar">
-
-        <a class="group-icon" href="ranking.html">
-          <img src="icons/ranking.svg" alt="ranking-icon" width="40px" />
-        </a>
-        
-        <a class="group-icon" href="create.html">
-          <img src="icons/create.svg" alt="create-icon" width="40px" />
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SLOStudySpots</title>
+  </head>
+  <body>
+    <header class="navbar">
+      <div class="navbar-content">
+        <a class="logo" href="index.html">
+          <img src="icons/lamp.svg" alt="SLOStudySpots Logo" width="50px" />
+          <h1>SLOStudySpots</h1>
         </a>
 
-        <a class="navbar-menu" href="profile.html">
-          <img src="icons/avatar.svg" alt="profile-icon" width="40px" />
-        </a>
-
-      </div>
-    </div>
-  </header>
-
-  <section class="content-container">
-    <h2>Add a New Study Spot</h2>
-    <form action="/submit-new-spot" method="post" enctype="multipart/form-data">
-      <div class="form-group">
-        <label for="name">Name of the Study Spot:</label>
-        <input type="text" id="name" name="name" required>
-      </div>
-
-      <div class="form-group">
-        <label for="location">Location/Address:</label>
-        <input type="text" id="location" name="location" required>
-      </div>
-
-      <div class="form-group">
-        <label for="features">Features (e.g., Wi-Fi, Outlets):</label>
-        <input type="text" id="features" name="features" required>
-      </div>
-
-      <div class="form-group">
-        <label for="description">Description (optional):</label>
-        <textarea id="description" name="description" rows="3" required></textarea>
-      </div>
-
-      <div class="form-group">
-        <label for="photo">Upload a photo (optional):</label>
-        <input type="file" id="photo" name="photo" accept="image/*">
-      </div>
-
-      <div class="form-group">
-        <label for="photo">Your Review:</label>
-        <textarea id="description" name="description" rows="3" required></textarea>
-
-        <div class="ratings">
-          
+        <div class="search-box">
+          <form>
+            <input
+              type="search"
+              placeholder="Search for study spots..."
+            />
+          </form>
         </div>
+
+        <div class="navbar-links">
+          <a class="group-icon" href="ranking.html">
+            <img src="icons/ranking.svg" alt="ranking-icon" width="40px" />
+          </a>
+          
+          <a class="group-icon" href="create.html">
+            <img src="icons/create.svg" alt="create-icon" width="40px" />
+          </a>
+
+          <a class="navbar-menu" href="profile.html">
+            <img src="icons/avatar.svg" alt="profile-icon" width="40px" />
+          </a>
+        </div>
+
       </div>
+    </header>
 
-      <button type="submit">Submit Study Spot</button>
-    </form>
-  </section>
+    <section class="content-container">
+      <h2>Add a New Study Spot</h2>
+      <form action="/submit-new-spot" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+          <label for="name">Name of the Study Spot:</label>
+          <input type="text" id="name" name="name" required>
+        </div>
 
-  <div class="footer">
-      <p>© 2024 SLOStudySpots. All rights reserved.</p>
-  </div>
+        <div class="form-group">
+          <label for="location">Location/Address:</label>
+          <input type="text" id="location" name="location" required>
+        </div>
 
-</body>
+        <div class="form-group">
+          <label for="features">Features (e.g., Wi-Fi, Outlets):</label>
+          <input type="text" id="features" name="features" required>
+        </div>
+
+        <div class="form-group">
+          <label for="description">Description (optional):</label>
+          <textarea id="description" name="description" rows="3" required></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="photo">Upload a photo (optional):</label>
+          <input type="file" id="photo" name="photo" accept="image/*">
+        </div>
+
+        <div class="form-group">
+          <label for="photo">Your Review:</label>
+          <textarea id="description" name="description" rows="3" required></textarea>
+
+          <div class="ratings">
+            
+          </div>
+        </div>
+
+        <button type="submit">Submit Study Spot</button>
+      </form>
+    </section>
+
+    <div class="footer">
+        <p>© 2024 SLOStudySpots. All rights reserved.</p>
+    </div>
+
+  </body>
 </html>
 

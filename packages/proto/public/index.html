@@ -1,85 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SLOStudySpots</title>
-</head>
-<body>
-  <header class="navbar">
-    <div class="navbar-content">
-      <a class="logo" href="index.html">
-        <img src="icons/lamp.svg" alt="SLOStudySpots Logo" width="50px" />
-        <h1>SLOStudySpots</h1>
-      </a>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SLOStudySpots</title>
+  </head>
+  <body>
+    <header class="navbar">
+      <div class="navbar-content">
+        <a class="logo" href="index.html">
+          <img src="icons/lamp.svg" alt="SLOStudySpots Logo" width="50px" />
+          <h1>SLOStudySpots</h1>
+        </a>
 
-      <section class="search-box">
-        <form>
-          <input
-            type="text"
-            placeholder="Search for study spots..."
-          />
-        </form>
+        <div class="search-box">
+          <form>
+            <input
+              type="search"
+              placeholder="Search for study spots..."
+            />
+          </form>
+        </div>
+
+        <div class="navbar-links">
+          <a class="group-icon" href="ranking.html">
+            <img src="icons/ranking.svg" alt="ranking-icon" width="40px" />
+          </a>
+          
+          <a class="group-icon" href="create.html">
+            <img src="icons/create.svg" alt="create-icon" width="40px" />
+          </a>
+
+          <a class="navbar-menu" href="profile.html">
+            <img src="icons/avatar.svg" alt="profile-icon" width="40px" />
+          </a>
+        </div>
+
+      </div>
+    </header>
+
+    <main>
+      <section class="welcome-section">
+        <h1>Welcome to SLOStudySpots</h1>
+        <p>Find the best spots to study in San Luis Obispo!</p>
       </section>
 
-      <div class="right-navbar">
+      <section class="featured-spots">
+        <h2>Featured Study Spots</h2>
 
-        <a class="group-icon" href="ranking.html">
-          <img src="icons/ranking.svg" alt="ranking-icon" width="40px" />
-        </a>
-        
-        <a class="group-icon" href="create.html">
-          <img src="icons/create.svg" alt="create-icon" width="40px" />
-        </a>
+        <ul class="spots-list">
+          <li class="study-spot-container">
+            <article>
+              <a href="study-spots/spot1.html">
+                <h3>SloDoCo Donuts</h3>
+                <img src="./images/slodoco.jpeg" width="500px"/>
+                <p><strong>Rating:</strong> ★★★★☆ 4/5 (12 reviews)</p>
+                <p><strong>Review:</strong> Spacious and comfortable, with excellent donuts. A bit crowded at times but still a good spot.</p>
+              </a>
+            </article>
+          </li>
 
-        <a class="navbar-menu" href="profile.html">
-          <img src="icons/avatar.svg" alt="profile-icon" width="40px" />
-        </a>
+          <li class="study-spot-container">
+            <article>
+              <a href="study-spots/spot1.html">
+                <h3>Robert E. Kennedy Library</h3>
+                <img src="./images/kennedylib.jpeg" width="500px"/>
+                <p><strong>Rating:</strong> ★★★☆☆ 3/5 (5 reviews)</p>
+                <p><strong>Review:</strong> Great quiet place with plenty of natural light and ample seating. Perfect for long study sessions.</p>
+              </a>
+            </article>
+          </li>
 
-      </div>
-    </div>
-  </header>
+          <li class="study-spot-container">
+            <article>
+              <a href="study-spots/spot1.html">
+                <h3>Kreuzberg California</h3>
+                <img src="./images/kreuzberg.jpeg" width="500px"/>
+                <p><strong>Rating:</strong> ★★★★★ 5/5 (10 reviews)</p>
+                <p><strong>Review:</strong> Cozy, artsy, and social study atmosphere! </p>
+              </a>
+            </article>
+          </li>
 
-  <section class="content-container">
-    <h3>Welcome to SLOStudySpots</h3>
-    <p>Find the best spots to study in San Luis Obispo!</p>
+        </ul>
+      </section>
+    </main>
 
-    <div id="spotsList">
-
-      <div class="study-spot">
-        <a href="study-spots/spot1.html">
-          <h2>SloDoCo Donuts</h2>
-          <img src="./images/slodoco.jpeg" width="500px"/>
-          <p><strong>Rating:</strong> ★★★★☆ 4/5 (12 reviews)</p>
-          <p><strong>Review:</strong> Spacious and comfortable, with excellent donuts. A bit crowded at times but still a good spot.</p>
-        </a>
-      </div>
-
-      <div class="study-spot">
-        <a href="study-spots/spot1.html">
-          <h2>Robert E. Kennedy Library</h2>
-          <img src="./images/kennedylib.jpeg" width="500px"/>
-          <p><strong>Rating:</strong> ★★★☆☆ 3/5 (5 reviews)</p>
-          <p><strong>Review:</strong> Great quiet place with plenty of natural light and ample seating. Perfect for long study sessions.</p>
-        </a>
-      </div>
-
-      <div class="study-spot">
-        <a href="study-spots/spot1.html">
-          <h2>Kreuzberg California</h2>
-          <img src="./images/kreuzberg.jpeg" width="500px"/>
-          <p><strong>Rating:</strong> ★★★★★ 5/5 (10 reviews)</p>
-          <p><strong>Review:</strong> Cozy, artsy, and social study atmosphere! </p>
-        </a>
-      </div>
-
-    </div>
-  </section>
-
-  <div class="footer">
+    <footer class="footer">
       <p>© 2024 SLOStudySpots. All rights reserved.</p>
-  </div>
+    </footer>
 
-</body>
+  </body>
 </html>
 

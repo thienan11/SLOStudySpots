@@ -1,98 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SLOStudySpots</title>
-</head>
-<body>
-  <header class="navbar">
-    <div class="navbar-content">
-      <a class="logo" href="index.html">
-        <img src="icons/lamp.svg" alt="SLOStudySpots Logo" width="50px" />
-        <h1>SLOStudySpots</h1>
-      </a>
-
-      <section class="search-box">
-        <form>
-          <input
-            type="text"
-            placeholder="Search for study spots..."
-          />
-        </form>
-      </section>
-
-      <div class="right-navbar">
-
-        <a class="group-icon" href="ranking.html">
-          <img src="icons/ranking.svg" alt="ranking-icon" width="40px" />
-        </a>
-        
-        <a class="group-icon" href="create.html">
-          <img src="icons/create.svg" alt="create-icon" width="40px" />
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SLOStudySpots</title>
+  </head>
+  <body>
+    <header class="navbar">
+      <div class="navbar-content">
+        <a class="logo" href="index.html">
+          <img src="icons/lamp.svg" alt="SLOStudySpots Logo" width="50px" />
+          <h1>SLOStudySpots</h1>
         </a>
 
-        <a class="navbar-menu" href="profile.html">
-          <img src="icons/avatar.svg" alt="profile-icon" width="40px" />
-        </a>
-
-      </div>
-    </div>
-  </header>
-
-  <main class="content-container">
-    <article class="profile-content">
-      <header class="profile-header">
-        <h4>Account > Personal Info</h4>
-        <h2>Personal Info</h2>
-      </header>
-
-        <div class="profile-info-container">
-
-        <figure class="profile-image">
-          <img src="images/dude.jpg" alt="Profile image of John Doe" draggable="false"/>
-          <figcaption>Edit Image</figcaption>
-        </figure>
-
-        <div class="info-block">
-          <header class="info-header">
-              <h2>Full Name</h2>
-              <button onclick="editFullName()">Edit</button>
-          </header>
-          <p class="info-content">John Doe</p>
+        <div class="search-box">
+          <form>
+            <input
+              type="search"
+              placeholder="Search for study spots..."
+            />
+          </form>
         </div>
 
-        <div class="info-block">
-          <header class="info-header">
-              <h2>Username</h2>
-              <button onclick="editUsername()">Edit</button>
-          </header>
-          <p class="info-content">illdoittomorrow</p>
-        </div>
+        <div class="navbar-links">
+          <a class="group-icon" href="ranking.html">
+            <img src="icons/ranking.svg" alt="ranking-icon" width="40px" />
+          </a>
+          
+          <a class="group-icon" href="create.html">
+            <img src="icons/create.svg" alt="create-icon" width="40px" />
+          </a>
 
-        <div class="info-block">
-          <header class="info-header">
-              <h2>Email Address</h2>
-              <button onclick="editEmail()">Edit</button>
-          </header>
-          <p class="info-content">j**e@gmail.com</p>
-        </div>
-
-        <div class="info-block">
-          <header class="info-header">
-              <h2>Phone Number</h2>
-              <button onclick="editPhone()">Edit</button>
-          </header>
-          <p class="info-content">90**-67</p>
+          <a class="navbar-menu" href="profile.html">
+            <img src="icons/avatar.svg" alt="profile-icon" width="40px" />
+          </a>
         </div>
 
       </div>
-    </article>
-  </main>
+    </header>
 
-  <footer class="footer">
-    <p>© 2024 SLOStudySpots. All rights reserved.</p>
-  </footer>
+    <main class="content-container">
+      <article class="profile-content">
+        <header class="profile-header">
+          <h4>Account > Personal Info</h4>
+          <h2>Personal Info</h2>
+        </header>
 
-</body>
+          <div class="profile-info-container">
+
+          <figure class="profile-image">
+            <img src="images/dude.jpg" alt="Profile image of John Doe" draggable="false"/>
+            <button onclick="editFullName()">Edit</button>
+          </figure>
+
+          <div class="info-block">
+            <header class="info-header">
+                <h2>Full Name</h2>
+                <button onclick="editFullName()">Edit</button>
+            </header>
+            <p class="info-content">John Doe</p>
+          </div>
+
+          <div class="info-block">
+            <header class="info-header">
+                <h2>Username</h2>
+                <button onclick="editUsername()">Edit</button>
+            </header>
+            <p class="info-content">illdoittomorrow</p>
+          </div>
+
+          <div class="info-block">
+            <header class="info-header">
+                <h2>Email Address</h2>
+                <button onclick="editEmail()">Edit</button>
+            </header>
+            <p class="info-content">j**e@gmail.com</p>
+          </div>
+
+          <div class="info-block">
+            <header class="info-header">
+                <h2>Phone Number</h2>
+                <button onclick="editPhone()">Edit</button>
+            </header>
+            <p class="info-content">90**-67</p>
+          </div>
+
+        </div>
+      </article>
+    </main>
+
+    <footer class="footer">
+      <p>© 2024 SLOStudySpots. All rights reserved.</p>
+    </footer>
+
+  </body>
 </html>

@@ -1,85 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SLOStudySpots</title>
-</head>
-<body>
-  <header class="navbar">
-    <div class="navbar-content">
-      <a class="logo" href="index.html">
-        <img src="icons/lamp.svg" alt="SLOStudySpots Logo" width="50px" />
-        <h1>SLOStudySpots</h1>
-      </a>
-
-      <section class="search-box">
-        <form>
-          <input
-            type="text"
-            placeholder="Search for study spots..."
-          />
-        </form>
-      </section>
-
-      <div class="right-navbar">
-
-        <a class="group-icon" href="ranking.html">
-          <img src="icons/ranking.svg" alt="ranking-icon" width="40px" />
-        </a>
-        
-        <a class="group-icon" href="create.html">
-          <img src="icons/create.svg" alt="create-icon" width="40px" />
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SLOStudySpots</title>
+  </head>
+  <body>
+    <header class="navbar">
+      <div class="navbar-content">
+        <a class="logo" href="index.html">
+          <img src="icons/lamp.svg" alt="SLOStudySpots Logo" width="50px" />
+          <h1>SLOStudySpots</h1>
         </a>
 
-        <a class="navbar-menu" href="profile.html">
-          <img src="icons/avatar.svg" alt="profile-icon" width="40px" />
-        </a>
+        <div class="search-box">
+          <form>
+            <input
+              type="search"
+              placeholder="Search for study spots..."
+            />
+          </form>
+        </div>
+
+        <div class="navbar-links">
+          <a class="group-icon" href="ranking.html">
+            <img src="icons/ranking.svg" alt="ranking-icon" width="40px" />
+          </a>
+          
+          <a class="group-icon" href="create.html">
+            <img src="icons/create.svg" alt="create-icon" width="40px" />
+          </a>
+
+          <a class="navbar-menu" href="profile.html">
+            <img src="icons/avatar.svg" alt="profile-icon" width="40px" />
+          </a>
+        </div>
 
       </div>
-    </div>
-  </header>
+    </header>
 
-  <main class="content-container">
-    <article class="profile">
-      <header class="profile-header">
-        <img src="icons/avatar-large.svg" alt="User Avatar" width="120px" class="profile-avatar"/>
-        <h2>John Doe</h2>
-        <p><a href="mailto:john.doe@example.com">john.doe@example.com</a></p>
-      </header>
+    <main class="content-container">
+      <article class="profile">
+        <header class="profile-header">
+          <img src="icons/avatar-large.svg" alt="User Avatar" width="120px" class="profile-avatar"/>
+          <h2>John Doe</h2>
+          <p><a href="mailto:john.doe@example.com">john.doe@example.com</a></p>
+        </header>
 
-      <section class="profile-details">
-        <h3>My Contributions</h3>
-        <div class="user-contributions">
-          <article class="contribution">
-            <h4>Reviewed Spots</h4>
-            <ul>
-              <li><a href="#">SloDoCo Donuts</a> - ★★★★☆</li>
-              <li><a href="#">Kennedy Library</a> - ★★★★★</li>
-            </ul>
-          </article>
+        <section class="profile-details">
+          <h3>My Contributions</h3>
+          <div class="user-contributions">
+            <article class="contribution">
+              <h4>Reviewed Spots</h4>
+              <ul>
+                <li><a href="#">SloDoCo Donuts</a> - ★★★★☆</li>
+                <li><a href="#">Kennedy Library</a> - ★★★★★</li>
+              </ul>
+            </article>
 
-          <article class="contribution">
-            <h4>Submitted Spots</h4>
-            <ul>
-              <li><a href="#">Blackhorse Espresso & Bakery</a></li>
-              <li><a href="#">Scout Coffee</a></li>
-            </ul>
-          </article>
-        </div>
-      </section>
+            <article class="contribution">
+              <h4>Submitted Spots</h4>
+              <ul>
+                <li><a href="#">Blackhorse Espresso & Bakery</a></li>
+                <li><a href="#">Scout Coffee</a></li>
+              </ul>
+            </article>
+          </div>
+        </section>
 
-      <section class="profile-actions">
-        <h3>Account Settings</h3>
-        <button onclick="window.location.href='profile-settings.html';">Edit Profile</button>
-        <button onclick="alert('Log out functionality not implemented.');">Log Out</button>
-      </section>
-    </article>
-  </main>
+        <section class="profile-actions">
+          <h3>Account Settings</h3>
+          <button onclick="window.location.href='profile-settings.html';">Edit Profile</button>
+          <button onclick="alert('Log out functionality not implemented.');">Log Out</button>
+        </section>
+      </article>
+    </main>
 
-  <footer class="footer">
-    <p>© 2024 SLOStudySpots. All rights reserved.</p>
-  </footer>
+    <footer class="footer">
+      <p>© 2024 SLOStudySpots. All rights reserved.</p>
+    </footer>
 
-</body>
+  </body>
 </html>

@@ -1,52 +1,58 @@
 /* @import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400&display=swap"); */
-/* @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
+/* Body and Backgrounds */
 body {
-  background-color: #f4f1ec;
-  color: #333; /* dark slate text */
-  font-family: "IBM Plex Sans", sans-serif;
+  background-color: #FFF8E7;  /* Cream background for a soft, warm look */
+  color: #7A6F72;  /* Earthy brown text for good readability */
+  font-family: "Merriweather", serif; /* Merriweather for body text */
 }
 
-header {
-  background-color: #004225; /* deep green */
-  color: #f5f5f5; /* cream text for contrast */
+/* Headers, Footers, and Navigation */
+header, .footer {
+  background-color: #668586;  /* Soft teal for major UI components */
+  color: #FFF8E7;  /* Cream text to contrast with the soft teal */
   padding: 10px 20px;
 }
 
-.navbar-links a, .navbar-links a:visited {
-  color: #388e3c; /* vibrant green */
+.navbar a, .navbar h1 {
+  color: #FFF8E7; /* Cream links for contrast */
+  font-family: "Lato", sans-serif; /* Lato for a clean, modern look in headers */
 }
 
-.navbar-links a:hover, .navbar-links a:focus {
-  color: #004225; /* deep green */
+.navbar a:hover {
+  color: #D7A8A2; /* Dusty rose on hover for a subtle change */
   text-decoration: underline;
 }
 
-.footer {
-  background-color: #263238; /* dark slate */
-  color: #f5f5f5; /* cream text for contrast */
-  text-align: center;
-  padding: 10px 0;
+/* Headings and Links */
+h1, h2, h3 {
+  font-family: "Lato", sans-serif; /* Consistent font for headings */
+  color: #668586; /* Soft teal for headers to stand out less jarringly against the body text */
 }
 
-.welcome-section, .spots-list {
-  background-color: #a5d6a7; /* soft green */
-  border: 1px solid #004225; /* deep green border */
+a {
+  color: #CAB8D9; /* Soft lavender for all standard links */
+  text-decoration: none; /* No underline for a cleaner look */
+}
+
+a:hover {
+  text-decoration: underline; /* Underline on hover for usability */
+}
+
+/* Special Sections and Items */
+.welcome-section, .spots-list, .rankings, .profile, .profile-content, .content-container, .add-review, .spot-intro, .spot-details, .rating-breakdown, .user-reviews, .photo-upload, .gallery {
+  background-color: #FFF8E7; /* Continuing the cream background for consistency */
+  border: 1px solid #668586; /* Soft teal borders for definition */
   border-radius: 8px;
   margin: 20px;
   padding: 20px;
 }
 
-h2, h3 {
-  color: #004225; /* deep green - good for headings */
-}
-
-a {
-  color: #388e3c; /* vibrant green */
-  text-decoration: none; /* no underline initially */
-}
-
-a:hover {
-  text-decoration: underline; /* underline on hover */
+footer {
+  background-color: #668586; /* Continuation of the soft teal for a cohesive footer */
+  text-align: center;
+  padding: 10px 0;
+  color: #FFF8E7; 
 }

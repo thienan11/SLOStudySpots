@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SLOStudySpots</title>
+    <link rel="stylesheet" href="/styles/page.css">
   </head>
   <body>
     <header class="navbar">
@@ -22,19 +23,25 @@
           </form>
         </div>
 
-        <div class="navbar-links">
-          <a class="group-icon" href="../ranking.html">
-            <img src="../icons/ranking.svg" alt="ranking-icon" width="40px" />
-          </a>
-          
-          <a class="group-icon" href="../create.html">
-            <img src="../icons/create.svg" alt="create-icon" width="40px" />
-          </a>
-
-          <a class="navbar-menu" href="../profile.html">
-            <img src="../icons/avatar.svg" alt="profile-icon" width="40px" />
-          </a>
-        </div>
+        <nav class="right-navbar-links">
+          <ul>
+            <li>
+              <a class="group-icon" href="../ranking.html">
+                <img src="../icons/ranking.svg" alt="ranking-icon" width="40px" />
+              </a>
+            </li>
+            <li>
+              <a class="group-icon" href="../create.html">
+                <img src="../icons/create.svg" alt="create-icon" width="40px" />
+              </a>
+            </li>
+            <li>
+              <a class="navbar-menu" href="../profile.html">
+                <img src="../icons/avatar.svg" alt="profile-icon" width="40px" />
+              </a>
+            </li>
+          </ul>
+        </nav>
 
       </div>
     </header>
@@ -44,8 +51,8 @@
         <h2>SloDoCo Donuts</h2>
         <img src="../images/slodoco.jpeg" alt="View of SloDoCo Donuts" width="500">
         <p>Located in the heart of downtown, SloDoCo offers a vibrant atmosphere with delicious treats and robust coffee, perfect for those lengthy study sessions or group projects.</p>
-        <button onclick="window.location.href='../photo-galleries/gallery1.html';">View Photo Gallery</button>
-        <button>Add Photo</button>
+        <a href="../photo-galleries/gallery1.html">View Photo Gallery</a>
+        <a href="">Add Photo</a>
       </section>
 
       <section class="spot-details">
@@ -79,13 +86,14 @@
         </article>
           <!-- More reviews can be added here -->
 
-        <button onclick="window.location.href='../make-review.html';">Write Review</button>
+        <a href="../make-review.html">Write Review</a>
+
       </section>
 
     </main>
 
     <footer>
-        <p>© 2024 SLOStudySpots. All rights reserved.</p>
+      <p>© 2024 SLOStudySpots. All rights reserved.</p>
     </footer>
 
   </body>

@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SLOStudySpots</title>
+    <link rel="stylesheet" href="/styles/page.css">
   </head>
   <body>
     <header class="navbar">
@@ -22,19 +23,25 @@
           </form>
         </div>
 
-        <div class="navbar-links">
-          <a class="group-icon" href="ranking.html">
-            <img src="icons/ranking.svg" alt="ranking-icon" width="40px" />
-          </a>
-          
-          <a class="group-icon" href="create.html">
-            <img src="icons/create.svg" alt="create-icon" width="40px" />
-          </a>
-
-          <a class="navbar-menu" href="profile.html">
-            <img src="icons/avatar.svg" alt="profile-icon" width="40px" />
-          </a>
-        </div>
+        <nav class="right-navbar-links">
+          <ul>
+            <li>
+              <a class="group-icon" href="ranking.html">
+                <img src="icons/ranking.svg" alt="ranking-icon" width="40px" />
+              </a>
+            </li>
+            <li>
+              <a class="group-icon" href="create.html">
+                <img src="icons/create.svg" alt="create-icon" width="40px" />
+              </a>
+            </li>
+            <li>
+              <a class="navbar-menu" href="profile.html">
+                <img src="icons/avatar.svg" alt="profile-icon" width="40px" />
+              </a>
+            </li>
+          </ul>
+        </nav>
 
       </div>
     </header>
@@ -62,27 +69,14 @@
           <textarea id="description" name="description" rows="3" required></textarea>
         </div>
 
-        <div class="form-group">
-          <label for="photo">Upload a photo (optional):</label>
-          <input type="file" id="photo" name="photo" accept="image/*">
-        </div>
+        <a href="./make-review.html">Continue to Review</a>
 
-        <div class="form-group">
-          <label for="photo">Your Review:</label>
-          <textarea id="description" name="description" rows="3" required></textarea>
-
-          <div class="ratings">
-            
-          </div>
-        </div>
-
-        <button type="submit">Submit Study Spot</button>
       </form>
     </section>
 
-    <div class="footer">
-        <p>© 2024 SLOStudySpots. All rights reserved.</p>
-    </div>
+    <footer class="footer">
+      <p>© 2024 SLOStudySpots. All rights reserved.</p>
+    </footer>
 
   </body>
 </html>

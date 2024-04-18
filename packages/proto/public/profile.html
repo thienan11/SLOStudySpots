@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SLOStudySpots</title>
+    <link rel="stylesheet" href="/styles/page.css">
   </head>
   <body>
     <header class="navbar">
@@ -22,19 +23,25 @@
           </form>
         </div>
 
-        <div class="navbar-links">
-          <a class="group-icon" href="ranking.html">
-            <img src="icons/ranking.svg" alt="ranking-icon" width="40px" />
-          </a>
-          
-          <a class="group-icon" href="create.html">
-            <img src="icons/create.svg" alt="create-icon" width="40px" />
-          </a>
-
-          <a class="navbar-menu" href="profile.html">
-            <img src="icons/avatar.svg" alt="profile-icon" width="40px" />
-          </a>
-        </div>
+        <nav class="right-navbar-links">
+          <ul>
+            <li>
+              <a class="group-icon" href="ranking.html">
+                <img src="icons/ranking.svg" alt="ranking-icon" width="40px" />
+              </a>
+            </li>
+            <li>
+              <a class="group-icon" href="create.html">
+                <img src="icons/create.svg" alt="create-icon" width="40px" />
+              </a>
+            </li>
+            <li>
+              <a class="navbar-menu" href="profile.html">
+                <img src="icons/avatar.svg" alt="profile-icon" width="40px" />
+              </a>
+            </li>
+          </ul>
+        </nav>
 
       </div>
     </header>
@@ -42,7 +49,7 @@
     <main class="content-container">
       <article class="profile">
         <header class="profile-header">
-          <img src="icons/avatar-large.svg" alt="User Avatar" width="120px" class="profile-avatar"/>
+          <img src="icons/default-avatar.svg" alt="User Avatar" width="120px" class="profile-avatar"/>
           <h2>John Doe</h2>
           <p><a href="mailto:john.doe@example.com">john.doe@example.com</a></p>
         </header>
@@ -70,8 +77,8 @@
 
         <section class="profile-actions">
           <h3>Account Settings</h3>
-          <button onclick="window.location.href='profile-settings.html';">Edit Profile</button>
-          <button onclick="alert('Log out functionality not implemented.');">Log Out</button>
+          <a href="profile-settings.html">Edit Profile</a>
+          <a href="">Log Out</a>
         </section>
       </article>
     </main>

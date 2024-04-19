@@ -3,56 +3,106 @@
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
 /* Body and Backgrounds */
-body {
-  background-color: #FFF8E7;  /* Cream background for a soft, warm look */
-  color: #7A6F72;  /* Earthy brown text for good readability */
-  font-family: "Merriweather", serif; /* Merriweather for body text */
-}
+/* body {
+  background-color: #FFF8E7;
+  color: #7A6F72;
+  font-family: "Merriweather", serif;
+} */
 
 /* Headers, Footers, and Navigation */
-header, .footer {
-  background-color: #668586;  /* Soft teal for major UI components */
-  color: #FFF8E7;  /* Cream text to contrast with the soft teal */
+/* header, .footer {
+  background-color: #668586;
+  color: #FFF8E7;
   padding: 10px 20px;
 }
 
 .navbar a, .navbar h1 {
-  color: #FFF8E7; /* Cream links for contrast */
-  font-family: "Lato", sans-serif; /* Lato for a clean, modern look in headers */
+  color: #FFF8E7;
+  font-family: "Lato", sans-serif;
 }
 
 .navbar a:hover {
-  color: #D7A8A2; /* Dusty rose on hover for a subtle change */
-  text-decoration: underline;
-}
+  color: #D7A8A2;
+  text-decoration: none;
+} */
 
 /* Headings and Links */
-h1, h2, h3 {
-  font-family: "Lato", sans-serif; /* Consistent font for headings */
-  color: #668586; /* Soft teal for headers to stand out less jarringly against the body text */
+/* h1, h2, h3 {
+  font-family: "Lato", sans-serif;
+  color: #668586;
 }
 
 a {
-  color: #CAB8D9; /* Soft lavender for all standard links */
-  text-decoration: none; /* No underline for a cleaner look */
+  color: #CAB8D9;
+  text-decoration: none;
 }
 
 a:hover {
-  text-decoration: underline; /* Underline on hover for usability */
-}
+  text-decoration: none; 
+} */
 
 /* Special Sections and Items */
-.welcome-section, .spots-list, .rankings, .profile, .profile-content, .content-container, .add-review, .spot-intro, .spot-details, .rating-breakdown, .user-reviews, .photo-upload, .gallery {
-  background-color: #FFF8E7; /* Continuing the cream background for consistency */
-  border: 1px solid #668586; /* Soft teal borders for definition */
-  border-radius: 8px;
+/* .welcome-section, .spots-list, .rankings, .profile, .profile-content, .content-container, .add-review, .spot-intro, .spot-details, .rating-breakdown, .user-reviews, .photo-upload, .gallery {
+  background-color: #FFF8E7;
+  border: 1px solid #668586;
   margin: 20px;
   padding: 20px;
-}
+} */
 
-footer {
-  background-color: #668586; /* Continuation of the soft teal for a cohesive footer */
+/* footer {
+  background-color: #668586;
   text-align: center;
   padding: 10px 0;
   color: #FFF8E7; 
+} */
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-text);
+  font-family: var(--font-primary);
+}
+
+header, .footer {
+  background-color: var(--color-primary);
+  color: var(--color-background);
+  padding: var(--space-small) var(--space-regular);
+}
+
+.navbar a, .navbar h1 {
+  color: var(--color-background);
+  font-family: var(--font-secondary);
+}
+
+.navbar a:hover {
+  color: var(--color-secondary);
+  text-decoration: underline;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-secondary);
+  color: var(--color-primary);
+  /* font-size: var(--font-size-large); */
+}
+
+a {
+  color: var(--color-links);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.welcome-section, .spots-list, .rankings, .profile, .profile-content, .content-container, .add-review, .spot-intro, .spot-details, .rating-breakdown, .user-reviews, .photo-upload, .gallery {
+  background-color: var(--color-background);
+  border: 1px solid var(--color-primary);
+  border-radius: var(--border-radius);
+  margin: var(--space-regular);
+  padding: var(--space-regular);
+}
+
+.footer {
+  background-color: var(--color-primary);
+  text-align: center;
+  padding: var(--space-small) 0;
 }

@@ -1,0 +1,23 @@
+:root {
+  /* Color Palette */
+  --color-primary: #668586; /* Soft teal used for headers and footers */
+  --color-secondary: #D7A8A2; /* Dusty rose used for hover states */
+  --color-text: #7A6F72; /* Earthy brown used for primary text */
+  --color-background: #FFF8E7; /* Cream used for background */
+  --color-links: #CAB8D9; /* Soft lavender used for links */
+
+  /* Font-Family */
+  --font-primary: 'Merriweather', serif; /* Primary font for body text */
+  --font-secondary: 'Lato', sans-serif; /* Secondary font for headings and UI components */
+
+  /* Font-Sizes */
+  --font-size-body: 1rem; /* Body text size 16px */
+  --font-size-large: 1.5rem; /* Larger text size for major headings 24px */
+
+  /* Spacing */
+  --space-regular: 20px; /* Regular spacing for padding and margins */
+  --space-small: 10px; /* Smaller spacing for smaller paddings and margins */
+
+  /* Borders */
+  --border-radius: 8px; /* Common border radius for UI elements like buttons, inputs */
+}

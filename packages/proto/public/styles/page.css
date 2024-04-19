@@ -1,17 +1,7 @@
-* {
-  margin: 0;
-  box-sizing: border-box;
-}
-
 body {
-  line-height: 1.5;
   background-color: var(--color-background);
   color: var(--color-text);
   font-family: var(--font-primary);
-}
-
-img {
-  max-width: 100%;
 }
 
 header, .footer {

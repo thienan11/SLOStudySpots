@@ -1,47 +1,219 @@
 body {
   background-color: var(--color-background);
   color: var(--color-text);
-  font-family: var(--font-primary);
+  font-family: var(--font-family-body);
 }
 
-header, .footer {
+main {
+  padding: var(--space-regular); /* Adds padding around the main content */
+}
+
+/* Header Styles */
+header.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   background-color: var(--color-primary);
   color: var(--color-background);
   padding: var(--space-small) var(--space-regular);
 }
 
-.navbar a, .navbar h1 {
+.navbar-content {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none; /* Removes underline from the logo link */
+}
+
+.logo img {
+  height: 40px; /* Logo image height */
+  margin-right: var(--space-small); /* Space between the logo image and title */
+}
+
+.logo h1 {
+  font-size: var(--font-size-large);
+  color: var(--color-background); /* Ensures the logo text is the same color as the header background */
+  margin: 0;
+}
+
+.search-box input[type="search"] {
+  width: 100%;
+  padding: var(--space-small);
+  margin-right: var(--space-regular);
+  border: 2px solid var(--color-secondary);
+  border-radius: 15px;
+}
+
+.right-navbar-links ul {
+  list-style: none; /* Removes bullet points */
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+.right-navbar-links li {
+  margin-left: var(--space-regular);
+}
+
+.right-navbar-links a {
   color: var(--color-background);
-  font-family: var(--font-secondary);
+  font-family: var(--font-family-display);
+  display: flex;
+  align-items: center;
 }
 
-.navbar a:hover {
-  color: var(--color-secondary);
-  text-decoration: underline;
+.right-navbar-links img {
+  height: 24px; /* Adjusts the size of the icons in the navbar */
 }
 
-h1, h2, h3 {
-  font-family: var(--font-secondary);
-  color: var(--color-primary);
-  /* font-size: var(--font-size-large); */
+/* Home Page (index.html) */
+
+.welcome-section {
+  text-align: center; /* Centers the text of the welcome section */
+  padding: var(--space-regular) 0; /* Top and bottom padding */
+  margin-bottom: var(--space-regular); /* Space before the next section */
 }
 
-a {
-  color: var(--color-links);
-  text-decoration: none;
+.welcome-section h1 {
+  font-size: var(--font-size-large); /* Larger font size for welcome message */
+  color: var(--color-primary); /* Primary color for emphasis */
+  padding-bottom: var(--space-small); /* Small padding below the heading */
 }
 
-a:hover {
-  text-decoration: underline;
+.featured-spots {
+  margin: var(--space-regular) 0; /* Margin around the featured spots section */
 }
 
-.welcome-section, .spots-list, .rankings, .profile, .profile-content, .content-container, .add-review, .spot-intro, .spot-details, .rating-breakdown, .user-reviews, .photo-upload, .gallery {
-  background-color: var(--color-background);
-  border: 1px solid var(--color-primary);
-  border-radius: var(--border-radius);
-  margin: var(--space-regular);
+.featured-spots h2 {
+  font-size: var(--font-size-large);
+  color: var(--color-secondary); /* Secondary color for section titles */
+  margin-bottom: var(--space-small); /* Space below the section title */
+}
+
+.spots-list {
+  list-style: none; /* Removes default list styling */
+  padding: 0;
+  display: grid; /* Using grid layout for spots */
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Responsive grid columns */
+  grid-gap: var(--space-regular); /* Space between grid items */
+}
+
+.study-spot-container {
+  border: 1px solid var(--color-primary); /* Border around each spot */
+  border-radius: var(--border-radius); /* Rounded corners for the container */
+  overflow: hidden; /* Ensures nothing overflows the border radius */
+  transition: transform 0.3s ease-in-out; /* Smooth transition for hover effect */
+}
+
+.study-spot-container:hover {
+  transform: scale(1.05); /* Slightly enlarges the spot container on hover */
+}
+
+.study-spot-container a {
+  color: inherit; /* Inherits the color from the parent */
+  text-decoration: none; /* No underline on the links */
+  display: block; /* Makes the whole area clickable */
+  padding: var(--space-small); /* Padding inside each container */
+}
+
+.study-spot-container img {
+  width: 100%; /* Makes images take full width of the container */
+  height: 100%; /* Keeps the image aspect ratio */
+  margin-bottom: var(--space-small); /* Space below the image */
+}
+
+.study-spot-container h3 {
+  font-size: 1.25rem; /* Specific font size for spot titles */
+  color: var(--color-text); /* Text color for better readability */
+  margin-bottom: var(--space-small); /* Space below the title */
+}
+
+.study-spot-container p {
+  margin: 0; /* Removes default paragraph margin */
+  font-size: 0.875rem; /* Smaller font size for details */
+}
+
+/* Individual Spots Page */
+
+/* Spot Introduction Section */
+.spot-intro {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centers the content */
+  text-align: center;
   padding: var(--space-regular);
 }
+
+.spot-intro img {
+  max-width: 80%; /* Limits image width but maintains responsiveness */
+  height: auto;
+  margin-top: var(--space-regular);
+}
+
+.spot-intro a {
+  margin-top: var(--space-small);
+  color: var(--color-links);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.spot-intro a:hover {
+  text-decoration: underline;
+}
+
+/* Spot Details and Rating Breakdown */
+.spot-details, .rating-breakdown {
+  padding: var(--space-regular);
+  border-top: 2px solid var(--color-primary); /* Adds a thematic break between sections */
+}
+
+.spot-details h3, .rating-breakdown h3, .user-reviews h3 {
+  color: var(--color-secondary);
+}
+
+/* User Reviews Section */
+.user-reviews {
+  padding: var(--space-regular);
+  border-top: 2px solid var(--color-primary);
+}
+
+.review {
+  margin-top: var(--space-regular);
+  padding-top: var(--space-small);
+  border-top: 1px dashed var(--color-secondary); /* Dashed line for stylistic separation */
+}
+
+.review h4 {
+  color: var(--color-text);
+}
+
+.review p {
+  font-size: var(--font-size-body);
+}
+
+.user-reviews a {
+  display: block; /* Makes the link block-level for easier clicking */
+  width: max-content;
+  margin: var(--space-regular) auto; /* Centers the link horizontally */
+  padding: var(--space-small);
+  background-color: var(--color-primary);
+  color: var(--color-background);
+  text-decoration: none;
+  border-radius: var(--border-radius);
+}
+
+.user-reviews a:hover {
+  background-color: var(--color-secondary);
+}
+
+
 
 footer {
   background-color: #263238;

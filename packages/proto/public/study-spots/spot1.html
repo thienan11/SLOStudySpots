@@ -49,48 +49,67 @@
     </header>
 
     <main>
-      <section class="spot-intro">
-        <h2>SloDoCo Donuts</h2>
-        <img src="../images/slodoco.jpeg" alt="View of SloDoCo Donuts">
-        <p>Located in the heart of downtown, SloDoCo offers a vibrant atmosphere with delicious treats and robust coffee, perfect for those lengthy study sessions or group projects.</p>
-        <a href="../photo-galleries/gallery1.html">View Photo Gallery</a>
-        <a href="">Add Photo</a>
+      
+      <section class="gallery-preview">
+        <img src="../images/slodoco.jpeg" alt="View of SloDoCo Donuts" class="featured-image">
+        <div class="view-gallery-overlay">
+          <h2 class="spot-title">SloDoCo Donuts</h2>
+          <a href="../photo-galleries/gallery1.html" class="btn-view-gallery">
+            <img src="../icons/default-photo.svg" alt="Gallery Icon">
+            View Gallery
+          </a>
+        </div>
       </section>
 
-      <section class="spot-details">
-        <h3>Details</h3>
-        <p><strong>Location/Address:</strong> 793F Foothill Blvd, San Luis Obispo, CA 93405</p>
-        <p><strong>Hours:</strong> Open 24/7</p>
-        <p><strong>Features:</strong> Free Wi-Fi, Power Outlets, Indoor and Outdoor Seating</p>
-        <p><strong>Overall Rating:</strong> 4/5 ★★★★☆ from 12 reviews</p>
+      <section class="study-spot-actions">
+        <a href="" class="btn-add-photo">
+          <img src="../icons/upload-photo.svg" alt="Add Photo Icon" class="btn-icon-white">
+          Add Photo
+        </a>
+        <a href="../make-review.html" class="btn-write-review">
+          <img src="../icons/create.svg" alt="Write Review Icon" class="btn-icon-white">
+          Write Review
+        </a>
       </section>
-
-      <section class="rating-breakdown">
-        <h3>Rating Breakdown</h3>
-        <p><strong>Quietness</strong> 3/5 ★★★☆☆</p>
-        <p><strong>Wifi-Quality</strong> 5/5 ★★★★★</p>
-        <p><strong>Crowdness</strong> 1/5 ★☆☆☆☆</p>
-        <p><strong>Power Outlets</strong> 3/5 ★★★☆☆</p>
-        <p><strong>Saftey</strong> 5/5 ★★★★★</p>
-      </section>
-
-      <section class="user-reviews">
-        <h3>User Reviews</h3>
-        <article class="review">
-          <h4>John Doe</h4>
-          <p>★★★★★ Posted on January 5, 2024</p>
-          <p>Love the ambiance here, not to mention the donuts are to die for! Plenty of space and great coffee make it my go-to spot for studying.</p>
-        </article>
-        <article class="review">
-          <h4>Jane Smith</h4>
-          <p>★★★★☆ Posted on March 30, 2024</p>
-          <p>Great place to study, especially in the morning. It can get a bit noisy in the afternoon, so bring headphones if you prefer a quieter environment.</p>
-        </article>
-          <!-- More reviews can be added here -->
-
-        <a href="../make-review.html">Write Review</a>
-
-      </section>
+  
+      <div class="details-reviews-container">
+        <div class="details-ratings">
+          <section class="spot-details">
+            <h3>Details</h3>
+            <p><strong>Location/Address:</strong> 793F Foothill Blvd, San Luis Obispo, CA 93405</p>
+            <p><strong>Hours:</strong> Open 24/7</p>
+            <p><strong>Features:</strong> <span class="feature-tag">Free Wi-Fi</span> <span class="feature-tag">Power Outlets</span> <span class="feature-tag">Indoor Seating</span> <span class="feature-tag">Outdoor Seating</span></p>
+          </section>
+  
+          <section class="rating-breakdown">
+            <h3><strong>Overall Rating</strong></h3>
+            <div class="overall-rating-image-container">
+              <img src="../icons/star-rating.svg" alt="Star Rating" class="star-icon"/>
+              <h4 class="rating-value">4.4</h4>
+            </div>
+            <h3>Rating Breakdown</h3>
+            <p><strong>Quietness:</strong> 3/5 ★★★☆☆</p>
+            <p><strong>Wifi-Quality:</strong> 5/5 ★★★★★</p>
+            <p><strong>Crowdness:</strong> 1/5 ★☆☆☆☆</p>
+            <p><strong>Power Outlets:</strong> 3/5 ★★★☆☆</p>
+            <p><strong>Safety:</strong> 5/5 ★★★★★</p>
+          </section>
+        </div>
+  
+        <section class="user-reviews">
+          <h3>User Reviews</h3>
+          <article class="review">
+            <h4>John Doe</h4>
+            <p>★★★★★ Posted on January 5, 2024</p>
+            <p>Love the ambiance here, not to mention the donuts are to die for! Plenty of space and great coffee make it my go-to spot for studying.</p>
+          </article>
+          <article class="review">
+            <h4>Jane Smith</h4>
+            <p>★★★★☆ Posted on March 30, 2024</p>
+            <p>Great place to study, especially in the morning. It can get a bit noisy in the afternoon, so bring headphones if you prefer a quieter environment.</p>
+          </article>
+        </section>
+      </div>
 
     </main>
 

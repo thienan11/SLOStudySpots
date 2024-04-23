@@ -2,10 +2,19 @@ body {
   background-color: var(--color-background);
   color: var(--color-text);
   font-family: var(--font-family-body);
+  display: flex;
+  flex-direction: column; /* Stack children vertically */
+  min-height: 100vh; /* Minimum height is full viewport height */
 }
 
 main {
   padding: var(--space-regular); /* Adds padding around the main content */
+  flex-grow: 1; /* Allows main content to expand and push the footer down */
+}
+
+/* Hide the scrollbar in Webkit browsers (including Safari and Chrome) */
+::-webkit-scrollbar {
+  display: none;
 }
 
 /* Header Styles */
@@ -14,7 +23,6 @@ header.navbar {
   justify-content: space-between;
   align-items: center;
   background-color: var(--color-primary);
-  color: var(--color-background);
   padding: var(--space-small) var(--space-regular);
 }
 
@@ -28,30 +36,49 @@ header.navbar {
 .logo {
   display: flex;
   align-items: center;
-  text-decoration: none; /* Removes underline from the logo link */
+  text-decoration: none;
 }
 
 .logo img {
-  height: 40px; /* Logo image height */
+  height: 40px;
   margin-right: var(--space-small); /* Space between the logo image and title */
 }
 
 .logo h1 {
   font-size: var(--font-size-large);
-  color: var(--color-background); /* Ensures the logo text is the same color as the header background */
+  color: var(--color-background);
   margin: 0;
 }
 
-.search-box input[type="search"] {
+.search-box {
+  flex: 1;  /* Adjusted for better flex distribution */
+  display: flex;
+  justify-content: center;
+  padding: 0 var(--space-small);
+}
+
+.search-box form {
   width: 100%;
-  padding: var(--space-small);
-  margin-right: var(--space-regular);
-  border: 2px solid var(--color-secondary);
-  border-radius: 15px;
+  max-width: 640px;
+  display: flex;
+}
+
+.search-box input[type="search"] {
+  flex-grow: 1; /* Ensures the input field occupies all available space */
+  padding: 10px 15px;
+  font-size: 1rem;
+  border: 2px solid var(--color-primary);
+  border-radius: var(--border-radius);
+  outline: none;
+  text-align: center;
+}
+
+.search-box input[type="search"]:focus {
+  border-color: var(--color-secondary);
 }
 
 .right-navbar-links ul {
-  list-style: none; /* Removes bullet points */
+  list-style: none;
   display: flex;
   align-items: center;
   margin: 0;
@@ -70,153 +97,247 @@ header.navbar {
 }
 
 .right-navbar-links img {
-  height: 24px; /* Adjusts the size of the icons in the navbar */
+  height: 27px;
 }
 
 /* Home Page (index.html) */
 
 .welcome-section {
-  text-align: center; /* Centers the text of the welcome section */
-  padding: var(--space-regular) 0; /* Top and bottom padding */
-  margin-bottom: var(--space-regular); /* Space before the next section */
+  text-align: center;
+  padding: var(--space-regular) 0;
 }
 
 .welcome-section h1 {
-  font-size: var(--font-size-large); /* Larger font size for welcome message */
-  color: var(--color-primary); /* Primary color for emphasis */
-  padding-bottom: var(--space-small); /* Small padding below the heading */
+  font-size: var(--font-size-large); /* can prob be removed*/
+  color: var(--color-primary);
+  padding-bottom: var(--space-small);
 }
 
 .featured-spots {
-  margin: var(--space-regular) 0; /* Margin around the featured spots section */
+  margin: var(--space-regular) 0;
 }
 
 .featured-spots h2 {
   font-size: var(--font-size-large);
-  color: var(--color-secondary); /* Secondary color for section titles */
-  margin-bottom: var(--space-small); /* Space below the section title */
+  color: var(--color-secondary);
+  margin-bottom: var(--space-small);
 }
 
 .spots-list {
-  list-style: none; /* Removes default list styling */
+  list-style: none;
   padding: 0;
-  display: grid; /* Using grid layout for spots */
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Responsive grid columns */
-  grid-gap: var(--space-regular); /* Space between grid items */
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-gap: var(--space-regular);
 }
 
 .study-spot-container {
-  border: 1px solid var(--color-primary); /* Border around each spot */
-  border-radius: var(--border-radius); /* Rounded corners for the container */
-  overflow: hidden; /* Ensures nothing overflows the border radius */
-  transition: transform 0.3s ease-in-out; /* Smooth transition for hover effect */
+  border: 1px solid var(--color-primary);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  transition: box-shadow 0.3s ease-in-out;
 }
 
 .study-spot-container:hover {
-  transform: scale(1.05); /* Slightly enlarges the spot container on hover */
+  box-shadow: 0px 8px 15px rgba(0,0,0,0.1);
 }
 
 .study-spot-container a {
-  color: inherit; /* Inherits the color from the parent */
-  text-decoration: none; /* No underline on the links */
-  display: block; /* Makes the whole area clickable */
-  padding: var(--space-small); /* Padding inside each container */
+  display: block;
+  color: inherit; /* Ensures text colors are consistent and link removal doesn't affect it */
+  text-decoration: none;
 }
 
 .study-spot-container img {
-  width: 100%; /* Makes images take full width of the container */
-  height: 100%; /* Keeps the image aspect ratio */
-  margin-bottom: var(--space-small); /* Space below the image */
+  width: 100%;
+  height: 200px; /* Set a fixed height for all images */
+  object-fit: cover; /* Ensures images cover their frame without distorting */
+}
+
+.study-spot-content {
+  padding: var(--space-small);
+  /* background: var(--color-background); */
 }
 
 .study-spot-container h3 {
-  font-size: 1.25rem; /* Specific font size for spot titles */
-  color: var(--color-text); /* Text color for better readability */
-  margin-bottom: var(--space-small); /* Space below the title */
+  margin: var(--space-small) 0;
+  color: var(--color-primary);
+  font-size: 1.25rem;
 }
 
 .study-spot-container p {
-  margin: 0; /* Removes default paragraph margin */
-  font-size: 0.875rem; /* Smaller font size for details */
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--color-text);
 }
 
 /* Individual Spots Page */
 
-/* Spot Introduction Section */
-.spot-intro {
-  display: flex;
-  flex-direction: column;
-  align-items: center; /* Centers the content */
-  text-align: center;
-  padding: var(--space-regular);
+.gallery-preview {
+  position: relative;
+  /* are the below needed? */
+  width: 100%; /* Full width */
+  margin: 0 auto; /* Center aligning */
 }
 
-.spot-intro img {
-  max-width: 80%; /* Limits image width but maintains responsiveness */
-  height: auto;
-  margin-top: var(--space-regular);
+.featured-image {
+  width: 100%;
+  display: block;
+  height: 300px; /* Smaller fixed height for the image */
+  object-fit: cover; /* Ensures the image covers the area without distorting aspect ratio */
 }
 
-.spot-intro a {
-  margin-top: var(--space-small);
-  color: var(--color-links);
+.view-gallery-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0; /* not needed? */
+  width: 100%;
+  background: linear-gradient(to top, rgba(0,0,0,0.8) 10%, transparent 90%);
+  padding: 10px 20px;
+}
+
+.spot-title {
+  color: white;
+  font-size: 2rem;
+}
+
+.btn-view-gallery {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  bottom: 10px;
+  right: 20px;
+  color: #333;
+  background-color: #fff;
+  padding: 8px 16px;
+  border-radius: var(--border-radius);
   text-decoration: none;
-  font-weight: bold;
 }
 
-.spot-intro a:hover {
-  text-decoration: underline;
+.btn-view-gallery img {
+  height: 20px; /* Fixed height for consistency */
+  width: auto; /* Maintain aspect ratio */
+  margin-right: 8px;
 }
 
-/* Spot Details and Rating Breakdown */
+.btn-view-gallery:hover {
+  filter: brightness(0.9);
+}
+
+.study-spot-actions {
+  text-align: center;
+  padding: 10px 0;
+}
+
+.btn-add-photo, .btn-write-review {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-primary);
+  color: white;
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: var(--border-radius);
+  margin: 0 10px;
+}
+
+.btn-add-photo:hover, .btn-write-review:hover, .feature-tag:hover {
+  background-color: var(--color-links);
+  cursor: pointer; /* prob not needed for tags once it can be clicked */
+}
+
+.btn-icon-white {
+  height: 20px;
+  width: auto;
+  margin-right: 8px;
+  filter: brightness(0) invert(1); /* Inverts the icon color for better visibility */
+}
+
+.details-reviews-container {
+  display: flex;
+  justify-content: space-between; /* might not need? */
+  margin-top: 20px;
+}
+
+.feature-tag {
+  display: inline-block;
+  background-color: var(--color-tags);
+  color: var(--color-background);
+  border-radius: var(--border-radius); /* Rounded corners for tag appearance */
+  padding: 5px 10px; /* Padding around text */
+  margin: 2px; /* Margin between tags for spacing */
+  font-size: 0.875rem; /* Smaller font size for tags */
+  text-transform: capitalize; /* Capitalizing the first letter of each word */
+}
+
+/* Details and Ratings Container Styles */
+.details-ratings {
+  flex: 1;
+  padding-right: 10px;
+}
+
+.details-ratings h3 {
+  color: var(--color-primary);
+}
+
 .spot-details, .rating-breakdown {
-  padding: var(--space-regular);
-  border-top: 2px solid var(--color-primary); /* Adds a thematic break between sections */
+  margin-bottom: 20px; /* Adds space below the details section */
+  padding-bottom: 20px; /* Additional padding at the bottom */
+  border-bottom: 1px solid #ccc; /* A subtle line to visually separate sections */
 }
 
-.spot-details h3, .rating-breakdown h3, .user-reviews h3 {
-  color: var(--color-secondary);
+/* .rating-breakdown {
+  padding-top: 20px; /* Space at the top to separate from details *
+} */
+
+.overall-rating-image-container {
+  display: flex;
+  align-items: center; /* Aligns the star icon vertically with the rating number */
+  margin-bottom: 10px; /* Spacing between this section and the detailed ratings below */
 }
 
-/* User Reviews Section */
+.star-icon {
+  width: 24px; /* Sets a fixed width for the star icon */
+  height: auto; /* Maintains aspect ratio of the star icon */
+  margin-right: 5px; /* Space between the star icon and the rating number */
+}
+
+.rating-value {
+  font-size: 1.5rem; /* Larger font size for visibility */
+  color: var(--color-primary); /* Uses the primary color for emphasis */
+}
+
+.rating-breakdown p {
+  margin: 5px 0; /* Vertical spacing for each rating line */
+}
+
+.rating-breakdown h3 {
+  color: var(--color-primary);
+}
+
+/* User Reviews Styles */
 .user-reviews {
-  padding: var(--space-regular);
-  border-top: 2px solid var(--color-primary);
+  flex: 2;
+  padding-left: 10px;
+}
+
+.user-reviews h3 {
+  color: var(--color-primary);
 }
 
 .review {
-  margin-top: var(--space-regular);
-  padding-top: var(--space-small);
-  border-top: 1px dashed var(--color-secondary); /* Dashed line for stylistic separation */
-}
-
-.review h4 {
-  color: var(--color-text);
-}
-
-.review p {
-  font-size: var(--font-size-body);
-}
-
-.user-reviews a {
-  display: block; /* Makes the link block-level for easier clicking */
-  width: max-content;
-  margin: var(--space-regular) auto; /* Centers the link horizontally */
-  padding: var(--space-small);
-  background-color: var(--color-primary);
-  color: var(--color-background);
-  text-decoration: none;
+  background-color: #fff;
+  /* border: 1px solid #ddd; */
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  margin-top: 20px;
+  padding: 10px;
   border-radius: var(--border-radius);
 }
 
-.user-reviews a:hover {
-  background-color: var(--color-secondary);
-}
-
-
-
 footer {
-  background-color: #263238;
+  background-color: #2f414a;
+  color: var(--color-background);
   text-align: center;
   padding: var(--space-small) 0;
 }

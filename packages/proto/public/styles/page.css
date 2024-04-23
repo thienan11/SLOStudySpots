@@ -506,6 +506,34 @@ header.navbar {
 }
 
 
+/* Create Review Page */
+
+.star-rating {
+  display: inline-block;
+}
+
+.star-rating input[type='radio'] {
+  display: none; /* Hide radio buttons */
+}
+
+.star-rating label {
+  float: right; /* Arranges stars in reverse order */
+  padding: 5px;
+  font-size: 25px;
+  color: #ccc; /* Default color for inactive stars */
+  transition: all 0.3s ease; /* Smooth transition for color and scale */
+  cursor: pointer; /* Indicates interactivity */
+}
+
+.star-rating label:hover,
+.star-rating label:hover ~ label,
+.star-rating input[type='radio']:checked ~ label {
+  /* color: #f5d315; */
+  color: var(--color-links);
+  transform: scale(1.2); /* Slightly increase the size */
+}
+
+
 footer {
   background-color: #2f414a;
   color: var(--color-background);

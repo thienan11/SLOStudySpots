@@ -335,6 +335,44 @@ header.navbar {
   border-radius: var(--border-radius);
 }
 
+/* Rankings Page Styles */
+
+.rankings {
+  display: flex;
+  flex-direction: column; /* Aligns the rankings vertically */
+  gap: 20px; /* Adds space between each ranking */
+  padding: var(--space-regular);
+}
+
+.ranking {
+  background-color: var(--color-background); /* Light background for the card */
+  border: 1px solid var(--color-primary); /* Border color from tokens */
+  border-radius: var(--border-radius); /* Rounded corners from tokens */
+  padding: 20px; /* Padding inside each ranking card */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  transition: transform 0.3s ease; /* Smooth transition for hover effects */
+}
+
+.ranking:hover {
+  transform: translateY(-5px); /* Slight raise effect on hover */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Increased shadow on hover */
+}
+
+.ranking h3 {
+  color: var(--color-primary); /* Primary color for the title */
+  margin-bottom: 10px; /* Space below the title */
+}
+
+.ranking p {
+  line-height: 1.5; /* Improved readability with more line space */
+  color: var(--color-text); /* Regular text color */
+}
+
+.ranking p strong {
+  font-weight: bold; /* Emphasizes the "Rating" label */
+}
+
+
 footer {
   background-color: #2f414a;
   color: var(--color-background);

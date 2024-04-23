@@ -344,6 +344,10 @@ header.navbar {
   padding: var(--space-regular);
 }
 
+.rankings h2 {
+  color: var(--color-secondary);
+}
+
 .ranking {
   background-color: var(--color-background); /* Light background for the card */
   border: 1px solid var(--color-primary); /* Border color from tokens */
@@ -370,6 +374,72 @@ header.navbar {
 
 .ranking p strong {
   font-weight: bold; /* Emphasizes the "Rating" label */
+}
+
+/* Photo Gallery Styles */
+
+/* Upload photos section */
+.photo-upload {
+  background-color: var(--color-background); /* Light background for better visibility */
+  padding: 20px;
+  border-radius: var(--border-radius); /* Consistent rounded corners */
+  text-align: center; /* Centers the content */
+  margin: var(--space-regular); /* Adds margin for spacing */
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Subtle shadow for depth */
+}
+
+.photo-upload h2 {
+  color: var(--color-primary);
+}
+
+.photo-upload form {
+  margin-top: 20px;
+}
+
+.photo-upload input[type="file"] {
+  margin-bottom: 10px; /* Space between the file input and the submit button */
+}
+
+.photo-upload button {
+  background-color: var(--color-primary);
+  color: var(--color-background);
+  border: none;
+  padding: 10px 15px;
+  border-radius: var(--border-radius);
+  cursor: pointer; /* Indicates the button is clickable */
+}
+
+.photo-upload button:hover {
+  background-color: var(--color-links);
+}
+
+/* Photo Gallery Grid */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Flexible grid that fits the container */
+  grid-gap: 20px; /* Spacing between images */
+  padding: var(--space-regular);
+}
+
+.gallery h2 {
+  grid-column: 1 / -1; /* Makes the title span across all columns */
+  text-align: center;
+  color: var(--color-primary);
+}
+
+.photo {
+  height: 200px; /* Fixed height for all images */
+  overflow: hidden; /* Hides parts of the image that exceed the dimensions */
+  position: relative;
+  cursor: pointer;
+  background-color: #eee; /* Light grey background in case images are not loaded */
+  border-radius: var(--border-radius);
+}
+
+.photo img {
+  width: 100%; /* Full width of the container */
+  height: 100%; /* Full height as set by .photo */
+  object-fit: cover; /* Covers the photo div without stretching the image */
 }
 
 

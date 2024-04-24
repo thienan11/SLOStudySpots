@@ -389,7 +389,7 @@ header.navbar {
 }
 
 .photo-upload h2 {
-  color: var(--color-primary);
+  color: var(--color-secondary);
 }
 
 .photo-upload form {
@@ -424,7 +424,7 @@ header.navbar {
 .gallery h2 {
   grid-column: 1 / -1; /* Makes the title span across all columns */
   text-align: center;
-  color: var(--color-primary);
+  color: var(--color-secondary);
 }
 
 .photo {
@@ -455,7 +455,7 @@ header.navbar {
 }
 
 .create-spot-container h2 {
-  color: var(--color-primary);
+  color: var(--color-secondary);
   text-align: center;
   margin-bottom: 20px;
 }
@@ -554,7 +554,7 @@ html-fragment {
 }
 
 footer {
-  background-color: #547585;
+  background-color: var(--color-text);
   color: var(--color-background);
   text-align: center;
   padding: var(--space-small) 0;

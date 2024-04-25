@@ -7,13 +7,14 @@
     <link rel="stylesheet" href="/styles/reset.css" />
     <link rel="stylesheet" href="/styles/tokens.css" />
     <link rel="stylesheet" href="/styles/page.css" />
+    <script type="module" src="/js/drop-down.js"></script>
     <script type="module" src="/js/html-loader.js"></script>
-    <script type="module" src="/js/dark-mode.js"></script>
     <script type="module">
       import { relayEvent } from "/js/relay-event.js";
 
       window.relayEvent = relayEvent;
     </script>
+    <script type="module" src="/js/dark-mode.js"></script>
   </head>
   <body>
     <header class="navbar">
@@ -33,87 +34,89 @@
         </div>
 
         <nav class="right-navbar-links">
-          <ul>
-            <li>
-              <label 
-                class="light-dark-switch"
-                onchange="relayEvent(
-                event, 
-                'dark-mode', 
-                {checked: event.target.checked})">
-                <input type="checkbox" autocomplete="off" id="dark-mode-toggle"> Dark Mode
-                <!-- <span class="slider"></span> -->
-              </label>
-            </li>
-            <li>
-              <a class="group-icon" href="ranking.html">
-                <img src="icons/ranking.svg" alt="ranking-icon" />
-              </a>
-            </li>
-            <li>
-              <a class="group-icon" href="create.html">
-                <img src="icons/create.svg" alt="create-icon" />
-              </a>
-            </li>
-            <li>
-              <a class="navbar-menu" href="profile.html">
-                <img src="icons/avatar.svg" alt="profile-icon" />
-              </a>
-            </li>
-          </ul>
+          <drop-down>
+            <ul>
+              <li>
+                <a class="navbar-menu" href="profile.html">
+                  <!-- <img src="icons/avatar.svg" alt="profile-icon" /> -->
+                  Profile
+                </a>
+              </li>
+              <li>
+                <a class="group-icon" href="ranking.html">
+                  <!-- <img src="icons/ranking.svg" alt="ranking-icon" /> -->
+                  Community Rankings
+                </a>
+              </li>
+              <li>
+                <a class="group-icon" href="create.html">
+                  <!-- <img src="icons/create.svg" alt="create-icon" /> -->
+                  Make a Review
+                </a>
+              </li>
+              <li>
+                <label 
+                  class="light-dark-switch"
+                  onchange="relayEvent(
+                  event, 
+                  'dark-mode', 
+                  {checked: event.target.checked})">
+                  <input type="checkbox" autocomplete="off" id="dark-mode-toggle"> Dark Mode
+                  <!-- <span class="slider"></span> -->
+                </label>
+              </li>
+            </ul>
+          </drop-down> 
         </nav>
 
       </div>
     </header>
 
     <main class="content-container">
-      <article class="profile-content">
-        <header class="profile-header">
-          <h4>Account > Personal Info</h4>
-          <h2>Personal Info</h2>
-        </header>
-
-          <div class="profile-info-container">
-
-          <figure class="profile-image">
-            <img src="images/dude.jpg" alt="Profile image of John Doe" draggable="false"/>
-            <button onclick="editFullName()">Edit</button>
-          </figure>
-
-          <div class="info-block">
-            <header class="info-header">
-                <h2>Full Name</h2>
-                <button onclick="editFullName()">Edit</button>
-            </header>
-            <p class="info-content">John Doe</p>
+      <section class="profile-settings">
+        <h3>Account Settings</h3>
+        <div class="settings-block">
+          <div class="settings-item">
+            <div class="info-title-edit">
+                <h4>Full Name</h4>
+                <a href="#" class="edit-link">Edit</a>
+            </div>
+            <p class="current-info">John Doe</p>
           </div>
-
-          <div class="info-block">
-            <header class="info-header">
-                <h2>Username</h2>
-                <button onclick="editUsername()">Edit</button>
-            </header>
-            <p class="info-content">illdoittomorrow</p>
+    
+          <div class="settings-item">
+            <div class="info-title-edit">
+                <h4>Username</h4>
+                <a href="#" class="edit-link">Edit</a>
+            </div>
+            <p class="current-info">johndoe123</p>
           </div>
-
-          <div class="info-block">
-            <header class="info-header">
-                <h2>Email Address</h2>
-                <button onclick="editEmail()">Edit</button>
-            </header>
-            <p class="info-content">j**e@gmail.com</p>
+    
+          <div class="settings-item">
+            <div class="info-title-edit">
+                <h4>Email Address</h4>
+                <a href="#" class="edit-link">Edit</a>
+            </div>
+            <p class="current-info">john.doe@example.com</p>
           </div>
-
-          <div class="info-block">
-            <header class="info-header">
-                <h2>Phone Number</h2>
-                <button onclick="editPhone()">Edit</button>
-            </header>
-            <p class="info-content">90**-67</p>
+  
+          <div class="settings-item">
+            <div class="info-title-edit">
+                <h4>Phone Number</h4>
+                <a href="#" class="edit-link">Edit</a>
+            </div>
+            <p class="current-info">123-456-7890</p>
           </div>
-
+    
+          <div class="settings-item">
+            <div class="info-title-edit">
+                <h4>Password</h4>
+                <a href="#" class="edit-link">Change Password</a>
+            </div>
+            <p class="current-info">*******</p>
+          </div>
         </div>
-      </article>
+      </section>
     </main>
 
     <footer>

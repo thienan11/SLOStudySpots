@@ -6,8 +6,8 @@
     <title>SLOStudySpots</title>
     <link rel="stylesheet" href="/styles/reset.css" />
     <link rel="stylesheet" href="/styles/tokens.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="/styles/page.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script type="module" src="/js/drop-down.js"></script>
     <script type="module" src="/js/html-loader.js"></script>
     <script type="module">
@@ -73,85 +73,87 @@
       </div>
     </header>
 
-    <section class="add-review">
-      <h2>Add Your Review</h3>
-      <form>
-        <div class="form-group">
-          <label>Quietness:</label>
-          <div class="star-rating">
-            <input type="radio" id="quietness-5" name="quietness" value="5"><label for="quietness-5" class="fa fa-star"></label>
-            <input type="radio" id="quietness-4" name="quietness" value="4"><label for="quietness-4" class="fa fa-star"></label>
-            <input type="radio" id="quietness-3" name="quietness" value="3"><label for="quietness-3" class="fa fa-star"></label>
-            <input type="radio" id="quietness-2" name="quietness" value="2"><label for="quietness-2" class="fa fa-star"></label>
-            <input type="radio" id="quietness-1" name="quietness" value="1"><label for="quietness-1" class="fa fa-star"></label>
+    <main>
+      <section class="add-review">
+        <h2>Add Your Review</h3>
+        <form>
+          <div class="star-form-group">
+            <label><strong>Quietness:</strong> <small>(Rate how quiet the area is)</small></label>
+            <div class="star-rating">
+              <input type="radio" id="quietness-5" name="quietness" value="5"><label for="quietness-5" class="fa fa-star"></label>
+              <input type="radio" id="quietness-4" name="quietness" value="4"><label for="quietness-4" class="fa fa-star"></label>
+              <input type="radio" id="quietness-3" name="quietness" value="3"><label for="quietness-3" class="fa fa-star"></label>
+              <input type="radio" id="quietness-2" name="quietness" value="2"><label for="quietness-2" class="fa fa-star"></label>
+              <input type="radio" id="quietness-1" name="quietness" value="1"><label for="quietness-1" class="fa fa-star"></label>
+            </div>
           </div>
-        </div>
 
-        <div class="form-group">
-          <label>Wifi Quality:</label>
-          <div class="star-rating">
-            <input type="radio" id="wifi-5" name="wifi" value="5"><label for="wifi-5" class="fa fa-star"></label>
-            <input type="radio" id="wifi-4" name="wifi" value="4"><label for="wifi-4" class="fa fa-star"></label>
-            <input type="radio" id="wifi-3" name="wifi" value="3"><label for="wifi-3" class="fa fa-star"></label>
-            <input type="radio" id="wifi-2" name="wifi" value="2"><label for="wifi-2" class="fa fa-star"></label>
-            <input type="radio" id="wifi-1" name="wifi" value="1"><label for="wifi-1" class="fa fa-star"></label>
+          <div class="star-form-group">
+            <label><strong>Wifi Quality:</strong> <small>(Evaluate the reliability and speed of the WiFi)</small></label>
+            <div class="star-rating">
+              <input type="radio" id="wifi-5" name="wifi" value="5"><label for="wifi-5" class="fa fa-star"></label>
+              <input type="radio" id="wifi-4" name="wifi" value="4"><label for="wifi-4" class="fa fa-star"></label>
+              <input type="radio" id="wifi-3" name="wifi" value="3"><label for="wifi-3" class="fa fa-star"></label>
+              <input type="radio" id="wifi-2" name="wifi" value="2"><label for="wifi-2" class="fa fa-star"></label>
+              <input type="radio" id="wifi-1" name="wifi" value="1"><label for="wifi-1" class="fa fa-star"></label>
+            </div>
           </div>
-        </div>
 
-        <div class="form-group">
-          <label>Crowdedness:</label>
-          <div class="star-rating">
-            <input type="radio" id="crowdedness-5" name="crowdedness" value="5"><label for="crowdedness-5" class="fa fa-star"></label>
-            <input type="radio" id="crowdedness-4" name="crowdedness" value="4"><label for="crowdedness-4" class="fa fa-star"></label>
-            <input type="radio" id="crowdedness-3" name="crowdedness" value="3"><label for="crowdedness-3" class="fa fa-star"></label>
-            <input type="radio" id="crowdedness-2" name="crowdedness" value="2"><label for="crowdedness-2" class="fa fa-star"></label>
-            <input type="radio" id="crowdedness-1" name="crowdedness" value="1"><label for="crowdedness-1" class="fa fa-star"></label>
+          <div class="star-form-group">
+            <label><strong>Crowdedness:</strong> <small>(Indicate how crowded the spot typically is)</small></label>
+            <div class="star-rating">
+              <input type="radio" id="crowdedness-5" name="crowdedness" value="5"><label for="crowdedness-5" class="fa fa-star"></label>
+              <input type="radio" id="crowdedness-4" name="crowdedness" value="4"><label for="crowdedness-4" class="fa fa-star"></label>
+              <input type="radio" id="crowdedness-3" name="crowdedness" value="3"><label for="crowdedness-3" class="fa fa-star"></label>
+              <input type="radio" id="crowdedness-2" name="crowdedness" value="2"><label for="crowdedness-2" class="fa fa-star"></label>
+              <input type="radio" id="crowdedness-1" name="crowdedness" value="1"><label for="crowdedness-1" class="fa fa-star"></label>
+            </div>
           </div>
-        </div>
 
-        <div class="form-group">
-          <label>Power Outlets:</label>
-          <div class="star-rating">
-            <input type="radio" id="power-5" name="power" value="5"><label for="power-5" class="fa fa-star"></label>
-            <input type="radio" id="power-4" name="power" value="4"><label for="power-4" class="fa fa-star"></label>
-            <input type="radio" id="power-3" name="power" value="3"><label for="power-3" class="fa fa-star"></label>
-            <input type="radio" id="power-2" name="power" value="2"><label for="power-2" class="fa fa-star"></label>
-            <input type="radio" id="power-1" name="power" value="1"><label for="power-1" class="fa fa-star"></label>
+          <div class="star-form-group">
+            <label><strong>Power Outlets:</strong> <small>(Assess the availability of power outlets)</small></label>
+            <div class="star-rating">
+              <input type="radio" id="power-5" name="power" value="5"><label for="power-5" class="fa fa-star"></label>
+              <input type="radio" id="power-4" name="power" value="4"><label for="power-4" class="fa fa-star"></label>
+              <input type="radio" id="power-3" name="power" value="3"><label for="power-3" class="fa fa-star"></label>
+              <input type="radio" id="power-2" name="power" value="2"><label for="power-2" class="fa fa-star"></label>
+              <input type="radio" id="power-1" name="power" value="1"><label for="power-1" class="fa fa-star"></label>
+            </div>
           </div>
-        </div>
 
-        <div class="form-group">
-          <label>Safety:</label>
-          <div class="star-rating">
-            <input type="radio" id="safety-5" name="safety" value="5"><label for="safety-5" class="fa fa-star"></label>
-            <input type="radio" id="safety-4" name="safety" value="4"><label for="safety-4" class="fa fa-star"></label>
-            <input type="radio" id="safety-3" name="safety" value="3"><label for="safety-3" class="fa fa-star"></label>
-            <input type="radio" id="safety-2" name="safety" value="2"><label for="safety-2" class="fa fa-star"></label>
-            <input type="radio" id="safety-1" name="safety" value="1"><label for="safety-1" class="fa fa-star"></label>
+          <div class="star-form-group">
+            <label><strong>Safety:</strong> <small>(Rate the overall safety of the location)</small></label>
+            <div class="star-rating">
+              <input type="radio" id="safety-5" name="safety" value="5"><label for="safety-5" class="fa fa-star"></label>
+              <input type="radio" id="safety-4" name="safety" value="4"><label for="safety-4" class="fa fa-star"></label>
+              <input type="radio" id="safety-3" name="safety" value="3"><label for="safety-3" class="fa fa-star"></label>
+              <input type="radio" id="safety-2" name="safety" value="2"><label for="safety-2" class="fa fa-star"></label>
+              <input type="radio" id="safety-1" name="safety" value="1"><label for="safety-1" class="fa fa-star"></label>
+            </div>
           </div>
-        </div>
 
-        <div class="form-group">
-          <label for="feature">Feature:</label>
-          <input type="text" id="feature" name="feature">
-        </div>
+          <div class="form-group">
+            <label for="feature">Feature:</label>
+            <input type="text" id="feature" name="feature">
+          </div>
 
-        <div class="photo-upload">
-          <p>Add Photos:</p>
-          <form action="/submit-photo" method="post" enctype="multipart/form-data">
-            <input type="file" id="photo" name="photo" accept="image/*">
-          </form>
-        </div>
+          <div class="form-group">
+            <label>Add Photos:</label>
+            <form>
+              <input type="file" id="photo" name="photo" accept="image/*">
+            </form>
+          </div>
 
-        <div class="form-group">
-          <label for="comment">Comment:</label>
-          <textarea id="comment" name="comment" rows="4" cols="50"></textarea>
-        </div>
+          <div class="form-group">
+            <label for="comment">Comment:</label>
+            <textarea id="comment" name="comment" rows="4" cols="50"></textarea>
+          </div>
 
-        <button type="submit" class="btn btn-primary">Submit</button>
-        
-      </form>
-    </section>
+          <button type="submit" class="btn-large">Submit</button>
+          
+        </form>
+      </section>
+    </main>
 
     <footer>
       <p>© 2024 SLOStudySpots. All rights reserved.</p>

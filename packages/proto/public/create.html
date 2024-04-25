@@ -72,33 +72,35 @@
       </div>
     </header>
 
-    <section class="create-spot-container">
-      <h2>Add a New Study Spot</h2>
-      <form action="/submit-new-spot" method="post" enctype="multipart/form-data">
-        <div class="form-group">
-          <label for="name">Name of the Study Spot:</label>
-          <input type="text" id="name" name="name" required>
-        </div>
+    <main>
+      <section class="create-spot-container">
+        <h2>Add a New Study Spot</h2>
+        <form>
+          <div class="form-group">
+            <label for="name">Name of the Study Spot:</label>
+            <input type="text" id="name" name="name" required>
+          </div>
 
-        <div class="form-group">
-          <label for="location">Location/Address:</label>
-          <input type="text" id="location" name="location" required>
-        </div>
+          <div class="form-group">
+            <label for="location">Location/Address:</label>
+            <input type="text" id="location" name="location" required>
+          </div>
 
-        <div class="form-group">
-          <label for="features">Features (e.g., Wi-Fi, Outlets):</label>
-          <input type="text" id="features" name="features" required>
-        </div>
+          <div class="form-group">
+            <label for="features">Features (e.g., Wi-Fi, Outlets):</label>
+            <input type="text" id="features" name="features" required>
+          </div>
 
-        <div class="form-group">
-          <label for="description">Description (optional):</label>
-          <textarea id="description" name="description" rows="3" required></textarea>
-        </div>
+          <div class="form-group">
+            <label for="description">Description (optional):</label>
+            <textarea id="description" name="description" rows="3" required></textarea>
+          </div>
 
-        <a href="./make-review.html" class="btn-continue">Continue to Review</a>
+          <a href="./make-review.html">Continue to Review</a>
 
-      </form>
-    </section>
+        </form>
+      </section>
+    </main>
 
     <footer>
       <p>© 2024 SLOStudySpots. All rights reserved.</p>

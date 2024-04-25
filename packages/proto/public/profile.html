@@ -75,7 +75,12 @@
     <main class="content-container">
       <article class="profile">
         <header class="profile-header">
-          <img src="icons/sloth-avatar.svg" alt="User Avatar" class="profile-avatar"/>
+          <figure class="profile-image">
+            <img src="icons/sloth-avatar.svg" alt="User Avatar" class="profile-avatar"/>
+            <figcaption>
+                <a href="#" class="edit-link">Edit Photo</a>
+            </figcaption>
+          </figure>
           <h2>John Doe</h2>
           <p>john.doe@example.com</p>
         </header>
@@ -102,9 +107,8 @@
         </section>
 
         <section class="profile-actions">
-          <h3>Account Settings</h3>
           <a href="profile-settings.html">Edit Profile</a>
-          <a href="">Log Out</a>
+          <a href="#">Log Out</a>
         </section>
       </article>
     </main>

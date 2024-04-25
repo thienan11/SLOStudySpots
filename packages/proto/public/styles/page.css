@@ -350,6 +350,10 @@ header.navbar {
   border-radius: var(--border-radius);
 }
 
+.review ul {
+  margin: 10px 0 0 15px;
+}
+
 /* Rankings Page Styles */
 
 .rankings {
@@ -364,12 +368,13 @@ header.navbar {
 }
 
 .ranking {
-  background-color: var(--color-background-primary); /* Light background for the card */
+  background-color: var(--color-background-secondary); /* Light background for the card */
   border: 1px solid var(--color-primary); /* Border color from tokens */
   border-radius: var(--border-radius); /* Rounded corners from tokens */
   padding: 20px; /* Padding inside each ranking card */
   box-shadow: var(--shadow-hover-small);
   transition: transform 0.3s ease; /* Smooth transition for hover effects */
+  cursor: pointer;
 }
 
 .ranking:hover {
@@ -415,7 +420,7 @@ header.navbar {
   margin-bottom: 10px; /* Space between the file input and the submit button */
 }
 
-.photo-upload button {
+.btn-small {
   background-color: var(--color-primary);
   color: var(--color-background-primary);
   border: none;
@@ -424,8 +429,20 @@ header.navbar {
   cursor: pointer; /* Indicates the button is clickable */
 }
 
-.photo-upload button:hover {
+.btn-small:hover, .btn-large:hover {
   background-color: var(--color-links);
+}
+
+.btn-large {
+  width: 100%;
+  padding: 12px;
+  background-color: var(--color-primary);
+  color: var(--color-background-primary);
+  font-size: 1.1rem;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.3s ease;
 }
 
 /* Photo Gallery Grid */
@@ -483,7 +500,6 @@ header.navbar {
   padding: 12px 24px; /* Larger padding for better clickability */
   border: none;
   border-radius: var(--border-radius);
-  cursor: pointer;
   font-size: 1rem; /* Larger font size for readability */
   margin-top: 10px; /* Space from the last form element */
   display: block;
@@ -523,16 +539,49 @@ header.navbar {
 
 /* Make Review Page */
 
+.add-review {
+  background-color: var(--color-background-secondary);
+  padding: 20px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-hover-small);
+  margin: 20px auto;
+  width: 90%;
+  max-width: 800px;
+}
 
+.add-review h2 {
+  text-align: center;
+  color: var(--color-primary);
+}
+
+.star-container {
+  display: flex;
+  justify-content: space-between; /* Aligns items on opposite ends */
+  align-items: center; /* Vertically aligns items in the middle */
+  margin-bottom: 20px; /* Adds space below each form group */
+}
+
+.star-container label {
+  margin-right: 20px; /* Adds space between label and stars if needed */
+  white-space: nowrap; /* Prevents the label from breaking into multiple lines */
+}
+
+.star-form-group {
+  display: flex;
+  justify-content: space-between; /* Aligns items on opposite ends */
+  align-items: center; /* Vertically aligns items in the middle */
+  margin-bottom: 20px; /* Adds space below each form group */
+}
+
+.star-form-group label {
+  margin-right: 20px; /* Adds space between label and stars if needed */
+  white-space: nowrap; /* Prevents the label from breaking into multiple lines */
+}
 
 /* Star Rating Styles */
-.star-rating {
-  display: inline-block;
-  /* flex-basis: 60%; /* Remaining space allocated to star rating *
-  display: flex;
-  justify-content: flex-start;
-  flex-direction: row-reverse; */
-}
+/* .star-rating {
+  display: inline-block; /* Aligns the stars horizontally *
+} */
 
 .star-rating input[type='radio'] {
   display: none; /* Hide radio buttons */
@@ -585,16 +634,36 @@ header.navbar {
 }
 
 .profile-header {
-  text-align: center; /* Center everything in the header */
+  text-align: center;
   padding-bottom: var(--space-regular);
-  border-bottom: 2px solid var(--color-primary); /* Adds a subtle line below the header */
+}
+
+.profile-image {
+  display: inline-block; /* Aligns the image and caption centrally within the header */
+  text-align: center;
+  position: relative;
 }
 
 .profile-avatar {
-  width: 120px; /* Fixed size for the avatar */
+  width: 100px; /* Adjust size as needed */
   height: auto;
-  border-radius: 50%; /* Makes the avatar image circular */
-  margin-bottom: var(--space-small);
+  border-radius: 50%; /* Circular image */
+}
+
+figcaption {
+  display: block; /* Ensure the caption is below the image */
+  margin-top: var(--space-small); /* Space between the image and the link */
+}
+
+.edit-link {
+  color: var(--color-primary);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.edit-link:hover {
+  color: var(--color-links);
+  text-decoration: none; /* Optional style for hover effect */
 }
 
 .profile-header h2 {
@@ -672,6 +741,54 @@ header.navbar {
 .profile-actions a:hover {
   background-color: var(--color-links);
   color: var(--color-background-primary);
+}
+
+/* Profile Settings Page */
+
+.profile-settings {
+  background-color: var(--color-background-secondary);
+  padding: var(--space-regular);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-hover-small);
+  margin-top: var(--space-regular);
+}
+
+.settings-block {
+  margin-top: var(--space-small);
+}
+
+.settings-item {
+  margin-bottom: var(--space-regular);
+  padding: var(--space-small);
+  background-color: var(--color-background);
+  border-radius: var(--border-radius);
+}
+
+.info-title-edit {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.info-title-edit h4 {
+  color: var(--color-text);
+}
+
+.info-title-edit a.edit-link {
+  color: var(--color-primary);
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.info-title-edit a.edit-link:hover {
+  color: var(--color-links);
+  text-decoration: none; /* Optional: remove underline on hover for a change effect */
+}
+
+.current-info {
+  font-size: var(--font-size-body);
+  color: var(--color-text);
+  margin-top: var(--space-small);
 }
 
 /* HTML Fragment Styles */

@@ -5,6 +5,7 @@ body {
   display: flex;
   flex-direction: column; /* Stack children vertically */
   min-height: 100vh; /* Minimum height is full viewport height */
+  /* position: relative; */
 }
 
 main {
@@ -54,26 +55,30 @@ header.navbar {
 }
 
 .search-box {
-  flex: 1;  /* Adjusted for better flex distribution */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Offset the search box to exactly center it */
+  width: 100%;
+  max-width: 640px;
   display: flex;
   justify-content: center;
-  padding: 0 var(--space-small);
 }
 
 .search-box form {
   width: 100%;
-  max-width: 640px;
   display: flex;
 }
 
 .search-box input[type="search"] {
-  flex-grow: 1; /* Ensures the input field occupies all available space */
+  width: 100%;
   padding: 10px 15px;
   font-size: 1rem;
   border: 2px solid var(--color-primary);
   border-radius: var(--border-radius);
   outline: none;
   text-align: center;
+  font-family: inherit;
 }
 
 .search-box input[type="search"]:focus {
@@ -159,14 +164,14 @@ header.navbar {
 
 .study-spot-container a {
   display: block;
-  color: inherit; /* Ensures text colors are consistent and link removal doesn't affect it */
+  color: inherit;
   text-decoration: none;
 }
 
 .study-spot-container img {
   width: 100%;
-  height: 200px; /* Set a fixed height for all images */
-  object-fit: cover; /* Ensures images cover their frame without distorting */
+  height: 200px;
+  object-fit: cover;
 }
 
 .study-spot-content {
@@ -198,8 +203,8 @@ header.navbar {
 .featured-image {
   width: 100%;
   display: block;
-  height: 300px; /* Smaller fixed height for the image */
-  object-fit: cover; /* Ensures the image covers the area without distorting aspect ratio */
+  height: 300px;
+  object-fit: cover;
 }
 
 .view-gallery-overlay {
@@ -231,8 +236,8 @@ header.navbar {
 }
 
 .btn-view-gallery img {
-  height: 20px; /* Fixed height for consistency */
-  width: auto; /* Maintain aspect ratio */
+  height: 20px;
+  width: auto;
   margin-right: 8px;
 }
 
@@ -266,7 +271,7 @@ header.navbar {
   height: 20px;
   width: auto;
   margin-right: 8px;
-  filter: brightness(0) invert(1); /* Inverts the icon color for better visibility */
+  filter: brightness(0) invert(1);
 }
 
 .details-reviews-container {
@@ -279,11 +284,11 @@ header.navbar {
   display: inline-block;
   background-color: var(--color-tags);
   color: #fff;
-  border-radius: var(--border-radius); /* Rounded corners for tag appearance */
-  padding: 5px 10px; /* Padding around text */
-  margin: 2px; /* Margin between tags for spacing */
-  font-size: 0.875rem; /* Smaller font size for tags */
-  text-transform: capitalize; /* Capitalizing the first letter of each word */
+  border-radius: var(--border-radius);
+  padding: 5px 10px;
+  margin: 2px;
+  font-size: 0.875rem;
+  text-transform: capitalize;
 }
 
 /* Details and Ratings Container Styles */
@@ -297,9 +302,9 @@ header.navbar {
 }
 
 .spot-details, .rating-breakdown {
-  margin-bottom: 20px; /* Adds space below the details section */
-  padding-bottom: 20px; /* Additional padding at the bottom */
-  border-bottom: 1px solid #ccc; /* A subtle line to visually separate sections */
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #ccc;
 }
 
 /* .rating-breakdown {
@@ -308,23 +313,23 @@ header.navbar {
 
 .overall-rating-image-container {
   display: flex;
-  align-items: center; /* Aligns the star icon vertically with the rating number */
-  margin-bottom: 10px; /* Spacing between this section and the detailed ratings below */
+  align-items: center;
+  margin-bottom: 10px;
 }
 
 .star-icon {
-  width: 24px; /* Sets a fixed width for the star icon */
-  height: auto; /* Maintains aspect ratio of the star icon */
-  margin-right: 5px; /* Space between the star icon and the rating number */
+  width: 24px;
+  height: auto;
+  margin-right: 5px;
 }
 
 .rating-value {
-  font-size: 1.5rem; /* Larger font size for visibility */
-  color: var(--color-primary); /* Uses the primary color for emphasis */
+  font-size: 1.5rem;
+  color: var(--color-primary);
 }
 
 .rating-breakdown p {
-  margin: 5px 0; /* Vertical spacing for each rating line */
+  margin: 5px 0;
 }
 
 .rating-breakdown h3 {
@@ -358,8 +363,8 @@ header.navbar {
 
 .rankings {
   display: flex;
-  flex-direction: column; /* Aligns the rankings vertically */
-  gap: 20px; /* Adds space between each ranking */
+  flex-direction: column;
+  gap: 20px;
   padding: var(--space-regular);
 }
 
@@ -368,43 +373,43 @@ header.navbar {
 }
 
 .ranking {
-  background-color: var(--color-background-secondary); /* Light background for the card */
-  border: 1px solid var(--color-primary); /* Border color from tokens */
-  border-radius: var(--border-radius); /* Rounded corners from tokens */
-  padding: 20px; /* Padding inside each ranking card */
+  background-color: var(--color-background-secondary);
+  border: 1px solid var(--color-primary);
+  border-radius: var(--border-radius);
+  padding: 20px;
   box-shadow: var(--shadow-hover-small);
-  transition: transform 0.3s ease; /* Smooth transition for hover effects */
+  transition: transform 0.3s ease;
   cursor: pointer;
 }
 
 .ranking:hover {
-  transform: translateY(-5px); /* Slight raise effect on hover */
+  transform: translateY(-5px);
   box-shadow: var(--shadow-hover-large);
 }
 
 .ranking h3 {
-  color: var(--color-primary); /* Primary color for the title */
-  margin-bottom: 10px; /* Space below the title */
+  color: var(--color-primary);
+  margin-bottom: 10px;
 }
 
 .ranking p {
-  line-height: 1.5; /* Improved readability with more line space */
-  color: var(--color-text-primary); /* Regular text color */
+  line-height: 1.5;
+  color: var(--color-text-primary);
 }
 
 .ranking p strong {
-  font-weight: bold; /* Emphasizes the "Rating" label */
+  font-weight: bold;
 }
 
 /* Photo Gallery Styles */
 
 /* Upload photos section */
 .photo-upload {
-  background-color: var(--color-background-primary); /* Light background for better visibility */
+  background-color: var(--color-background-primary);
   padding: 20px;
-  border-radius: var(--border-radius); /* Consistent rounded corners */
-  text-align: center; /* Centers the content */
-  margin: var(--space-regular); /* Adds margin for spacing */
+  border-radius: var(--border-radius);
+  text-align: center;
+  margin: var(--space-regular);
   box-shadow: var(--shadow-hover-small);
 }
 
@@ -417,7 +422,7 @@ header.navbar {
 }
 
 .photo-upload input[type="file"] {
-  margin-bottom: 10px; /* Space between the file input and the submit button */
+  margin-bottom: 10px;
 }
 
 .btn-small {
@@ -426,7 +431,7 @@ header.navbar {
   border: none;
   padding: 10px 15px;
   border-radius: var(--border-radius);
-  cursor: pointer; /* Indicates the button is clickable */
+  cursor: pointer;
 }
 
 .btn-small:hover, .btn-large:hover {
@@ -449,7 +454,7 @@ header.navbar {
 .gallery {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Flexible grid that fits the container */
-  grid-gap: 20px; /* Spacing between images */
+  grid-gap: 20px;
   padding: var(--space-regular);
 }
 
@@ -460,27 +465,27 @@ header.navbar {
 }
 
 .photo {
-  height: 200px; /* Fixed height for all images */
-  overflow: hidden; /* Hides parts of the image that exceed the dimensions */
+  height: 200px;
+  overflow: hidden;
   position: relative;
   cursor: pointer;
-  background-color: #eee; /* Light grey background in case images are not loaded */
+  background-color: #eee;
   border-radius: var(--border-radius);
 }
 
 .photo img {
-  width: 100%; /* Full width of the container */
-  height: 100%; /* Full height as set by .photo */
-  object-fit: cover; /* Covers the photo div without stretching the image */
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 /* Create Spots Page */
 
 .create-spot-container {
-  width: 90%; /* Use more of the viewport width */
-  max-width: 960px; /* Increased max-width for desktop */
-  margin: 40px auto; /* More vertical margin */
-  padding: 40px; /* More padding for a better layout */
+  width: 90%;
+  max-width: 960px;
+  margin: 40px auto;
+  padding: 40px;
   background-color: var(--color-background-secondary);
   border-radius: var(--border-radius);
   box-shadow: var(--shadow-hover-med);
@@ -497,11 +502,11 @@ header.navbar {
   background-color: var(--color-primary);
   color: var(--color-background-primary);
   text-decoration: none;
-  padding: 12px 24px; /* Larger padding for better clickability */
+  padding: 12px 24px;
   border: none;
   border-radius: var(--border-radius);
-  font-size: 1rem; /* Larger font size for readability */
-  margin-top: 10px; /* Space from the last form element */
+  font-size: 1rem;
+  margin-top: 10px;
   display: block;
   text-align: center;
 }
@@ -511,7 +516,7 @@ header.navbar {
 }
 
 .form-group {
-  margin-bottom: var(--space-regular); /* Ensures ample space between form fields */
+  margin-bottom: var(--space-regular);
 }
 
 .form-group label {
@@ -524,8 +529,8 @@ header.navbar {
 .form-group input[type="text"],
 .form-group textarea {
   width: 100%;
-  padding: 12px; /* More padding for better interaction */
-  border: 2px solid var(--color-primary); /* Thicker border */
+  padding: 12px;
+  border: 2px solid var(--color-primary);
   border-radius: var(--border-radius);
   box-sizing: border-box;
   outline: none;
@@ -551,30 +556,30 @@ header.navbar {
 
 .add-review h2 {
   text-align: center;
-  color: var(--color-primary);
+  color: var(--color-secondary);
 }
 
 .star-container {
   display: flex;
-  justify-content: space-between; /* Aligns items on opposite ends */
-  align-items: center; /* Vertically aligns items in the middle */
-  margin-bottom: 20px; /* Adds space below each form group */
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
 .star-container label {
-  margin-right: 20px; /* Adds space between label and stars if needed */
-  white-space: nowrap; /* Prevents the label from breaking into multiple lines */
+  margin-right: 20px;
+  white-space: nowrap;
 }
 
 .star-form-group {
   display: flex;
-  justify-content: space-between; /* Aligns items on opposite ends */
-  align-items: center; /* Vertically aligns items in the middle */
-  margin-bottom: 20px; /* Adds space below each form group */
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
 .star-form-group label {
-  margin-right: 20px; /* Adds space between label and stars if needed */
+  margin-right: 20px;
   white-space: nowrap; /* Prevents the label from breaking into multiple lines */
 }
 
@@ -591,9 +596,9 @@ header.navbar {
   float: right;
   padding: 5px;
   font-size: 25px;
-  color: #ccc; /* Default color for inactive stars */
-  transition: all 0.3s ease; /* Smooth transition for color and scale */
-  cursor: pointer; /* Indicates interactivity */
+  color: #ccc;
+  transition: all 0.3s ease;
+  cursor: pointer;
 }
 
 .star-rating label:hover,
@@ -601,7 +606,7 @@ header.navbar {
 .star-rating input[type='radio']:checked ~ label {
   /* color: #f5d315; */
   color: var(--color-links);
-  transform: scale(1.2); /* Slightly increase the size */
+  transform: scale(1.2);
 }
 
 /* Light/Dark Mode Switch */
@@ -610,12 +615,12 @@ header.navbar {
   display: inline-flex;
   align-items: center;
   cursor: pointer;
-  font-size: 16px; /* Adjust font size as needed */
+  font-size: 16px;
   color: var(--color-text-secondary);
 }
 
 .light-dark-switch input[type="checkbox"] {
-  margin-right: 8px; /* Space between checkbox and label text */
+  margin-right: 8px;
 }
 
 .light-dark-switch:hover{
@@ -628,7 +633,7 @@ header.navbar {
   background-color: var(--color-background-secondary);
   padding: var(--space-regular);
   margin: auto;
-  max-width: 800px; /* Keeps the profile section well contained */
+  max-width: 800px;
   border-radius: var(--border-radius);
   box-shadow: var(--shadow-hover-small);
 }
@@ -639,20 +644,20 @@ header.navbar {
 }
 
 .profile-image {
-  display: inline-block; /* Aligns the image and caption centrally within the header */
+  display: inline-block;
   text-align: center;
   position: relative;
 }
 
 .profile-avatar {
-  width: 100px; /* Adjust size as needed */
+  width: 100px;
   height: auto;
-  border-radius: 50%; /* Circular image */
+  border-radius: 50%;
 }
 
 figcaption {
-  display: block; /* Ensure the caption is below the image */
-  margin-top: var(--space-small); /* Space between the image and the link */
+  display: block;
+  margin-top: var(--space-small);
 }
 
 .edit-link {
@@ -663,7 +668,7 @@ figcaption {
 
 .edit-link:hover {
   color: var(--color-links);
-  text-decoration: none; /* Optional style for hover effect */
+  text-decoration: none;
 }
 
 .profile-header h2 {
@@ -694,13 +699,13 @@ figcaption {
 }
 
 .contribution ul {
-  list-style-type: none; /* Removes bullet points */
+  list-style-type: none;
   padding: 0;
 }
 
 .contribution li {
   padding: var(--space-small) 0;
-  border-bottom: 1px solid var(--color-primary); /* Adds a line below each item */
+  border-bottom: 1px solid var(--color-primary);
 }
 
 .contribution li:last-child {
@@ -719,7 +724,7 @@ figcaption {
 /* Profile Actions Section */
 .profile-actions {
   margin-top: var(--space-regular);
-  text-align: center; /* Centers the action links */
+  text-align: center;
 }
 
 .profile-actions h3 {
@@ -786,7 +791,7 @@ figcaption {
 
 .info-title-edit a.edit-link:hover {
   color: var(--color-links);
-  text-decoration: none; /* Optional: remove underline on hover for a change effect */
+  text-decoration: none;
 }
 
 .current-info {

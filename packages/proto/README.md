@@ -1,6 +1,17 @@
-## Concept Model
+# Prototype
 
-Miro Board: https://miro.com/app/board/uXjVKTnltEo=/?share_link_id=757753677716
+This package is an HTML prototype of the SLOStudySpots app.
+This prototype is developed in modules 1-3 of the course, and
+written entirely in static HTML, CSS, and Javascript.
 
-## Run
-This prototype can be run using `npm start` or `npm run start`
+## Documentation
+
+Miro Board (Concept Map): https://miro.com/app/board/uXjVKTnltEo=/?share_link_id=757753677716
+
+## Running
+
+To start the web server:
+
+```shell
+npm start
+```

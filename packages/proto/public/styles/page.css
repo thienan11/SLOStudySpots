@@ -753,6 +753,10 @@ figcaption {
   margin-top: var(--space-regular);
 }
 
+.profile-settings h3 {
+  color: var(--color-secondary);
+}
+
 .settings-block {
   margin-top: var(--space-small);
 }

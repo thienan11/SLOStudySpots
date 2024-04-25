@@ -8,9 +8,18 @@ written entirely in static HTML, CSS, and Javascript.
 
 Miro Board (Concept Map): https://miro.com/app/board/uXjVKTnltEo=/?share_link_id=757753677716
 
+## Dependencies
+
+Go to this directory and install all the required dependencies:
+
+```shell
+cd packages/proto
+npm install
+```
+
 ## Running
 
-To start the web server:
+Once all dependencies are installed, to start the web server:
 
 ```shell
 npm start

@@ -26,22 +26,22 @@
   --font-size-large: 1.5rem; /* Larger text size for major headings 24px */
 
   /* Spacing */
-  --space-regular: 20px; /* Regular spacing for padding and margins */
-  --space-small: 10px; /* Smaller spacing for smaller paddings and margins */
+  --space-regular: 20px;
+  --space-small: 10px;
 
   /* Borders */
-  --border-radius: 8px; /* Common border radius for UI elements like buttons, inputs */
+  --border-radius: 8px;
 }
 
 body.dark-mode {
   --color-primary: #33736B;
-  --color-secondary: #79504F; /* Darker shade of dusty rose */
-  --color-text-primary: #E8E1E2; /* Lighter earthy brown, for readability on dark */
-  --color-text-secondary: #fff; /* White text for dark mode */
-  --color-background-primary: #2A2A2A; /* Very dark gray as a background color */
-  --color-background-secondary: #404040; /* Darker shade of light cream */
-  --color-links: #6E5D84; /* Darker shade of lavender */
-  --color-tags: #495D50; /* Darker shade of soothing green */
+  --color-secondary: #79504F;
+  --color-text-primary: #E8E1E2;
+  --color-text-secondary: #fff;
+  --color-background-primary: #2A2A2A;
+  --color-background-secondary: #404040;
+  --color-links: #6E5D84;
+  --color-tags: #495D50;
 
   --shadow-hover-large: 0px 8px 15px rgba(255,255,255,0.05);
   --shadow-hover-small: 0 2px 5px rgba(255,255,255,0.04);

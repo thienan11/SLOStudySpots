@@ -5,11 +5,12 @@
   /* Color Palette */
   --color-primary: #668586; /* Soft teal */
   --color-secondary: #D7A8A2; /* Dusty rose */
-  --color-text: #7A6F72; /* Earthy brown */
-  --color-background: #FFF8E7; /* Cream */
+  --color-text-primary: #7A6F72; /* Earthy brown */
+  --color-text-secondary: #333;
+  --color-background-primary: #FFF8E7; /* Cream */
+  --color-background-secondary: #FFFDF6; /* Lighter cream */
   --color-links: #CAB8D9; /* Soft lavender */
   --color-tags: #9CAD92; /* Soothing green */
-  --color-background-secondary: #FFFDF6; /* Lighter cream */
 
   /* Shadows */
   --shadow-hover-large: 0px 8px 15px rgba(0,0,0,0.1);
@@ -17,8 +18,8 @@
   --shadow-hover-med: 0 4px 20px rgba(0, 0, 0, 0.15);
 
   /* Font-Family */
-  --font-family-body: "IBM Plex Sans", Cambria, sans-serif; /* Primary font for body text */
-  --font-family-display: "IBM Plex Serif", Calibri, serif; /* Secondary font for headings and UI components */
+  --font-family-body: "IBM Plex Sans", Cambria, sans-serif;
+  --font-family-display: "IBM Plex Serif", Calibri, serif;
 
   /* Font-Sizes */
   --font-size-body: 1rem; /* Body text size 16px */
@@ -33,13 +34,14 @@
 }
 
 body.dark-mode {
-  /* --color-primary: #33736B; */
+  --color-primary: #33736B;
   --color-secondary: #79504F; /* Darker shade of dusty rose */
-  --color-text: #E8E1E2; /* Lighter earthy brown, for readability on dark */
-  --color-background: #2A2A2A; /* Very dark gray as a background color */
+  --color-text-primary: #E8E1E2; /* Lighter earthy brown, for readability on dark */
+  --color-text-secondary: #fff; /* White text for dark mode */
+  --color-background-primary: #2A2A2A; /* Very dark gray as a background color */
+  --color-background-secondary: #404040; /* Darker shade of light cream */
   --color-links: #6E5D84; /* Darker shade of lavender */
   --color-tags: #495D50; /* Darker shade of soothing green */
-  --color-background-secondary: #404040; /* Darker shade of light cream */
 
   --shadow-hover-large: 0px 8px 15px rgba(255,255,255,0.05);
   --shadow-hover-small: 0 2px 5px rgba(255,255,255,0.04);

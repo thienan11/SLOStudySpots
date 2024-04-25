@@ -44,6 +44,9 @@ export class DropdownElement extends HTMLElement {
         align-items: center;
         justify-content: center;
       }
+      button:hover {
+        background: var(--color-links);
+      }
       #menu-icon {
         width: 24px; /* Adjust size as needed */
         height: auto;

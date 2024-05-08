@@ -3,10 +3,9 @@ export interface Profile {
   name: string;
   email: string;
   // nickname: string | undefined;
-  dateJoined: Date;
-  bio?: string;
-  numPosts: Array<string>;
-  // comments: Array<String>;
+  bio?: string; // optional
   avatar: string | undefined;
-  // color: string | undefined;
+  favSpots?: string[] | undefined; // Array<String>;
+  reviewsCount?: number;
+  dateJoined: Date;
 }

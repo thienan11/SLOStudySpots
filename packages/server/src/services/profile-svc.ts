@@ -6,10 +6,11 @@ let profiles: Array<Profile> = [
     userid: "susan",
     name: "Susan Sloth",
     email: "123@gmail.com",
-    dateJoined: new Date(),
     bio: "I'm a sloth who likes to study!",
-    numPosts: [],
-    avatar: "../proto/public/icons/avatar.svg"
+    avatar: "../icons/avatar.svg",
+    favSpots: ["Starbucks", "Library"],
+    reviewsCount: 5,
+    dateJoined: new Date(),
   }
   // add a few more profile objects here
 ];

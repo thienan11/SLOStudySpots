@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="/styles/page.css" />
     <script type="module" src="/js/drop-down.js"></script>
     <script type="module" src="/js/html-loader.js"></script>
+    <script type="module" src="/js/json-loader.js"></script>
     <script type="module">
       import { relayEvent } from "/js/relay-event.js";
 
@@ -81,8 +82,13 @@
                 <a href="#" class="edit-link">Edit Photo</a>
             </figcaption>
           </figure>
-          <h2>John Doe</h2>
-          <p>john.doe@example.com</p>
+          <!-- <h2>John Doe</h2> -->
+          <!-- <p>john.doe@example.com</p> -->
+          <json-object src="/api/profiles/susan" open>
+            <a href="#" onclick="relayEvent(event, 'json-object:open')">
+              Susan Sloth
+            </a>
+          </json-object>
         </header>
 
         <section class="profile-details">

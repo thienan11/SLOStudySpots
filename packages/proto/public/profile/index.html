@@ -10,6 +10,7 @@
     <script type="module" src="/js/drop-down.js"></script>
     <script type="module" src="/js/html-loader.js"></script>
     <script type="module" src="/js/json-loader.js"></script>
+    <script type="module" src="/js/restful-form.js"></script>
     <script type="module">
       import { relayEvent } from "/js/relay-event.js";
 
@@ -18,10 +19,11 @@
     <script type="module" src="/js/dark-mode.js"></script>
   </head>
   <body>
+
     <header class="navbar">
       <div class="navbar-content">
-        <a class="logo" href="index.html">
-          <img src="icons/desk-lamp.svg" alt="SLOStudySpots Logo" />
+        <a class="logo" href="../index.html">
+          <img src="../icons/desk-lamp.svg" alt="SLOStudySpots Logo" />
           <h1>SLOStudySpots</h1>
         </a>
 
@@ -74,54 +76,39 @@
     </header>
 
     <main class="content-container">
-      <article class="profile">
-        <header class="profile-header">
-          <figure class="profile-image">
-            <img src="icons/sloth-avatar.svg" alt="User Avatar" class="profile-avatar"/>
-            <figcaption>
-                <a href="#" class="edit-link">Edit Photo</a>
-            </figcaption>
-          </figure>
-          <h2>Susan Sloth</h2>
-          <p>123@example.com</p>
-          <!-- <json-object src="/api/profiles/susan" open>
-            <a href="#" onclick="relayEvent(event, 'json-object:open')">
-              Susan Sloth
-            </a>
-          </json-object> -->
-        </header>
+      <restful-form slot="form" src="/api/profiles/susan">
+        <label>
+          <span>Username</span>
+          <input name="userid"/>
+        </label>
+        <label>
+          <span>Name</span>
+          <input name="name"/>
+        </label>
+        <label>
+          <span>Email</span>
+          <input name="email">
+        </label>
+        <label>
+          <span>Bio</span>
+          <textarea name="bio"></textarea>
+        </label>
+        <label>
+          <span>Favorite Study Spots</span>
+          <input name="favSpots" />
+        </label>
+        <label>
+          <span>Avatar</span>
+          <input name="avatar" />
+        </label>
+      </restful-form>
 
-        <section class="profile-details">
-          <h3>My Contributions</h3>
-          <div class="user-contributions">
-            <article class="contribution">
-              <h4>Reviewed Spots</h4>
-              <ul>
-                <li><a href="#">SloDoCo Donuts</a> - ★★★★☆</li>
-                <li><a href="#">Kennedy Library</a> - ★★★★★</li>
-              </ul>
-            </article>
-
-            <article class="contribution">
-              <h4>Submitted Spots</h4>
-              <ul>
-                <li><a href="#">Blackhorse Espresso & Bakery</a></li>
-                <li><a href="#">Scout Coffee</a></li>
-              </ul>
-            </article>
-          </div>
-        </section>
-
-        <section class="profile-actions">
-          <a href="profile-settings.html">Edit Profile</a>
-          <a href="#">Log Out</a>
-        </section>
-      </article>
+      <json-object src="/api/profiles/susan">
+        <a href="#" onclick="relayEvent(event, 'json-object:open')">
+          Susan Sloth
+        </a>
+      </json-object>
     </main>
-
-    <footer>
-      <p>© 2024 SLOStudySpots. All rights reserved.</p>
-    </footer>
 
   </body>
 </html>

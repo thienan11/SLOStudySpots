@@ -11,6 +11,7 @@
     <script type="module" src="/js/html-loader.js"></script>
     <script type="module" src="/js/json-loader.js"></script>
     <script type="module" src="/js/restful-form.js"></script>
+    <script type="module" src="/js/profile-view.js"></script>
     <script type="module">
       import { relayEvent } from "/js/relay-event.js";
 
@@ -76,6 +77,9 @@
     </header>
 
     <main class="content-container">
+      <profile-view src="/api/profiles/susan"></profile-view>
+      <hr />
+
       <restful-form slot="form" src="/api/profiles/susan">
         <label>
           <span>Username</span>
@@ -103,11 +107,7 @@
         </label>
       </restful-form>
 
-      <json-object src="/api/profiles/susan">
-        <a href="#" onclick="relayEvent(event, 'json-object:open')">
-          Susan Sloth
-        </a>
-      </json-object>
+      <json-object src="/api/profiles/susan" open></json-object>
     </main>
 
   </body>

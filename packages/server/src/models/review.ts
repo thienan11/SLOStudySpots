@@ -1,9 +1,6 @@
 export interface Review {
-  id: string;  // Unique identifier for the review
-  userid: string;  // Identifier of the user who wrote the review
-  userName: string;  // Username of the reviewer
-  spotId: string;
-
+  userId: string;  // ID of the user who wrote the review
+  spotId: string;  // ID of the study spot being reviewed
   quietnessRating: number;
   wifiQualityRating: number;
   crowdednessRating: number;
@@ -12,6 +9,8 @@ export interface Review {
   overallRating: number;  // Calculated average of all the ratings
   comment: string;
   createdAt: Date;
+  likes: Number,
+  edited: Boolean,
 }
 
 // function calculateOverallRating(review: Review): number {

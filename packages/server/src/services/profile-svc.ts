@@ -7,10 +7,11 @@ const ProfileSchema = new Schema<Profile>(
     name: { type: String, required: true, trim: true },
     email: { type: String, trim: true, default: null },
     bio: { type: String, default: null},
-    avatar: String,
-    favSpots: {type: [String], default: []},
+    avatar: { type: String, default: null},
     reviewsCount: { type: Number, default: 0 },
-    dateJoined: { type: Date, default: Date.now }
+    reviews: { type: [String], default: [] },
+    favSpots: { type: [String], default: [] },
+    dateJoined: { type: Date, default: Date.now },
   },
   { collection: "user_profiles" }
 );

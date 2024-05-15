@@ -37,27 +37,27 @@ export class ProfileViewElement extends HTMLElement {
   `;
   static template = prepareTemplate(`
     <template>
-    <section>
-      <slot name="avatar"></slot>
-      <h1><slot name="name"></slot></h1>
-      <dl>
-        <dt>Username: </dt>
-        <dd><slot name="userid"></slot></dd>
-        <dt>Email: </dt>
-        <dd><slot name="email"></slot></dd>
-        <dt>Bio: </dt>
-        <dd><slot name="bio"></slot></dd>
-        <dt>Number of Reviews: </dt>
-        <dd><slot name="reviewsCount"></slot></dd>
-        <dt>Reviews: </dt>
-        <dd><slot name="reviews"></slot></dd>
-        <dt>Favorite Study Spots: </dt>
-        <dd><slot name="favSpots"></slot></dd>
-        <dt>Date Joined: </dt>
-        <dd><slot name="dateJoined"></slot></dd>
-      </dl>
-    </section>
-    <style>${ProfileViewElement.styles}</style>
+      <section>
+        <slot name="avatar"></slot>
+        <h1><slot name="name"></slot></h1>
+        <dl>
+          <dt>Username: </dt>
+          <dd><slot name="userid"></slot></dd>
+          <dt>Email: </dt>
+          <dd><slot name="email"></slot></dd>
+          <dt>Bio: </dt>
+          <dd><slot name="bio"></slot></dd>
+          <dt>Number of Reviews: </dt>
+          <dd><slot name="reviewsCount"></slot></dd>
+          <dt>Reviews: </dt>
+          <dd><slot name="reviews"></slot></dd>
+          <dt>Favorite Study Spots: </dt>
+          <dd><slot name="favSpots"></slot></dd>
+          <dt>Date Joined: </dt>
+          <dd><slot name="dateJoined"></slot></dd>
+        </dl>
+      </section>
+      <style>${ProfileViewElement.styles}</style>
     </template>
     `);
 

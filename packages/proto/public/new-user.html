@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <!-- <link rel="stylesheet" href="/styles/reset.css" />
+    <link rel="stylesheet" href="/styles/tokens.css" />
+    <link rel="stylesheet" href="/styles/page.css" /> -->
+    <script type="importmap">
+      {
+        "imports": {
+          "@calpoly/mustang": "/node_modules/@calpoly/mustang/dist/mustang.mjs"
+        }
+      }
+    </script>
+    <script type="module">
+      import { define, Auth } from "@calpoly/mustang";
+    
+      define({ "mu-auth": Auth.Provider });
+    </script>
+    <script type="module" src="/js/drop-down.js"></script>
+    <script type="module" src="/js/html-loader.js"></script>
+    <script type="module" src="/js/json-loader.js"></script>
+    <script type="module" src="/js/restful-form.js"></script>
+    <script type="module" src="/js/profile-view.js"></script>
+    <script type="module">
+      import { relayEvent } from "/js/relay-event.js";
+
+      window.relayEvent = relayEvent;
+    </script>
+    <script type="module" src="/js/dark-mode.js"></script>
+  </head>
+  <body>
+    <mu-auth>
+      <h2>Signup as a new User</h2>
+      <main class="card">
+        <restful-form new src="/auth/register">
+          <label>
+            <span>Username:</span>
+            <input name="username" autocomplete="off" />
+          </label>
+          <label>
+            <span>Password:</span>
+            <input type="password" name="password" />
+          </label>
+        </restful-form>
+      </main>
+      <p
+        >Already signed up? Then you can
+        <a href="./login.html">log in</a> instead.
+      </p>
+    </mu-auth>
+  </body>
+</html>

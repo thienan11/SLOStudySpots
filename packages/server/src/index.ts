@@ -1,5 +1,6 @@
 import express, { Request, Response } from "express";
 import profiles from "./routes/profiles";
+import auth, { authenticateUser } from "./routes/auth";
 import { connect } from "./services/mongo";
 
 const app = express();
@@ -10,7 +11,12 @@ connect("slostudyspots");
 
 app.use(express.static(staticDir));
 app.use(express.json()); // JSON parsing middleware
-app.use("/api/profiles", profiles); // mount the profiles router
+
+// Auth routes
+app.use("/auth", auth);
+
+// Profile routes
+app.use("/api/profiles", authenticateUser, profiles);
 
 app.get("/hello", (req: Request, res: Response) => {
   res.send("Hello, World");

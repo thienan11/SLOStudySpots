@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <!-- <link rel="stylesheet" href="/styles/reset.css" />
+    <link rel="stylesheet" href="/styles/reset.css" />
     <link rel="stylesheet" href="/styles/tokens.css" />
-    <link rel="stylesheet" href="/styles/page.css" /> -->
+    <link rel="stylesheet" href="/styles/page.css" />
     <script type="importmap">
       {
         "imports": {
@@ -34,24 +34,30 @@
   </head>
   <body>
     <mu-auth>
-      <h2>User Login</h2>
-      <main class="card">
-        <login-form>
-          <label>
-            <span>Username:</span>
-            <input name="username" autocomplete="off" />
-          </label>
-          <label>
-            <span>Password:</span>
-            <input type="password" name="password" />
-          </label>
-        </login-form>
-      </main>
-      <p>
-        Or did you want to
-        <a href="./new-user.html">Sign up as a new user</a>
-        ?
-      </p>
+      <div class="login-register-container">
+        <h2>User Login</h2>
+        <main class="card">
+          <p>
+            <a href="./index.html">← Back to home</a>
+          </p>
+          <login-form>
+            <label>
+              <span>Username:</span>
+              <input name="username" autocomplete="off" />
+            </label>
+            <label>
+              <span>Password:</span>
+              <input type="password" name="password" />
+            </label>
+          </login-form>
+          <p>
+            Or did you want to
+            <a href="./new-user.html">Sign up as a new user</a>
+            ?
+          </p>
+          <img src="./images/person-studying.svg" alt="Person Studying">
+        </main>
+      </div>
     </mu-auth>
   </body>
 </html>

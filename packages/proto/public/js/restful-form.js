@@ -24,6 +24,7 @@ export class RestfulFormElement extends HTMLElement {
           display: grid;
           gap: var(--size-spacing-medium);
           grid-template-columns: [start] 1fr [label] 1fr [input] 3fr 1fr [end];
+          margin-right: 70px;
         }
         ::slotted(label) {
           display: grid;
@@ -34,6 +35,19 @@ export class RestfulFormElement extends HTMLElement {
         button[type="submit"] {
           grid-column: input;
           justify-self: start;
+          width: 100%;
+          padding: var(--space-small);
+          background-color: var(--color-primary);
+          color: var(--color-background-primary);
+          border: none;
+          border-radius: var(--border-radius);
+          cursor: pointer;
+          font-size: var(--font-size-body);
+          margin-top: 20px;
+          margin-bottom: 20px;
+        }
+        button[type="submit"]:hover {
+          background-color: var(--color-links);
         }
       </style>
     </template>

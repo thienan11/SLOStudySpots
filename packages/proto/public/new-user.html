@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
-    <!-- <link rel="stylesheet" href="/styles/reset.css" />
+    <link rel="stylesheet" href="/styles/reset.css" />
     <link rel="stylesheet" href="/styles/tokens.css" />
-    <link rel="stylesheet" href="/styles/page.css" /> -->
+    <link rel="stylesheet" href="/styles/page.css" />
     <script type="importmap">
       {
         "imports": {
@@ -33,23 +33,29 @@
   </head>
   <body>
     <mu-auth>
-      <h2>Signup as a new User</h2>
-      <main class="card">
-        <restful-form new src="/auth/register">
-          <label>
-            <span>Username:</span>
-            <input name="username" autocomplete="off" />
-          </label>
-          <label>
-            <span>Password:</span>
-            <input type="password" name="password" />
-          </label>
-        </restful-form>
-      </main>
-      <p
-        >Already signed up? Then you can
-        <a href="./login.html">log in</a> instead.
-      </p>
+      <div class="login-register-container">
+        <h2>Signup as a new User</h2>
+        <main class="card">
+          <p>
+            <a href="./index.html">← Back to home</a>
+          </p>
+          <restful-form new src="/auth/register">
+            <label>
+              <span>Username:</span>
+              <input name="username" autocomplete="off" />
+            </label>
+            <label>
+              <span>Password:</span>
+              <input type="password" name="password" />
+            </label>
+          </restful-form>
+          <p>
+            Already signed up? Then you can
+            <a href="./login.html">log in</a> instead.
+          </p>
+          <img src="./images/person-studying.svg" alt="Person Studying">
+        </main>
+      </div>
     </mu-auth>
   </body>
 </html>

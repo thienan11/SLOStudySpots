@@ -4,6 +4,4 @@ SLOStudySpots is an interactive web application designed to help students and re
 
 Miro Board: https://miro.com/app/board/uXjVKTnltEo=/?share_link_id=757753677716
 
-## Getting Started
-
-Read the README.md in the `packages/proto` directory.
+Check out the web app here: https://ttran259.unbundled.dev/

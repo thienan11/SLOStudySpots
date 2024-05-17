@@ -2,7 +2,6 @@ import { prepareTemplate } from "./template.js";
 import { loadJSON } from "./json-loader.js";
 import { Auth, Observer } from "@calpoly/mustang";
 import "./restful-form.js";
-import "./input-array.js";
 
 export class ProfileViewElement extends HTMLElement {
   static observedAttributes = ["src", "mode"];

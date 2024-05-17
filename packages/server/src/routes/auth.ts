@@ -45,7 +45,10 @@ router.post("/register", (req: Request, res: Response) => {
       .then((creds) => generateAccessToken(creds.username))
       .then((token) => {
         res.status(201).send({ token: token });
-      });
+    })
+    .catch(() => {
+      res.status(409).send("Username already exists!!!");
+    });
   }
 });
 

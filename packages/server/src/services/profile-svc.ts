@@ -57,4 +57,12 @@ function update(
     });
 }
 
-export default { index, get, create, update };
+function remove(userid: String): Promise<void> {
+  return ProfileModel.findOneAndDelete({ userid }).then(
+    (deleted) => {
+      if (!deleted) throw `${userid} not deleted`;
+    }
+  );
+}
+
+export default { index, get, create, update , remove};

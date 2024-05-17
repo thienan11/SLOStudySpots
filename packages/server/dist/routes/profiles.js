@@ -50,4 +50,8 @@ router.put("/:userid", (req, res) => {
   const newProfile = req.body;
   import_profile_svc.default.update(userid, newProfile).then((profile) => res.json(profile)).catch((err) => res.status(404).end());
 });
+router.delete("/:userid", (req, res) => {
+  const { userid } = req.params;
+  import_profile_svc.default.remove(userid).then(() => res.status(204).end()).catch((err) => res.status(404).send(err));
+});
 var profiles_default = router;

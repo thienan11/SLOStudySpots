@@ -57,8 +57,11 @@ function create(username, password) {
       reject("must provide username and password");
     }
     credentialModel.find({ username }).then((found) => {
-      if (found.length)
+      if (found.length) {
         reject("username exists");
+        return Promise.reject("username exists");
+      }
+      ;
     }).then(
       () => import_bcryptjs.default.genSalt(10).then((salt) => import_bcryptjs.default.hash(password, salt)).then((hashedPassword) => {
         const creds = new credentialModel({
@@ -70,7 +73,9 @@ function create(username, password) {
             resolve(created);
         });
       })
-    );
+    ).catch((error) => {
+      reject(error);
+    });
   });
 }
 function verify(username, password) {

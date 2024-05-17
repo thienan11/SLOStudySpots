@@ -30,7 +30,10 @@ function create(username: string, password: string) {
     credentialModel
       .find({ username })
       .then((found: Credential[]) => {
-        if (found.length) reject("username exists");
+        if (found.length) {
+          reject("username exists");
+          return Promise.reject('username exists'); // This stops the chain from proceeding to the next then
+        };
       })
       .then(() =>
         bcrypt
@@ -45,7 +48,10 @@ function create(username: string, password: string) {
               if (created) resolve(created);
             });
           })
-      );
+      )
+      .catch(error => {
+        reject(error); // Handle any errors that occur during the process
+      });
   });
 }
 

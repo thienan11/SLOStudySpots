@@ -6,6 +6,8 @@ for either the Prototype or our App.
 
 ## Running
 
+Ensure you are in the `packages/server` directory to execute the following commands.
+
 Make sure to have all dependencies installed before running.
 
 To start build the Express server for production:

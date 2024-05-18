@@ -10,6 +10,8 @@ Miro Board (Concept Map): https://miro.com/app/board/uXjVKTnltEo=/?share_link_id
 
 ## Running
 
+Ensure you are in the `packages/proto` directory to execute the following commands.
+
 Once all dependencies are installed, to start the web server:
 
 ```shell

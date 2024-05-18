@@ -4,17 +4,9 @@ This package implements an Express server which provides the
 endpoints for our REST API, as well as serving the HTML/CSS/JS
 for either the Prototype or our App.
 
-## Dependencies
-
-Install dependencies globally from the monorepo root:
-
-```shell
-npm install
-```
-
 ## Running
 
-Ensure you are in the `packages/server` directory to execute the following commands.
+Make sure to have all dependencies installed before running.
 
 To start build the Express server for production:
 

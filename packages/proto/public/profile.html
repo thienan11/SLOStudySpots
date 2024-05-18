@@ -7,9 +7,23 @@
     <link rel="stylesheet" href="/styles/reset.css" />
     <link rel="stylesheet" href="/styles/tokens.css" />
     <link rel="stylesheet" href="/styles/page.css" />
+    <script type="importmap">
+      {
+        "imports": {
+          "@calpoly/mustang": "/node_modules/@calpoly/mustang/dist/mustang.mjs"
+        }
+      }
+    </script>
+    <script type="module">
+      import { define, Auth } from "@calpoly/mustang";
+    
+      define({ "mu-auth": Auth.Provider });
+    </script>
     <script type="module" src="/js/drop-down.js"></script>
     <script type="module" src="/js/html-loader.js"></script>
     <script type="module" src="/js/json-loader.js"></script>
+    <script type="module" src="/js/restful-form.js"></script>
+    <script type="module" src="/js/profile-view.js"></script>
     <script type="module">
       import { relayEvent } from "/js/relay-event.js";
 
@@ -73,51 +87,19 @@
       </div>
     </header>
 
-    <main class="content-container">
-      <article class="profile">
-        <header class="profile-header">
-          <figure class="profile-image">
-            <img src="icons/sloth-avatar.svg" alt="User Avatar" class="profile-avatar"/>
-            <figcaption>
-                <a href="#" class="edit-link">Edit Photo</a>
-            </figcaption>
-          </figure>
-          <h2>Susan Sloth</h2>
-          <p>123@example.com</p>
-          <!-- <json-object src="/api/profiles/susan" open>
-            <a href="#" onclick="relayEvent(event, 'json-object:open')">
-              Susan Sloth
-            </a>
-          </json-object> -->
-        </header>
-
-        <section class="profile-details">
-          <h3>My Contributions</h3>
-          <div class="user-contributions">
-            <article class="contribution">
-              <h4>Reviewed Spots</h4>
-              <ul>
-                <li><a href="#">SloDoCo Donuts</a> - ★★★★☆</li>
-                <li><a href="#">Kennedy Library</a> - ★★★★★</li>
-              </ul>
-            </article>
-
-            <article class="contribution">
-              <h4>Submitted Spots</h4>
-              <ul>
-                <li><a href="#">Blackhorse Espresso & Bakery</a></li>
-                <li><a href="#">Scout Coffee</a></li>
-              </ul>
-            </article>
-          </div>
-        </section>
+    <mu-auth provides="slostudyspots:auth" redirect="../login.html">
+      <main class="content-container">
+        <profile-view src="/api/profiles/susan"></profile-view>
 
         <section class="profile-actions">
-          <a href="profile-settings.html">Edit Profile</a>
-          <a href="#">Log Out</a>
+          <a
+            href="#"
+            onclick="relayEvent(event, 'auth:message', ['auth/signout'])">
+            Sign out
+          </a>
         </section>
-      </article>
-    </main>
+      </main>
+    </mu-auth>
 
     <footer>
       <p>© 2024 SLOStudySpots. All rights reserved.</p>

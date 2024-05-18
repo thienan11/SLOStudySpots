@@ -30,42 +30,72 @@ export class ProfileViewElement extends HTMLElement {
       --display-edit-button: inline-block;
       --display-close-button: none;
       --display-delete-button: none;
+      --display-profile-sections: block;
+      --display-form: none;
+      --input-background-color: #f5f5f5;
+      --input-text-color: #333;
+      --input-border-color: #ccc;
     }
     :host([mode="edit"]) {
       --display-new-button: none;
       --display-edit-button: none;
       --display-close-button: inline-block;
       --display-delete-button: inline-block;
+      --display-profile-sections: none;
+      --display-form: block;
     }
     :host([mode="new"]) {
       --display-new-button: none;
       --display-edit-button: none;
       --display-close-button: inline-block;
+      --display-profile-sections: none;
+      --display-form: block;
+    }
+    :host([mode="view"]) {
+      --display-new-button: inline-block;
+      --display-edit-button: inline-block;
+      --display-close-button: none;
+      --display-delete-button: none;
+      --display-profile-sections: block;
+      --display-form: none;
     }
     * {
       margin: 0;
       box-sizing: border-box;
     }
     section {
-      display: grid;
-      grid-template-columns: [key] 1fr [value] 3fr [controls] 1fr [end];
-      gap: var(--size-spacing-medium) var(--size-spacing-xlarge);
-      align-items: end;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--size-spacing-medium);
+      background-color: var(--color-background-secondary);
+      padding: var(--space-regular);
+      margin: auto;
+      max-width: 800px;
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow-hover-small);
     }
     h1 {
-      grid-row: 4;
-      grid-column: value;
+      margin: var(--space-small) 0;
+      color: var(--color-primary);
+      text-align: center;
     }
     slot[name="avatar"] {
       display: block;
-      grid-row: 1/ span 4;
+      text-align: center;
+      position: relative;
+    }
+    slot[name="avatar"]::slotted(*) {
+      width: 100px;
+      height: auto;
+      border-radius: 50%;
+      border: 2px solid var(--color-primary);
     }
     nav {
-      display: contents;
-      text-align: right;
-    }
-    nav > * {
-      grid-column: controls;
+      display: flex;
+      justify-content: center;
+      gap: var(--size-spacing-medium);
+      margin-top: var(--size-spacing-medium);
     }
     nav > .new {
       display: var(--display-new-button);
@@ -80,38 +110,110 @@ export class ProfileViewElement extends HTMLElement {
       display: var(--display-delete-button);
     }
     restful-form {
-      display: none;
-      grid-column: key / end;
+      display: var(--display-form);
+      width: 100%;
     }
-    restful-form input {
-      grid-column: input;
+    restful-form input,
+    restful-form textarea {
+      width: 100%;
+      box-sizing: border-box;
+      margin-bottom: var(--space-small);
+      padding: var(--space-small);
+      background-color: var(--input-background-color);
+      color: var(--input-text-color);
+      border: 1px solid var(--input-border-color);
+      border-radius: var(--border-radius);
     }
-    restful-form[src] {
+    restful-form label {
       display: block;
+      margin-bottom: var(--space-small);
+      font-weight: bold;
+      color: var(--color-primary);
+    }
+    .profile-section {
+      display: var(--display-profile-sections);
+      width: 100%;
+      padding: var(--space-small);
+    }
+    .profile-section:not(:last-child) {
+      border-bottom: 1px solid var(--color-border);
+      margin-bottom: var(--space-regular);
+    }
+    .profile-section h2 {
+      margin-bottom: var(--space-small);
+      color: var(--color-secondary);
+      font-size: var(--font-size-large);
+      border-bottom: 2px solid var(--color-primary);
+      padding-bottom: var(--space-small);
     }
     dl {
       display: grid;
-      grid-column: key / end;
-      grid-template-columns: subgrid;
-      gap: 0 var(--size-spacing-xlarge);
+      grid-template-columns: 1fr 3fr;
+      gap: var(--size-spacing-medium) var(--size-spacing-xlarge);
       align-items: baseline;
     }
-    restful-form[src] + dl {
-      display: none;
-    }
     dt {
-      grid-column: key;
-      justify-self: end;
-      color: var(--color-accent);
+      font-weight: bold;
+      color: var(--color-primary);
       font-family: var(--font-family-display);
+      padding-right: var(--size-spacing-medium);
+      border-right: 2px solid var(--color-border);
     }
     dd {
-      grid-column: value;
+      color: var(--color-text-primary);
+      padding-left: var(--size-spacing-medium);
+      font-family: var(--font-family-body);
+      text
     }
     ::slotted(ul) {
       list-style: none;
-      display: flex;
-      gap: var(--size-spacing-medium);
+      padding: 0;
+      margin: 0;
+    }
+    ::slotted(ul > li) {
+      padding: var(--size-spacing-small) 0;
+      border-bottom: 1px solid var(--color-border);
+      color: var(--color-text-primary);
+    }
+    .profile-actions {
+      margin-top: var(--space-regular);
+      text-align: center;
+    }
+    .profile-actions h3 {
+      color: var(--color-secondary);
+    }
+    .profile-actions a {
+      margin-top: var(--space-regular);
+      background-color: var(--color-primary);
+      color: var(--color-background-primary);
+      padding: 10px 20px;
+      border-radius: var(--border-radius);
+      text-decoration: none;
+      margin-right: var(--space-small);
+      display: inline-block;
+      transition: background-color 0.3s ease;
+    }
+    .profile-actions a:hover {
+      background-color: var(--color-links);
+      color: var(--color-background-primary);
+    }
+    button {
+      grid-column: input;
+      justify-self: start;
+      width: 100%;
+      padding: var(--space-small);
+      background-color: var(--color-primary);
+      color: var(--color-background-primary);
+      border: none;
+      border-radius: var(--border-radius);
+      cursor: pointer;
+      font-size: var(--font-size-body);
+      margin-top: 20px;
+      margin-bottom: 20px;
+      margin-right: 20px;
+    }
+    button:hover {
+      background-color: var(--color-links);
     }
   `;
 
@@ -132,8 +234,7 @@ export class ProfileViewElement extends HTMLElement {
             >Close</button>
             <button class="delete"
               onclick="relayEvent(event,'profile-view:delete')"
-              >Delete</button
-            >
+            >Delete</button>
           </nav>
           <restful-form>
             <label>
@@ -161,6 +262,8 @@ export class ProfileViewElement extends HTMLElement {
               <input name="avatar" />
             </label>
           </restful-form>
+        <div class="profile-section">
+          <h2>General Information</h2>
           <dl>
             <dt>Username: </dt>
             <dd><slot name="userid"></slot></dd>
@@ -168,15 +271,26 @@ export class ProfileViewElement extends HTMLElement {
             <dd><slot name="email"></slot></dd>
             <dt>Bio: </dt>
             <dd><slot name="bio"></slot></dd>
-            <dt>Number of Reviews: </dt>
-            <dd><slot name="reviewsCount"></slot></dd>
-            <dt>Reviews: </dt>
-            <dd><slot name="reviews"></slot></dd>
-            <dt>Favorite Study Spots: </dt>
-            <dd><slot name="favSpots"></slot></dd>
-            <dt>Date Joined: </dt>
+            <dt>Date Joined:</dt>
             <dd><slot name="dateJoined"></slot></dd>
           </dl>
+        </div>
+        <div class="profile-section">
+          <h2>Reviews</h2>
+          <dl>
+            <dt>Number of Reviews:</dt>
+            <dd><slot name="reviewsCount"></slot></dd>
+            <dt>Reviews:</dt>
+            <dd><slot name="reviews"></slot></dd>
+          </dl>
+        </div>
+        <div class="profile-section">
+          <h2>Favorite Study Spots</h2>
+          <dl>
+            <dt>Favorite Study Spots:</dt>
+            <dd><slot name="favSpots"></slot></dd>
+          </dl>
+        </div>
         </section>
       <style>${ProfileViewElement.styles}</style>
     </template>

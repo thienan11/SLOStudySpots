@@ -7,10 +7,10 @@ export interface Review {
   powerOutletRating: number;
   safetyRating: number; 
   overallRating: number;  // Calculated average of all the ratings
-  comment: string;
+  comment: string | undefined;
   createdAt: Date;
-  likes: Number,
-  edited: Boolean,
+  likes: number | undefined;
+  edited: Boolean;
 }
 
 // function calculateOverallRating(review: Review): number {

@@ -28,6 +28,8 @@ export class LoginFormElement extends HTMLElement {
       const redirect = this.next;
       console.log("Login successful", event.detail, redirect);
 
+      alert("Login successful!");
+
       relayEvent(event, "auth:message", [
         "auth/signin",
         { token, redirect }

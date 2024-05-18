@@ -5,3 +5,16 @@ SLOStudySpots is an interactive web application designed to help students and re
 Miro Board: https://miro.com/app/board/uXjVKTnltEo=/?share_link_id=757753677716
 
 Check out the web app here: https://ttran259.unbundled.dev/
+
+## Getting Started
+
+First, install dependencies globally from the monorepo root:
+
+```shell
+npm install
+```
+
+Then, refer to the README.md in the following packages:
+
+- [Prototype](packages/proto/README.md) uses only static HTML, CSS, and Javascript.
+- [Server](packages/server/README.md) adds a backend API, communication with a database, and authentication.

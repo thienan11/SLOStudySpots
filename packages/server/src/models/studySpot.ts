@@ -1,20 +1,18 @@
-import { Review } from './review';
-
 export interface StudySpot {
-  id: string;
   name: string;
   description: string;
   address: string;
-  hoursOfOperation?: string;
+  hoursOfOperation: string | undefined;
   location: string;
   image: string;
   ratings: {
     overall: number;
-    quietness?: number;
-    wifiQuality?: number;
-    accessibility?: number;
-    comfort?: number;
+    quietness: number | undefined;
+    wifiQuality: number | undefined;
+    accessibility: number | undefined;
+    comfort: number | undefined;
+    safety: number | undefined;
   };
-  reviews: Review[];
-  tags: string[];
+  reviews: string[] | undefined; // User's reviews, as IDs
+  tags: string[] | undefined;
 }

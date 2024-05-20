@@ -1,0 +1,14 @@
+* {
+  margin: 0;
+  box-sizing: border-box;
+  padding: 0;
+}
+
+body {
+  line-height: 1.5;
+}
+
+img {
+  max-width: 100%;
+  /* height: auto; */
+}

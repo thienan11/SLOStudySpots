@@ -9,8 +9,13 @@
     <link rel="stylesheet" href="/styles/page.css" />
     <script type="module">
       import { define, Auth, Events } from "@calpoly/mustang";
+      import { HeaderElement } from "/src/components/studyspots-header";
     
-      define({ "mu-auth": Auth.Provider });
+      define({
+        "mu-auth": Auth.Provider,
+        "studyspots-header": HeaderElement
+      });
+    
       window.relayEvent = Events.relay;
     </script>
     <!-- <script type="module" src="/js/drop-down.js"></script>
@@ -24,60 +29,7 @@
   </head>
   <body>
     <mu-auth>
-      <header class="navbar">
-        <div class="navbar-content">
-          <a class="logo" href="index.html">
-            <img src="icons/desk-lamp.svg" alt="SLOStudySpots Logo" />
-            <h1>SLOStudySpots</h1>
-          </a>
-
-          <div class="search-box">
-            <form>
-              <input
-                type="search"
-                placeholder="Search for study spots..."
-              />
-            </form>
-          </div>
-
-          <nav class="right-navbar-links">
-            <drop-down>
-              <ul>
-                <li>
-                  <a class="navbar-menu" href="profile.html">
-                    <!-- <img src="icons/avatar.svg" alt="profile-icon" /> -->
-                    Profile
-                  </a>
-                </li>
-                <li>
-                  <a class="group-icon" href="ranking.html">
-                    <!-- <img src="icons/ranking.svg" alt="ranking-icon" /> -->
-                    Community Rankings
-                  </a>
-                </li>
-                <li>
-                  <a class="group-icon" href="create.html">
-                    <!-- <img src="icons/create.svg" alt="create-icon" /> -->
-                    Add a Spot
-                  </a>
-                </li>
-                <li>
-                  <label 
-                    class="light-dark-switch"
-                    onchange="relayEvent(
-                    event, 
-                    'dark-mode', 
-                    {checked: event.target.checked})">
-                    <input type="checkbox" autocomplete="off" id="dark-mode-toggle"> Dark Mode
-                    <!-- <span class="slider"></span> -->
-                  </label>
-                </li>
-              </ul>
-            </drop-down> 
-          </nav>
-
-        </div>
-      </header>
+      <studyspots-header></studyspots-header>
 
       <main>
         <section class="welcome-section">

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SLOStudySpots</title>
+    <link rel="stylesheet" href="/styles/reset.css" />
+    <link rel="stylesheet" href="/styles/tokens.css" />
+    <link rel="stylesheet" href="/styles/page.css" />
+    <!-- <script type="module" src="/js/drop-down.js"></script>
+    <script type="module" src="/js/html-loader.js"></script> -->
+    <!-- <script type="module">
+      import { relayEvent } from "/js/relay-event.js";
+
+      window.relayEvent = relayEvent;
+    </script> -->
+    <!-- <script type="module" src="/js/dark-mode.js"></script> -->
+    <script type="module" crossorigin src="/assets/index-B4sHse8b.js"></script>
+  </head>
+  <body>
+    <mu-auth provides="slostudyspots:auth" redirect="./login.html">
+      <studyspots-header></studyspots-header>
+
+      <main>
+        <section class="welcome-section">
+          <h1>Welcome to SLOStudySpots</h1>
+          <p>Find the best spots to study in San Luis Obispo!</p>
+        </section>
+
+        <section class="featured-spots">
+          <h2>Featured Study Spots</h2>
+
+          <ul class="spots-list">
+            <li class="study-spot-container">
+              <a href="study-spots/slodoco.html">
+                <img src="./images/slodoco.jpeg" alt="SloDoCo Donuts"/>
+                <div class="study-spot-content">
+                  <h3>SloDoCo Donuts</h3>
+                  <p> ★★★★☆ (12 reviews)</p>
+                </div>
+              </a>
+              <html-fragment href="spot-details/slodoco-details.html">
+                <p>
+                  <a
+                    href="#"
+                    onclick="relayEvent(event, 'html-fragment:open')">
+                    ▸ View Details
+                  </a>
+                </p>
+              </html-fragment>
+            </li>
+
+            <li class="study-spot-container">
+              <a href="study-spots/slodoco.html">
+                <img src="./images/kennedylib.jpeg" alt="Robert E. Kennedy Library"/>
+                <div class="study-spot-content">
+                  <h3>Robert E. Kennedy Library</h3>
+                  <p> ★★★☆☆ (5 reviews)</p>
+                  <!-- <p><strong>Review:</strong> Great quiet place with plenty of natural light and ample seating. Perfect for long study sessions.</p> -->
+                </div>
+              </a>
+              <html-fragment href="spot-details/slodoco-details.html">
+                <p>
+                  <a
+                    href="#"
+                    onclick="relayEvent(event, 'html-fragment:open')">
+                    ▸ View Details
+                  </a>
+                </p>
+              </html-fragment>
+            </li>
+
+            <li class="study-spot-container">
+              <a href="study-spots/slodoco.html">
+                <img src="./images/kreuzberg.jpeg" alt="Kreuzberg"/>
+                <div class="study-spot-content">
+                  <h3>Kreuzberg California</h3>
+                  <p> ★★★★★ (10 reviews)</p>
+                  <!-- <p><strong>Review:</strong> Cozy, artsy, and social study atmosphere! </p> -->
+                </div>
+              </a>
+              <html-fragment href="spot-details/slodoco-details.html">
+                <p>
+                  <a
+                    href="#"
+                    onclick="relayEvent(event, 'html-fragment:open')">
+                    ▸ View Details
+                  </a>
+                </p>
+              </html-fragment>
+            </li>
+
+          </ul>
+        </section>
+      </main>
+
+      <footer>
+        <p>© 2024 SLOStudySpots. All rights reserved.</p>
+      </footer>
+    </mu-auth>
+  </body>
+</html>
+

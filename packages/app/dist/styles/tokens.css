@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
+
+:root {
+  /* Color Palette */
+  --color-primary: #668586; /* Soft teal */
+  --color-secondary: #D7A8A2; /* Dusty rose */
+  --color-text-primary: #7A6F72; /* Earthy brown */
+  --color-text-secondary: #333;
+  --color-background-primary: #FFF8E7; /* Cream */
+  --color-background-secondary: #FFFDF6; /* Lighter cream */
+  --color-links: #CAB8D9; /* Soft lavender */
+  --color-tags: #9CAD92; /* Soothing green */
+
+  /* Shadows */
+  --shadow-hover-large: 0px 8px 15px rgba(0,0,0,0.1);
+  --shadow-hover-small: 0 2px 5px rgba(0,0,0,0.1);
+  --shadow-hover-med: 0 4px 20px rgba(0, 0, 0, 0.15);
+
+  /* Font-Family */
+  --font-family-body: "IBM Plex Sans", Cambria, sans-serif;
+  --font-family-display: "IBM Plex Serif", Calibri, serif;
+
+  /* Font-Sizes */
+  --font-size-body: 1rem; /* Body text size 16px */
+  --font-size-large: 1.5rem; /* Larger text size for major headings 24px */
+
+  /* Spacing */
+  --space-regular: 20px;
+  --space-small: 10px;
+
+  /* Borders */
+  --border-radius: 8px;
+}
+
+body.dark-mode {
+  --color-primary: #33736B;
+  --color-secondary: #79504F;
+  --color-text-primary: #E8E1E2;
+  --color-text-secondary: #fff;
+  --color-background-primary: #2A2A2A;
+  --color-background-secondary: #404040;
+  --color-links: #6E5D84;
+  --color-tags: #495D50;
+
+  --shadow-hover-large: 0px 8px 15px rgba(255,255,255,0.05);
+  --shadow-hover-small: 0 2px 5px rgba(255,255,255,0.04);
+  --shadow-hover-med: 0 4px 20px rgba(255,255,255,0.07);
+}

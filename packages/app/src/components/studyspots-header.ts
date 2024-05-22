@@ -1,5 +1,5 @@
 import { LitElement, css, html } from "lit";
-import { DropdownElement, define, Events} from "@calpoly/mustang";
+import { DropdownElement, define} from "@calpoly/mustang";
 
 export class HeaderElement extends LitElement {
   static uses = define({

@@ -1,9 +1,10 @@
 import { LitElement, css, html } from "lit";
-import { DropdownElement, define} from "@calpoly/mustang";
+import { define } from "@calpoly/mustang";
+import { DropdownElement } from "./drop-down";
 
 export class HeaderElement extends LitElement {
   static uses = define({
-    "drop-down": DropdownElement
+    "drop-down": DropdownElement,
   });
 
   render() {
@@ -17,10 +18,7 @@ export class HeaderElement extends LitElement {
 
           <div class="search-box">
             <form>
-              <input
-                type="search"
-                placeholder="Search for study spots..."
-              />
+              <input type="search" placeholder="Search for study spots..." />
             </form>
           </div>
 
@@ -46,13 +44,13 @@ export class HeaderElement extends LitElement {
                   </a>
                 </li>
                 <li>
-                <label @change=${toggleDarkMode}>
-                  <input type="checkbox" autocomplete="off" />
-                  Dark mode
-                </label>
+                  <label class="light-dark-switch" @change=${toggleDarkMode}>
+                    <input type="checkbox" autocomplete="off" />
+                    Dark mode
+                  </label>
                 </li>
               </ul>
-            </drop-down> 
+            </drop-down>
           </nav>
         </div>
       </header>
@@ -60,6 +58,12 @@ export class HeaderElement extends LitElement {
   }
 
   static styles = css`
+    * {
+      margin: 0;
+      box-sizing: border-box;
+      padding: 0;
+    }
+
     header.navbar {
       display: flex;
       justify-content: space-between;
@@ -70,47 +74,52 @@ export class HeaderElement extends LitElement {
       top: 0; /* Ensures it sticks at the very top */
       z-index: 1000; /* Ensures the header stays on top of other content */
     }
-    
+
     .navbar-content {
       display: flex;
       align-items: center;
       width: 100%;
       justify-content: space-between;
     }
-    
+
     .logo {
       display: flex;
       align-items: center;
       text-decoration: none;
     }
-    
+
     .logo img {
       height: 40px;
-      margin-right: var(--space-small); /* Space between the logo image and title */
+      margin-right: var(
+        --space-small
+      ); /* Space between the logo image and title */
     }
-    
+
     .logo h1 {
       font-size: var(--font-size-large);
       color: var(--color-background-primary);
       margin: 0;
     }
-    
+
     .search-box {
       position: absolute;
       top: 50%;
       left: 50%;
-      transform: translate(-50%, -50%); /* Offset the search box to exactly center it */
+      transform: translate(
+        -50%,
+        -50%
+      ); /* Offset the search box to exactly center it */
       width: 100%;
       max-width: 470px;
       display: flex;
       justify-content: center;
     }
-    
+
     .search-box form {
       width: 100%;
       display: flex;
     }
-    
+
     .search-box input[type="search"] {
       width: 100%;
       padding: 10px 15px;
@@ -121,29 +130,29 @@ export class HeaderElement extends LitElement {
       text-align: center;
       font-family: inherit;
     }
-    
+
     .search-box input[type="search"]:focus {
       border-color: var(--color-secondary);
     }
-    
+
     .right-navbar-links ul {
       /* list-style: none;
       display: flex;
       align-items: center;
       margin: 0;
       padding: 0; */
-    
+
       list-style: none;
       display: flex;
       flex-direction: column;
       align-items: flex-end;
     }
-    
+
     .right-navbar-links li {
       /* margin-left: var(--space-regular); */
       padding: 10px;
     }
-    
+
     .right-navbar-links a {
       color: var(--color-text-secondary);
       /* font-family: var(--font-family-display); */
@@ -151,16 +160,31 @@ export class HeaderElement extends LitElement {
       align-items: center;
       text-decoration: none;
     }
-    
+
     .right-navbar-links a:hover {
       color: var(--color-links);
     }
-    
+
     .right-navbar-links img {
       height: 27px;
     }
+
+    .light-dark-switch {
+      display: inline-flex;
+      align-items: center;
+      cursor: pointer;
+      font-size: 16px;
+      color: var(--color-text-secondary);
+    }
+
+    .light-dark-switch input[type="checkbox"] {
+      margin-right: 8px;
+    }
+
+    .light-dark-switch:hover {
+      color: var(--color-links);
+    }
   `;
-  
 }
 
 type Checkbox = HTMLInputElement & { checked: boolean };
@@ -171,5 +195,5 @@ function toggleDarkMode(ev: InputEvent) {
 
   // Events.relay(ev, "dark-mode", { checked });
 
-  document.body.classList.toggle('dark-mode', checked);
+  document.body.classList.toggle("dark-mode", checked);
 }

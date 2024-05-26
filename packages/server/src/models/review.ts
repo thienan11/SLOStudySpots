@@ -1,15 +1,15 @@
 export interface Review {
   userId: string;  // ID of the user who wrote the review
-  spotId: string;  // ID of the study spot being reviewed
+  studySpotId: string;  // ID of the study spot being reviewed
   quietnessRating: number;
   wifiQualityRating: number;
   crowdednessRating: number;
   powerOutletRating: number;
-  safetyRating: number; 
+  amenitiesRating: number; 
   overallRating: number;  // Calculated average of all the ratings
-  comment: string | undefined;
+  comment: string;
   createdAt: Date;
-  likes: number | undefined;
+  likes: number;
   edited: Boolean;
 }
 

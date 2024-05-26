@@ -9,7 +9,6 @@ const ProfileSchema = new Schema<Profile>(
     bio: { type: String, default: null},
     avatar: { type: String, default: null},
     reviewsCount: { type: Number, default: 0 },
-    reviews: { type: [String], default: [] },
     favSpots: { type: [String], default: [] },
     dateJoined: { type: Date, default: Date.now },
   },

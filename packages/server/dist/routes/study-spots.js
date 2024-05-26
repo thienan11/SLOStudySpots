@@ -5,6 +5,10 @@ var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
 var __getOwnPropNames = Object.getOwnPropertyNames;
 var __getProtoOf = Object.getPrototypeOf;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
 var __copyProps = (to, from, except, desc) => {
   if (from && typeof from === "object" || typeof from === "function") {
     for (let key of __getOwnPropNames(from))
@@ -21,31 +25,33 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
   isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target,
   mod
 ));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var study_spots_exports = {};
+__export(study_spots_exports, {
+  default: () => study_spots_default
+});
+module.exports = __toCommonJS(study_spots_exports);
 var import_express = __toESM(require("express"));
-var import_profiles = __toESM(require("./routes/profiles"));
-var import_study_spots = __toESM(require("./routes/study-spots"));
-var import_auth = __toESM(require("./routes/auth"));
-var import_mongo = require("./services/mongo");
-var import_path = __toESM(require("path"));
-(0, import_mongo.connect)("slostudyspots");
-const app = (0, import_express.default)();
-const port = process.env.PORT || 3e3;
-const staticDir = process.env.STATIC || "public";
-console.log("Serving static files from ", staticDir);
-app.use(import_express.default.static(staticDir));
-app.use(import_express.default.json());
-const nodeModules = import_path.default.resolve(
-  __dirname,
-  "../../../node_modules"
-);
-console.log("Serving NPM packages from", nodeModules);
-app.use("/node_modules", import_express.default.static(nodeModules));
-app.use("/auth", import_auth.default);
-app.use("/api/profiles", import_auth.authenticateUser, import_profiles.default);
-app.use("/study-spots", import_study_spots.default);
-app.get("/hello", (req, res) => {
-  res.send("Hello, World");
+var import_study_spot_svc = __toESM(require("../services/study-spot-svc"));
+const router = import_express.default.Router();
+router.get("/:id", (req, res) => {
+  const id = req.params.id;
+  import_study_spot_svc.default.getStudySpotbyId(id).then((studySpot) => {
+    if (studySpot) {
+      res.json(studySpot);
+    } else {
+      res.status(404).send("Study spot not found!");
+    }
+  }).catch((error) => {
+    res.status(500).send(error);
+  });
 });
-app.listen(port, () => {
-  console.log(`Server running at http://localhost:${port}`);
+router.post("/", (req, res) => {
+  const newStudySpot = req.body;
+  import_study_spot_svc.default.create(newStudySpot).then((studySpot) => {
+    res.status(201).send(studySpot);
+  }).catch((err) => {
+    res.status(500).send(err);
+  });
 });
+var study_spots_default = router;

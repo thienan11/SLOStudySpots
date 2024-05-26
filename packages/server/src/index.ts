@@ -1,5 +1,6 @@
 import express, { Request, Response } from "express";
 import profiles from "./routes/profiles";
+import studySpots from "./routes/study-spots";
 import auth, { authenticateUser } from "./routes/auth";
 import { connect } from "./services/mongo";
 import path from "path";
@@ -31,6 +32,9 @@ app.use("/auth", auth);
 
 // Profile routes
 app.use("/api/profiles", authenticateUser, profiles);
+
+// Study Spot routes
+app.use("/study-spots", studySpots);
 
 // Hello, World route
 app.get("/hello", (req: Request, res: Response) => {

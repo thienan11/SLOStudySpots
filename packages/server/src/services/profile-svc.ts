@@ -30,8 +30,30 @@ function get(userid: String): Promise<Profile> {
 }
 
 function create(profile: Profile): Promise<Profile> {
-  const p = new ProfileModel(profile);
-  return p.save();
+  // const p = new ProfileModel(profile);
+  // return p.save();
+
+  // Check if the user ID already exists
+  return ProfileModel.findOne({ userid: profile.userid })
+    .then(existingUserIdProfile => {
+      if (existingUserIdProfile) {
+        throw new Error("User ID already exists");
+      } else {
+        // Check if the email already exists
+        return ProfileModel.findOne({ email: profile.email });
+      }
+    })
+
+    .then(existingEmailProfile => {
+      if (existingEmailProfile?.email != null) {
+        console.log(existingEmailProfile);
+        throw new Error("Email already exists");
+      } else {
+        // If both user ID and email are unique, save the profile
+        const p = new ProfileModel(profile);
+        return p.save();
+      }
+    });
 }
 
 function update(

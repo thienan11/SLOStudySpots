@@ -1,6 +1,6 @@
 export interface StudySpot {
   name: string;
-  description: string;
+  // description: string;
   address: string;
   hoursOfOperation: string;
   ratings: {

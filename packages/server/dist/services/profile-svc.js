@@ -45,8 +45,21 @@ function get(userid) {
   });
 }
 function create(profile) {
-  const p = new ProfileModel(profile);
-  return p.save();
+  return ProfileModel.findOne({ userid: profile.userid }).then((existingUserIdProfile) => {
+    if (existingUserIdProfile) {
+      throw new Error("User ID already exists");
+    } else {
+      return ProfileModel.findOne({ email: profile.email });
+    }
+  }).then((existingEmailProfile) => {
+    if ((existingEmailProfile == null ? void 0 : existingEmailProfile.email) != null) {
+      console.log(existingEmailProfile);
+      throw new Error("Email already exists");
+    } else {
+      const p = new ProfileModel(profile);
+      return p.save();
+    }
+  });
 }
 function update(userid, profile) {
   return ProfileModel.findOne({ userid }).then((found) => {

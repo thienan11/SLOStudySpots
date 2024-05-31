@@ -2,7 +2,6 @@ import {
   define,
   Form,
   History,
-  // InputArray,
   View
 } from "@calpoly/mustang";
 import { css, html, LitElement } from "lit";

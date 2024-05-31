@@ -3,6 +3,7 @@ import { Msg } from "./messages";
 import { Model, init } from "./model";
 import update from "./update";
 import { HeaderElement } from "./components/studyspots-header";
+import { ProfileViewElement } from "./views/profile-view";
 
 define({
   "mu-auth": Auth.Provider,
@@ -15,4 +16,5 @@ define({
     }
   },
   "studyspots-header": HeaderElement,
+  "profile-view": ProfileViewElement,
 });

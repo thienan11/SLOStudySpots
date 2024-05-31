@@ -1,5 +1,5 @@
 import { LitElement, css, html } from "lit";
-import { define } from "@calpoly/mustang";
+import { define, Events} from "@calpoly/mustang";
 import { DropdownElement } from "./drop-down";
 
 export class HeaderElement extends LitElement {
@@ -48,6 +48,9 @@ export class HeaderElement extends LitElement {
                     <input type="checkbox" autocomplete="off" />
                     Dark mode
                   </label>
+                </li>
+                <li>
+                  <a href="#" @click=${signOutUser}> Sign out </a>
                 </li>
               </ul>
             </drop-down>
@@ -196,4 +199,8 @@ function toggleDarkMode(ev: InputEvent) {
   // Events.relay(ev, "dark-mode", { checked });
 
   document.body.classList.toggle("dark-mode", checked);
+}
+
+function signOutUser(ev: Event) {
+  Events.relay(ev, "auth:message", ["auth/signout"]);
 }

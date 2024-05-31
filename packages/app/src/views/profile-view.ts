@@ -56,8 +56,6 @@ class ProfileViewer extends LitElement {
           <dl>
             <dt>Number of Reviews:</dt>
             <dd><slot name="reviewsCount"></slot></dd>
-            <dt>Reviews:</dt>
-            <dd><slot name="reviews"></slot></dd>
           </dl>
         </div>
         <div class="profile-section">
@@ -277,9 +275,9 @@ export class ProfileViewElement extends View<Model, Msg> {
   }
 
   render() {
-    if (!this.profile) {
-      return html`<p>Loading profile...</p>`;
-    }
+    // if (!this.profile) {
+    //   return html`<p>Loading profile...</p>`;
+    // }
 
     const {
       avatar,
@@ -288,16 +286,11 @@ export class ProfileViewElement extends View<Model, Msg> {
       email,
       bio,
       reviewsCount,
-      favSpots,
-      dateJoined
     } = this.profile || {};
 
-    const fav_spots_html = favSpots.map(
-      (s) =>
-        html`
-          <li>${s}</li>
-        `
-    );
+    const fav_spots_html = this.profile?.favSpots?.map(s => html`<li>${s}</li>`) || html``;
+
+    const formattedDate = this.profile?.dateJoined ? new Date(this.profile.dateJoined).toLocaleDateString() : 'Date unavailable';
 
     const avatarElement = avatar
     ? html`<img src=${avatar} alt="Profile Avatar" slot="avatar">`
@@ -321,7 +314,7 @@ export class ProfileViewElement extends View<Model, Msg> {
           <span slot="userid">${userid}</span>
           <span slot="email">${email}</span>
           <span slot="bio">${bio || 'No bio available'}</span>
-          <span slot="dateJoined">${dateJoined.toLocaleDateString()}</span>
+          <span slot="dateJoined">${formattedDate}</span>
           <span slot="reviewsCount">${reviewsCount}</span>
           <ul slot="favSpots">${fav_spots_html}</ul>
         </profile-viewer>

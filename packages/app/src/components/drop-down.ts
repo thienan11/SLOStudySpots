@@ -48,7 +48,7 @@ export class DropdownElement extends LitElement {
     return html`
       <slot name="actuator">
         <button @click="${this.toggle}">
-          <img src="../icons/menu.svg" alt="Menu" id="menu-icon" />
+          <img src="/icons/menu.svg" alt="Menu" id="menu-icon" />
         </button>
       </slot>
       <div id="panel">

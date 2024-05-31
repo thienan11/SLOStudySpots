@@ -11,6 +11,8 @@ import { Model, init } from "./model";
 import update from "./update";
 import { HeaderElement } from "./components/studyspots-header";
 import { ProfileViewElement } from "./views/profile-view";
+import { LoginView } from "./views/login-view";
+import { RegisterView } from "./views/register-view";
 
 const routes = [
   // {
@@ -38,6 +40,14 @@ const routes = [
     `
   },
   {
+    path: "/app/login",
+    view: () => html` <login-view></login-view> `,
+  },
+  {
+    path: "/app/register",
+    view: () => html` <register-view></register-view> `,
+  },
+  {
     path: "/",
     redirect: "/app"
   }
@@ -61,4 +71,6 @@ define({
   },
   "studyspots-header": HeaderElement,
   "profile-view": ProfileViewElement,
+  "login-view": LoginView,
+  "register-view": RegisterView,
 });

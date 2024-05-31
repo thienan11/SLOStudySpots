@@ -10,15 +10,11 @@
     <script type="module" src="/src/main"></script>
   </head>
   <body>
-    <mu-history provides="blazing:history">
+    <mu-history provides="slostudyspots:history">
       <mu-auth provides="slostudyspots:auth" redirect="/login.html">
         <mu-store provides="slostudyspots:model">
           <studyspots-header></studyspots-header>
           <main>
-            <section class="welcome-section">
-              <h1>Welcome to SLOStudySpots</h1>
-              <p>Find the best spots to study in San Luis Obispo!</p>
-            </section>
             <mu-switch></mu-switch>
           </main>
 

@@ -11,8 +11,8 @@ export class HeaderElement extends LitElement {
     return html`
       <header class="navbar">
         <div class="navbar-content">
-          <a class="logo" href="index.html">
-            <img src="icons/desk-lamp.svg" alt="SLOStudySpots Logo" />
+          <a class="logo" href="/app">
+            <img src="/icons/desk-lamp.svg" alt="SLOStudySpots Logo" />
             <h1>SLOStudySpots</h1>
           </a>
 

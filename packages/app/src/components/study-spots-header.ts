@@ -1,11 +1,35 @@
 import { LitElement, css, html } from "lit";
-import { define, Events} from "@calpoly/mustang";
+import { define, Events, Auth, Observer} from "@calpoly/mustang";
 import { DropdownElement } from "./drop-down";
+import { state } from "lit/decorators.js";
 
 export class HeaderElement extends LitElement {
   static uses = define({
     "drop-down": DropdownElement,
   });
+
+  @state()
+  username = "anonymous";
+
+  @state()
+  user: Auth.Model["user"] | null = null;
+
+  constructor() {
+    super();
+    this._authObserver = new Observer<Auth.Model>(this, "slostudyspots:auth");
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+    this._authObserver.observe(({ user }) => {
+      if (user && user.username !== this.username) {
+        this.username = user.username;
+        this.user = user;
+      } else {
+        this.user = null;
+      }
+    });
+  }
 
   render() {
     return html`
@@ -26,10 +50,13 @@ export class HeaderElement extends LitElement {
             <drop-down>
               <ul>
                 <li>
-                  <a class="navbar-menu" href="profile.html">
+                  <a class="navbar-menu" href="/app/profile/${this.username}">
                     <!-- <img src="icons/avatar.svg" alt="profile-icon" /> -->
                     Profile
                   </a>
+                </li>
+                <li>
+                  <a href="/app/login"> Login </a>
                 </li>
                 <li>
                   <a class="group-icon" href="ranking.html">
@@ -59,7 +86,7 @@ export class HeaderElement extends LitElement {
       </header>
     `;
   }
-
+  
   static styles = css`
     * {
       margin: 0;
@@ -188,6 +215,17 @@ export class HeaderElement extends LitElement {
       color: var(--color-links);
     }
   `;
+
+  // handleProfileClick(ev: Event) {
+  //   ev.preventDefault();
+  //   if (this.user) {
+  //     window.location.href = `/app/profile/${this.user.username}`;
+  //   } else {
+  //     window.location.href = '/app/login';
+  //   }
+  // }
+
+  _authObserver: Observer<Auth.Model>;
 }
 
 type Checkbox = HTMLInputElement & { checked: boolean };

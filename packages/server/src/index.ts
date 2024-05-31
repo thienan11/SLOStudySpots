@@ -3,6 +3,7 @@ import profiles from "./routes/profiles";
 import studySpots from "./routes/study-spots";
 import auth, { authenticateUser } from "./routes/auth";
 import { connect } from "./services/mongo";
+import fs from "node:fs/promises";
 import path from "path";
 
 // MongoDB connection
@@ -36,9 +37,22 @@ app.use("/api/profiles", authenticateUser, profiles);
 // Study Spot routes
 app.use("/study-spots", studySpots);
 
-// Hello, World route
-app.get("/hello", (req: Request, res: Response) => {
-  res.send("Hello, World");
+// HTML Routes:
+app.get("/hello", (_: Request, res: Response) => {
+  res.send(
+    `<h1>Hello!</h1>
+     <p>Server is up and running.</p>
+     <p>Serving static files from <code>${staticDir}</code>.</p>
+    `
+  );
+});
+
+// SPA Routes: /app/...
+app.use("/app", (req: Request, res: Response) => {
+  const indexHtml = path.resolve(staticDir, "index.html");
+  fs.readFile(indexHtml, { encoding: "utf8" }).then((html) =>
+    res.send(html)
+  );
 });
 
 // Start the server

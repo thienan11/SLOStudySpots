@@ -1,13 +1,13 @@
 import { html, LitElement } from "lit";
 import { define, Auth } from "@calpoly/mustang";
-import { RegisterForm } from "../components/register-form";
+import { RegisterFormElement } from "../components/register-form";
 
 define({
   "mu-auth": Auth.Provider,
-  "register-form": RegisterForm
+  "register-form": RegisterFormElement
 });
 
-export class RegisterView extends LitElement {
+export class RegisterViewElement extends LitElement {
   render() {
     return html`
       <div class="center">

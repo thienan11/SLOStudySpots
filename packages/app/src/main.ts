@@ -9,10 +9,10 @@ import { html } from "lit";
 import { Msg } from "./messages";
 import { Model, init } from "./model";
 import update from "./update";
-import { HeaderElement } from "./components/studyspots-header";
+import { HeaderElement } from "./components/study-spots-header";
 import { ProfileViewElement } from "./views/profile-view";
-import { LoginView } from "./views/login-view";
-import { RegisterView } from "./views/register-view";
+import { LoginViewElement } from "./views/login-view";
+import { RegisterViewElement } from "./views/register-view";
 
 const routes = [
   // {
@@ -69,8 +69,8 @@ define({
       super(routes, "slostudyspots:history");
     }
   },
-  "studyspots-header": HeaderElement,
+  "study-spots-header": HeaderElement,
   "profile-view": ProfileViewElement,
-  "login-view": LoginView,
-  "register-view": RegisterView,
+  "login-view": LoginViewElement,
+  "register-view": RegisterViewElement,
 });

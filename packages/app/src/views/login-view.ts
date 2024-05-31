@@ -8,7 +8,7 @@ define({
   "login-form": LoginFormElement
 });
 
-export class LoginView extends LitElement {
+export class LoginViewElement extends LitElement {
 
   render() {
     return html`

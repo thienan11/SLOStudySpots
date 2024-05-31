@@ -806,58 +806,6 @@ html-fragment {
   padding: var(--space-small); /* Adds some padding around the content */
 }
 
-.login-register-container {
-  background-color: var(--color-background-secondary);
-  padding: var(--space-regular);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  height: 100vh;
-}
-
-.login-register-container a {
-  color: var(--color-links);
-}
-
-.login-register-container h2 {
-  margin-bottom: var(--space-medium);
-  font-size: var(--font-size-large);
-  color: var(--color-primary);
-}
-
-.login-register-container .card {
-  background-color: var(--color-background-secondary);
-  padding: var(--space-large);
-  max-width: 500px;
-  width: 100%;
-  margin-top: var(--space-medium);
-}
-
-.login-register-container label {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  font-size: var(--font-size-body);
-  color: var(--color-text-primary);
-  margin-bottom: var(--space-medium);
-}
-
-.login-register-container input {
-  width: 100%;
-  padding: var(--space-small);
-  margin-top: var(--space-small);
-  border: 1px solid var(--color-primary);
-  border-radius: var(--border-radius);
-  font-size: var(--font-size-body);
-}
-
-.login-register-container input:focus {
-  border-color: var(--color-secondary);
-  outline: none;
-}
-
 footer {
   background-color: var(--color-text-primary);
   color: var(--color-background-primary);

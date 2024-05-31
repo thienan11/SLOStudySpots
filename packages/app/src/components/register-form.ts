@@ -3,7 +3,7 @@ import { html, LitElement } from "lit";
 
 define({ "restful-form": Rest.FormElement });
 
-export class RegisterForm extends LitElement {
+export class RegisterFormElement extends LitElement {
   render() {
     return html`
       <restful-form new src="/auth/register">

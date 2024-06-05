@@ -25,10 +25,12 @@ export class HomeViewElement extends View<Model, Msg> {
     const renderItem = (s: StudySpot) => {
       const { name } = s;
       const { _id } = s as unknown as { _id: string };
+      const photoURL = s.photos?.[0] || '/icons/default-photo.webp';
+
       return html`
       <li class="study-spot-container">
         <a href="/app/study-spots/${_id}">
-          <img src="../public/icons/default-spot.webp" alt="${name}" />
+          <img src="${photoURL}" alt="${name}" />
           <div class="study-spot-content">
             <h3>${name}</h3>
             <p> Reviews: 5 </p>

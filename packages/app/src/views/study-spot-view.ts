@@ -9,9 +9,9 @@ import { Msg } from "../messages";
 import { Model } from "../model";
 
 export class StudySpotViewElement extends View<Model, Msg> {
-  static uses = define({
+  // static uses = define({
     
-  });
+  // });
 
   @property({ attribute: "spot-id", reflect: true })
   spotid = "";
@@ -55,18 +55,19 @@ export class StudySpotViewElement extends View<Model, Msg> {
       photos,
       link,
     } = this.studySpot || {};
+    
+    const photoURL = this.studySpot?.photos?.[0] || '/icons/default-photo.webp';
 
-
-    console.log("Rendering study spot page", this.studySpot);
+    const tags_html = this.studySpot?.tags?.map(s => html`<span class="feature-tag">${s}</span>`) || html``;
 
     return html`
       <main>
         <section class="gallery-preview">
-          <img src="${photos?.[0] || '../images/default-image.jpg'}" alt="View of ${name}" class="featured-image">
+        <img src="${photoURL}" alt="View of ${this.studySpot?.name}" class="featured-image">
           <div class="view-gallery-overlay">
             <h2 class="spot-title">${name}</h2>
-            <a href="${link || '#'}" class="btn-view-gallery">
-              <img src="../icons/default-photo.svg" alt="Gallery Icon">
+            <a href="" class="btn-view-gallery">
+              <img src="/icons/default-photo.svg" alt="Gallery Icon">
               View Gallery
             </a>
           </div>
@@ -79,10 +80,26 @@ export class StudySpotViewElement extends View<Model, Msg> {
         <div class="details-reviews-container">
           <div class="details-ratings">
             <section class="spot-details">
-              <!-- Dynamically generate details -->
+              <h3>Details</h3>
+              <p><strong>Address: </strong>${address}</p>
+              <p><strong>Website Link: </strong> <a href="${link}" target="_blank">Link</a></p>
+              <p>
+                <strong>Features:</strong>
+                ${tags_html}
+              </p>
             </section>
             <section class="rating-breakdown">
-              <!-- Dynamically generate rating breakdown -->
+              <h3><strong>Overall Rating:</strong></h3>
+              <div class="overall-rating-image-container">
+                <img src="/icons/star-rating.svg" alt="Star Rating" class="star-icon"/>
+                <h4 class="rating-value">${ratings?.overall}</h4>
+              </div>
+              <h3>Rating Breakdown</h3>
+              <p><strong>Quietness:</strong> ${ratings?.quietness} / 5</p>
+              <p><strong>Wifi Quality:</strong> ${ratings?.wifiQuality} / 5</p>
+              <p><strong>Crowdedness:</strong> ${ratings?.crowdedness} / 5</p>
+              <p><strong>Power Outlets:</strong> ${ratings?.powerOutlets} / 5</p>
+              <p><strong>Amenities:</strong> ${ratings?.amenities} / 5</p>
             </section>
           </div>
           <section class="user-reviews">

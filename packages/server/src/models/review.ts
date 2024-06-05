@@ -8,6 +8,7 @@ export interface Review {
   amenitiesRating: number; 
   overallRating: number;  // Calculated average of all the ratings
   comment: string;
+  bestTimeToGo: string | undefined; // short description of the best time to go to the study spot (optional?)
   createdAt: Date;
   likes: number;
   edited: Boolean;

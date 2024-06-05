@@ -4,19 +4,34 @@ import { StudySpot } from "../models/study-spot";
 const StudySpotSchema = new Schema<StudySpot>(
   {
     name: { type: String, required: true, trim: true },
-    // description: { type: String, default: null },
     address: { type: String, required: true },
-    hoursOfOperation: { type: String, default: null },
+    locationType: { type: String, required: true },
+    hoursOfOperation: 
+    {
+      type: [
+        {
+          startDay: { type: String, required: true },
+          endDay: { type: String, required: true },
+          open: { type: Number, required: true, min: 0, max: 1440 },  // Time in minutes from midnight
+          close: { type: Number, required: true, min: 0, max: 1440 },  // Time in minutes from midnight
+          isOpen24Hours: { type: Boolean, default: false },
+          isClosed: { type: Boolean, default: false },
+        },
+      ],
+      default: [],
+    },
     ratings: {
-      overall: { type: Number, default: 0 },
-      quietness: { type: Number, default: 0 },
-      wifiQuality: { type: Number, default: 0 },
-      crowdedness: { type: Number, default: 0 },
-      powerOutlets: { type: Number, default: 0 },
-      amenities: { type: Number, default: 0 },
+      overall: { type: Number, default: 0, min: 0, max: 5},
+      quietness: { type: Number, default: 0, min: 0, max: 5 },
+      wifiQuality: { type: Number, default: 0, min: 0, max: 5},
+      crowdedness: { type: Number, default: 0, min: 0, max: 5},
+      powerOutlets: { type: Number, default: 0, min: 0, max: 5},
+      amenities: { type: Number, default: 0, min: 0, max: 5},
     },
     tags: { type: [String], default: [] },
     photos: { type: [String], default: [] },
+    link: { type: String, default: null },
+    createdBy: { type: String, required: true }
   },
   { collection: "study_spots" }
 );

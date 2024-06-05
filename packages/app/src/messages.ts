@@ -11,3 +11,5 @@ export type Msg =
     }
   ]
   | ["profile/select", { userid: string }]
+  | ["study-spot/select", { spotid: string }]
+  | ["study-spot/index"];

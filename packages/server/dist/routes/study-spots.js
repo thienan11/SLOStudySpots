@@ -34,6 +34,14 @@ module.exports = __toCommonJS(study_spots_exports);
 var import_express = __toESM(require("express"));
 var import_study_spot_svc = __toESM(require("../services/study-spot-svc"));
 const router = import_express.default.Router();
+router.get("/", (req, res) => {
+  import_study_spot_svc.default.index().then(
+    (list) => res.status(200).send({
+      count: list.length,
+      data: list
+    })
+  ).catch((err) => res.status(500).send(err));
+});
 router.get("/:id", (req, res) => {
   const id = req.params.id;
   import_study_spot_svc.default.getStudySpotbyId(id).then((studySpot) => {

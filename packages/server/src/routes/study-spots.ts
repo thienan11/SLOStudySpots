@@ -4,6 +4,20 @@ import { StudySpot } from "../models/study-spot";
 
 const router = express.Router();
 
+
+// GET route (get all)
+router.get("/", (req: Request, res: Response) => {
+  studySpots
+    .index()
+    .then((list: StudySpot[]) =>
+      res.status(200).send({
+        count: list.length,
+        data: list
+      })
+    )
+    .catch((err) => res.status(500).send(err));
+});
+
 // GET route (get by id)
 router.get("/:id", (req: Request, res: Response) => {
   const id = req.params.id;

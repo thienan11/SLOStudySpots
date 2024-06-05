@@ -52,10 +52,24 @@ const StudySpotSchema = new import_mongoose.Schema(
         {
           startDay: { type: String, required: true },
           endDay: { type: String, required: true },
-          open: { type: Number, required: true, min: 0, max: 1440 },
-          // Time in minutes from midnight
-          close: { type: Number, required: true, min: 0, max: 1440 },
-          // Time in minutes from midnight
+          open: {
+            type: Number,
+            min: 0,
+            max: 1440,
+            // Time in minutes from midnight
+            required: function() {
+              return !this.isOpen24Hours && !this.isClosed;
+            }
+          },
+          close: {
+            type: Number,
+            min: 0,
+            max: 1440,
+            // Time in minutes from midnight
+            required: function() {
+              return !this.isOpen24Hours && !this.isClosed;
+            }
+          },
           isOpen24Hours: { type: Boolean, default: false },
           isClosed: { type: Boolean, default: false }
         }
@@ -78,6 +92,9 @@ const StudySpotSchema = new import_mongoose.Schema(
   { collection: "study_spots" }
 );
 const StudySpotModel = (0, import_mongoose.model)("StudySpot", StudySpotSchema);
+function index() {
+  return StudySpotModel.find();
+}
 function getStudySpotbyId(id) {
   return StudySpotModel.findById(id).exec().then((studySpot) => {
     return studySpot;
@@ -119,4 +136,4 @@ function getFavoriteStudySpots(favoriteStudySpotIds) {
     }
   });
 }
-var study_spot_svc_default = { getStudySpotbyId, create, getStudySpotsByTag, getFavoriteStudySpots };
+var study_spot_svc_default = { index, getStudySpotbyId, create, getStudySpotsByTag, getFavoriteStudySpots };

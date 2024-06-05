@@ -28,7 +28,8 @@ const ProfileSchema = new import_mongoose.Schema(
     name: { type: String, required: true, trim: true },
     email: { type: String, trim: true, default: null },
     bio: { type: String, default: null },
-    avatar: { type: String, default: null },
+    // avatar: { type: String, default: null},
+    avatar: { data: Buffer, contentType: String },
     reviewsCount: { type: Number, default: 0 },
     favSpots: { type: [String], default: [] },
     dateJoined: { type: Date, default: Date.now }

@@ -12,8 +12,14 @@ const StudySpotSchema = new Schema<StudySpot>(
         {
           startDay: { type: String, required: true },
           endDay: { type: String, required: true },
-          open: { type: Number, required: true, min: 0, max: 1440 },  // Time in minutes from midnight
-          close: { type: Number, required: true, min: 0, max: 1440 },  // Time in minutes from midnight
+          open: {
+            type: Number, min: 0, max: 1440, // Time in minutes from midnight
+            required: function () { return !this.isOpen24Hours && !this.isClosed; }
+          },
+          close: {
+            type: Number, min: 0, max: 1440, // Time in minutes from midnight
+            required: function() { return !this.isOpen24Hours && !this.isClosed; }
+          },
           isOpen24Hours: { type: Boolean, default: false },
           isClosed: { type: Boolean, default: false },
         },
@@ -37,6 +43,10 @@ const StudySpotSchema = new Schema<StudySpot>(
 );
 
 const StudySpotModel = model<StudySpot>("StudySpot", StudySpotSchema);
+
+function index(): Promise<StudySpot[]> {
+  return StudySpotModel.find();
+}
 
 function getStudySpotbyId(id: string): Promise<StudySpot | null> {
   return StudySpotModel.findById(id)
@@ -91,4 +101,4 @@ async function getFavoriteStudySpots(
   }
 }
 
-export default { getStudySpotbyId, create, getStudySpotsByTag, getFavoriteStudySpots };
+export default { index, getStudySpotbyId, create, getStudySpotsByTag, getFavoriteStudySpots };

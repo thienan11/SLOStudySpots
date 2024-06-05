@@ -22,8 +22,8 @@ interface Ratings {
 interface OperatingHours {
   startDay: Day;
   endDay: Day;
-  open: number; // Time in minutes since midnight or -1 if closed
-  close: number; // Time in minutes since midnight or -1 if closed
+  open: number | undefined; // Time in minutes since midnight or -1 if closed
+  close: number | undefined; // Time in minutes since midnight or -1 if closed
   isOpen24Hours: boolean;
   isClosed: boolean;
 }

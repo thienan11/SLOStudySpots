@@ -31,6 +31,13 @@ export default function update(
         apply((model) => ({ ...model, profile }))
       );
       break;
+    case "study-spot/index":
+      indexStudySpots().then((studySpotIndex: StudySpot[] | undefined) =>
+        apply((model) => ({ ...model, studySpotIndex }))
+      ).catch(error => {
+        console.error("Failed to fetch study spots", error);
+      });
+      break;
     case "study-spot/select":
       selectStudySpot(message[1]).then((studySpot: StudySpot | undefined) =>
         apply((model) => ({ ...model, studySpot }))
@@ -38,7 +45,7 @@ export default function update(
       break;
     default:
       const unhandled: never = message[0];
-      throw new Error(`Unhandled Auth message "${unhandled}"`);
+      throw new Error(`Unhandled message "${unhandled}"`);
   }
 }
 
@@ -89,6 +96,32 @@ function selectProfile(
         return json as Profile;
       }
     });
+}
+
+function indexStudySpots() {
+  return fetch("/study-spots", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json"
+    }
+  })
+    .then((response: Response) => {
+      if (response.status === 200) {
+        return response.json();
+      }
+      throw undefined;
+    })
+    .then((json: unknown) => {
+      if (json) {
+        // console.log("Study Spots:", json);
+        // return json as StudySpot[];
+
+        const { data } = json as {
+          data: StudySpot[];
+        };
+        return data;
+      }
+    })
 }
 
 function selectStudySpot(

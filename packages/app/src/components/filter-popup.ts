@@ -1,7 +1,7 @@
 import { LitElement, html, css } from "lit";
 import { property, state } from "lit/decorators.js";
 
-class FilterPopup extends LitElement {
+export class FilterPopup extends LitElement {
   @property({ reflect: true, type: Boolean })
   open: boolean = false;
 
@@ -68,7 +68,7 @@ class FilterPopup extends LitElement {
 
     .filter-container:hover {
       cursor: pointer;
-      background-color: rgb(230, 230, 230);
+      background-color: var(--color-links);
     }
 
     .filter-title {
@@ -152,7 +152,7 @@ class FilterPopup extends LitElement {
                     </button>
 
                     <button @click="${this.triggerSort}" class="sort-button">
-                      Sort By Date
+                      Sort By Highest Reviews
                     </button>
 
                   </div>
@@ -164,5 +164,3 @@ class FilterPopup extends LitElement {
     `;
   }
 }
-
-customElements.define("filter-popup", FilterPopup);

@@ -1,25 +1,49 @@
-import { View } from "@calpoly/mustang";
+import { define, View } from "@calpoly/mustang";
 import { css, html, TemplateResult } from "lit";
 import { state } from "lit/decorators.js";
 import { StudySpot } from "server/models";
 import resetCSS from "../css/reset";
 import { Msg } from "../messages";
 import { Model } from "../model";
+import {FilterPopup} from "../components/filter-popup";
 
 export class HomeViewElement extends View<Model, Msg> {
+  static uses = define({
+    "filter-popup": FilterPopup,
+  });
+
   @state()
   get studySpotIndex(): StudySpot[] {
     return this.model.studySpotIndex || [];
   }
 
+  @state()
+  sortedStudySpots: StudySpot[] = [];
+
   constructor() {
     super("slostudyspots:model");
+    this.sortedStudySpots = this.studySpotIndex;
   }
 
   connectedCallback() {
     super.connectedCallback();
     this.dispatchMessage(["study-spot/index"]);
   }
+
+  firstUpdated() {
+    this.addEventListener("sort-requested" as string, this.handleSortRequested as EventListener);
+  }
+
+  handleSortRequested(event: CustomEvent) {
+    const sortAlphabetically = event.detail;
+    if (sortAlphabetically) {
+      this.sortedStudySpots = [...this.studySpotIndex].sort((a, b) => a.name.localeCompare(b.name));
+    } else {
+      this.sortedStudySpots = this.studySpotIndex; // Or implement other sorting logic
+    }
+    this.requestUpdate(); // Ensure the component re-renders
+  }
+
 
   render(): TemplateResult {
     const renderItem = (s: StudySpot) => {
@@ -33,7 +57,7 @@ export class HomeViewElement extends View<Model, Msg> {
           <img src="${photoURL}" alt="${name}" />
           <div class="study-spot-content">
             <h3>${name}</h3>
-            <p> Reviews: 5 </p>
+            <p> Reviews: 1 </p>
           </div>
         </a>
       </li>
@@ -46,6 +70,10 @@ export class HomeViewElement extends View<Model, Msg> {
         <section class="welcome-section">
           <h1>Welcome to SLOStudySpots</h1>
           <p>Find the best spots to study in San Luis Obispo!</p>
+        </section>
+
+        <section class="filter-section">
+          <filter-popup></filter-popup>
         </section>
 
         <section class="featured-spots">
@@ -136,6 +164,14 @@ export class HomeViewElement extends View<Model, Msg> {
         font-size: 0.875rem;
         color: var(--color-text-primary);
       }
+
+      .filter-section {
+        display: flex;
+        justify-content: flex-end;
+        padding: 0;
+        margin: 0;
+      }
+
     `
   ];
 }

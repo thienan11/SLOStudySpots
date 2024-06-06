@@ -24,6 +24,7 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
 var import_express = __toESM(require("express"));
 var import_profiles = __toESM(require("./routes/profiles"));
 var import_study_spots = __toESM(require("./routes/study-spots"));
+var import_reviews = __toESM(require("./routes/reviews"));
 var import_auth = __toESM(require("./routes/auth"));
 var import_mongo = require("./services/mongo");
 var import_promises = __toESM(require("node:fs/promises"));
@@ -44,6 +45,7 @@ app.use("/node_modules", import_express.default.static(nodeModules));
 app.use("/auth", import_auth.default);
 app.use("/api/profiles", import_auth.authenticateUser, import_profiles.default);
 app.use("/study-spots", import_study_spots.default);
+app.use("/reviews", import_reviews.default);
 app.get("/hello", (_, res) => {
   res.send(
     `<h1>Hello!</h1>

@@ -1,6 +1,7 @@
 import { define, View } from "@calpoly/mustang";
 import { css, html, TemplateResult } from "lit";
 import { property, state } from "lit/decorators.js";
+import resetCSS from "../css/reset";
 import {
   StudySpot,
   Review
@@ -20,6 +21,9 @@ export class StudySpotViewElement extends View<Model, Msg> {
   get studySpot(): StudySpot | undefined {
     return this.model.studySpot;
   }
+
+  @state()
+  reviews: Review[] = [];
 
   constructor() {
     super("slostudyspots:model");
@@ -41,8 +45,13 @@ export class StudySpotViewElement extends View<Model, Msg> {
         "study-spot/select",
         { spotid: newValue }
       ]);
+      this.dispatchMessage(["review/load", { spotId: newValue }]);
     }
   }
+
+  // formatDate(date: Date): string {
+  //   return `${date.toLocaleString('default', { month: 'long' })} ${date.getDate()}, ${date.getFullYear()}`;
+  // }  
 
   render(): TemplateResult {
     const {
@@ -60,6 +69,8 @@ export class StudySpotViewElement extends View<Model, Msg> {
 
     const tags_html = this.studySpot?.tags?.map(s => html`<span class="feature-tag">${s}</span>`) || html``;
 
+    const reviews = this.model.reviews || [];
+
     return html`
       <main>
         <section class="gallery-preview">
@@ -74,7 +85,14 @@ export class StudySpotViewElement extends View<Model, Msg> {
         </section>
 
         <section class="study-spot-actions">
-          <!-- Actions can be modified similarly -->
+          <a href="#" class="btn-add-photo">
+            <img src="/icons/upload-photo.svg" alt="Add Photo Icon" class="btn-icon-white">
+            Add Photo
+          </a>
+          <a href="app/study-spot/${this.spotid}/write-review" class="btn-write-review">
+            <img src="/icons/create.svg" alt="Write Review Icon" class="btn-icon-white">
+            Write Review
+          </a>
         </section>
 
         <div class="details-reviews-container">
@@ -104,7 +122,30 @@ export class StudySpotViewElement extends View<Model, Msg> {
           </div>
           <section class="user-reviews">
             <h3>User Reviews</h3>
+            ${reviews.length > 0 ? reviews.map(review => html`
+          <div class="review">
+            <h4>${review.userId.name}</h4>
             
+            <br/>
+            <p><strong>Comment: </strong>${review.comment}</p>
+            <br/>
+            <p><strong>Best Time to Go</strong>: ${review.bestTimeToGo}</p>
+            <br/>
+            <div>
+              <strong>Overall Rating:</strong> ${review.overallRating} / 5
+              <br/>
+              <strong>Quietness:</strong> ${review.quietnessRating} / 5
+              <br/>
+              <strong>Wifi Quality:</strong> ${review.wifiQualityRating} / 5
+              <br/>
+              <strong>Crowdedness:</strong> ${review.crowdednessRating} / 5
+              <br/>
+              <strong>Power Outlets:</strong> ${review.powerOutletRating} / 5
+              <br/>
+              <strong>Amenities:</strong> ${review.amenitiesRating} / 5
+            </div>
+          </div>
+        `) : html`<p>No reviews yet.</p>`}
           </section>
         </div>
       </main>
@@ -112,7 +153,13 @@ export class StudySpotViewElement extends View<Model, Msg> {
   }
 
   static styles = [
+    resetCSS,
     css`
+      main {
+        padding: var(--space-regular);
+        flex-grow: 1;
+      }
+
       .gallery-preview {
         position: relative;
         /* are the below needed? */

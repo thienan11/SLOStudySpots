@@ -1,6 +1,7 @@
 import express, { Request, Response } from "express";
 import profiles from "./routes/profiles";
 import studySpots from "./routes/study-spots";
+import reviews from "./routes/reviews";
 import auth, { authenticateUser } from "./routes/auth";
 import { connect } from "./services/mongo";
 import fs from "node:fs/promises";
@@ -36,6 +37,9 @@ app.use("/api/profiles", authenticateUser, profiles);
 
 // Study Spot routes
 app.use("/study-spots", studySpots);
+
+// Review routes
+app.use("/reviews", reviews);
 
 // HTML Routes:
 app.get("/hello", (_: Request, res: Response) => {

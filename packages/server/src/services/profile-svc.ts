@@ -16,7 +16,7 @@ const ProfileSchema = new Schema<Profile>(
   { collection: "user_profiles" }
 );
 
-const ProfileModel = model<Profile>("Profile", ProfileSchema);
+export const ProfileModel = model<Profile>("Profile", ProfileSchema);
 
 function index(): Promise<Profile[]> {
   return ProfileModel.find();

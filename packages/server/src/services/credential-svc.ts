@@ -1,6 +1,9 @@
 import bcrypt from "bcryptjs";
 import { Schema, model } from "mongoose";
 import { Credential } from "../models/credential";
+import profileSvc from "./profile-svc";
+import { Profile } from "../models/profile";
+import { ProfileModel } from "./profile-svc";
 
 const credentialSchema = new Schema<Credential>(
   {
@@ -21,6 +24,26 @@ const credentialModel = model<Credential>(
   "Credential",
   credentialSchema
 );
+
+function createProfile(username: string) {
+  return new Promise<Profile>((resolve, reject) => {
+    const newProfile = new ProfileModel({
+      userid: username,
+      name: username
+    });
+
+    profileSvc
+      .create(newProfile)
+      .then((createdProfile) => {
+        console.log("Profile created successfully:", createdProfile);
+        resolve(createdProfile);
+      })
+      .catch((err) => {
+        console.error("Error creating profile:", err);
+        reject(new Error("unable to create new profile for user"));
+      });
+  });
+}
 
 function create(username: string, password: string) {
   return new Promise<Credential>((resolve, reject) => {
@@ -44,11 +67,22 @@ function create(username: string, password: string) {
               username,
               hashedPassword
             });
-            creds.save().then((created: Credential) => {
-              if (created) resolve(created);
-            });
+            return creds.save();
           })
       )
+      .then((created: Credential) => {
+        if (created) {
+          return createProfile(username)
+            .then(() => resolve(created))
+            .catch((error) => {
+              // Handle profile creation error
+              console.error("Profile creation failed:", error);
+              reject("Profile creation failed");
+            });
+        } else {
+          reject("Failed to create credentials");
+        }
+      })
       .catch(error => {
         reject(error); // Handle any errors that occur during the process
       });

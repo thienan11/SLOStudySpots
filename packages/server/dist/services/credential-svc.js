@@ -33,6 +33,8 @@ __export(credential_svc_exports, {
 module.exports = __toCommonJS(credential_svc_exports);
 var import_bcryptjs = __toESM(require("bcryptjs"));
 var import_mongoose = require("mongoose");
+var import_profile_svc = __toESM(require("./profile-svc"));
+var import_profile_svc2 = require("./profile-svc");
 const credentialSchema = new import_mongoose.Schema(
   {
     username: {
@@ -51,6 +53,21 @@ const credentialModel = (0, import_mongoose.model)(
   "Credential",
   credentialSchema
 );
+function createProfile(username) {
+  return new Promise((resolve, reject) => {
+    const newProfile = new import_profile_svc2.ProfileModel({
+      userid: username,
+      name: username
+    });
+    import_profile_svc.default.create(newProfile).then((createdProfile) => {
+      console.log("Profile created successfully:", createdProfile);
+      resolve(createdProfile);
+    }).catch((err) => {
+      console.error("Error creating profile:", err);
+      reject(new Error("unable to create new profile for user"));
+    });
+  });
+}
 function create(username, password) {
   return new Promise((resolve, reject) => {
     if (!username || !password) {
@@ -68,12 +85,18 @@ function create(username, password) {
           username,
           hashedPassword
         });
-        creds.save().then((created) => {
-          if (created)
-            resolve(created);
-        });
+        return creds.save();
       })
-    ).catch((error) => {
+    ).then((created) => {
+      if (created) {
+        return createProfile(username).then(() => resolve(created)).catch((error) => {
+          console.error("Profile creation failed:", error);
+          reject("Profile creation failed");
+        });
+      } else {
+        reject("Failed to create credentials");
+      }
+    }).catch((error) => {
       reject(error);
     });
   });

@@ -19,7 +19,7 @@ interface Ratings {
   amenities: number;
 }
 
-interface OperatingHours {
+export interface OperatingHours {
   startDay: Day;
   endDay: Day;
   open: number | undefined; // Time in minutes since midnight or -1 if closed

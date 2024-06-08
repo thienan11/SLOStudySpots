@@ -2,6 +2,7 @@ import { LitElement, css, html } from "lit";
 import { define, Events, Auth, Observer} from "@calpoly/mustang";
 import { DropdownElement } from "./drop-down";
 import { state } from "lit/decorators.js";
+import resetCSS from "../css/reset";
 
 export class HeaderElement extends LitElement {
   static uses = define({
@@ -11,22 +12,30 @@ export class HeaderElement extends LitElement {
   @state()
   username = "anonymous";
 
-  @state()
-  user: Auth.Model["user"] | null = null;
+  // @state()
+  // user: Auth.Model["user"] | null = null;
 
-  constructor() {
-    super();
-    this._authObserver = new Observer<Auth.Model>(this, "slostudyspots:auth");
-  }
+  // constructor() {
+  //   super();
+  //   this._authObserver = new Observer<Auth.Model>(this, "slostudyspots:auth");
+  // }
 
+  // connectedCallback() {
+  //   super.connectedCallback();
+  //   this._authObserver.observe(({ user }) => {
+  //     if (user && user.username !== this.username) {
+  //       this.username = user.username;
+  //       this.user = user;
+  //     } else {
+  //       this.user = null;
+  //     }
+  //   });
+  // }
   connectedCallback() {
     super.connectedCallback();
     this._authObserver.observe(({ user }) => {
-      if (user && user.username !== this.username) {
+    if (user) {
         this.username = user.username;
-        this.user = user;
-      } else {
-        this.user = null;
       }
     });
   }
@@ -56,16 +65,13 @@ export class HeaderElement extends LitElement {
                   </a>
                 </li>
                 <li>
-                  <a href="/app/login"> Login </a>
-                </li>
-                <li>
-                  <a class="group-icon" href="ranking.html">
+                  <a class="group-icon" href="/app/rankings">
                     <!-- <img src="icons/ranking.svg" alt="ranking-icon" /> -->
                     Community Rankings
                   </a>
                 </li>
                 <li>
-                  <a class="group-icon" href="create.html">
+                  <a class="group-icon" href="/app/add-spot">
                     <!-- <img src="icons/create.svg" alt="create-icon" /> -->
                     Add a Spot
                   </a>
@@ -87,7 +93,9 @@ export class HeaderElement extends LitElement {
     `;
   }
   
-  static styles = css`
+  static styles = [
+    resetCSS,
+    css`
     * {
       margin: 0;
       box-sizing: border-box;
@@ -214,18 +222,14 @@ export class HeaderElement extends LitElement {
     .light-dark-switch:hover {
       color: var(--color-links);
     }
-  `;
+  `
+  ];
 
-  // handleProfileClick(ev: Event) {
-  //   ev.preventDefault();
-  //   if (this.user) {
-  //     window.location.href = `/app/profile/${this.user.username}`;
-  //   } else {
-  //     window.location.href = '/app/login';
-  //   }
-  // }
-
-  _authObserver: Observer<Auth.Model>;
+  // _authObserver: Observer<Auth.Model>;
+  _authObserver = new Observer<Auth.Model>(
+    this,
+    "slostudyspots:auth"
+  );
 }
 
 type Checkbox = HTMLInputElement & { checked: boolean };
@@ -234,8 +238,7 @@ function toggleDarkMode(ev: InputEvent) {
   const target = ev.target as Checkbox;
   const checked = target.checked;
 
-  // Events.relay(ev, "dark-mode", { checked });
-
+  Events.relay(ev, "dark-mode", { checked });
   document.body.classList.toggle("dark-mode", checked);
 }
 

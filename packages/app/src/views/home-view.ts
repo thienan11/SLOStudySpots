@@ -5,12 +5,8 @@ import { StudySpot } from "server/models";
 import resetCSS from "../css/reset";
 import { Msg } from "../messages";
 import { Model } from "../model";
-import {FilterPopup} from "../components/filter-popup";
 
 export class HomeViewElement extends View<Model, Msg> {
-  static uses = define({
-    "filter-popup": FilterPopup,
-  });
 
   @state()
   get studySpotIndex(): StudySpot[] {
@@ -18,11 +14,13 @@ export class HomeViewElement extends View<Model, Msg> {
   }
 
   @state()
-  sortedStudySpots: StudySpot[] = [];
+  private isPopupOpen: boolean = false;
+
+  @state()
+  private filterTerm: string = '';
 
   constructor() {
     super("slostudyspots:model");
-    this.sortedStudySpots = this.studySpotIndex;
   }
 
   connectedCallback() {
@@ -30,26 +28,25 @@ export class HomeViewElement extends View<Model, Msg> {
     this.dispatchMessage(["study-spot/index"]);
   }
 
-  firstUpdated() {
-    this.addEventListener("sort-requested" as string, this.handleSortRequested as EventListener);
+  togglePopup() {
+    this.isPopupOpen = !this.isPopupOpen;
   }
 
-  handleSortRequested(event: CustomEvent) {
-    const sortAlphabetically = event.detail;
-    if (sortAlphabetically) {
-      this.sortedStudySpots = [...this.studySpotIndex].sort((a, b) => a.name.localeCompare(b.name));
-    } else {
-      this.sortedStudySpots = this.studySpotIndex; // Or implement other sorting logic
-    }
-    this.requestUpdate(); // Ensure the component re-renders
+  sortAlphabetically() {
+    this.studySpotIndex.sort((a, b) => a.name.localeCompare(b.name));
+    this.isPopupOpen = false;
   }
 
+  updateFilterTerm(e: Event) {
+    const input = e.target as HTMLInputElement;
+    this.filterTerm = input.value;
+  }
 
   render(): TemplateResult {
     const renderItem = (s: StudySpot) => {
       const { name } = s;
       const { _id } = s as unknown as { _id: string };
-      const photoURL = s.photos?.[0] || '/icons/default-photo.webp';
+      const photoURL = s.photos?.[0] || '/icons/default-spot.webp';
 
       return html`
       <li class="study-spot-container">
@@ -65,6 +62,10 @@ export class HomeViewElement extends View<Model, Msg> {
     };
     // <p> ${this.renderRatings(spot.ratings.overall)} (${spot.ratings.overall} reviews)</p>
 
+    const filteredStudySpots = this.studySpotIndex.filter(spot =>
+      spot.name.toLowerCase().includes(this.filterTerm.toLowerCase())
+    );
+
     return html`
       <main>
         <section class="welcome-section">
@@ -72,14 +73,17 @@ export class HomeViewElement extends View<Model, Msg> {
           <p>Find the best spots to study in San Luis Obispo!</p>
         </section>
 
-        <section class="filter-section">
-          <filter-popup></filter-popup>
-        </section>
-
         <section class="featured-spots">
           <h2>Featured Study Spots</h2>
+          <input type="text" @input="${this.updateFilterTerm}" placeholder="Search spots..." />
+          <button @click="${this.togglePopup}">Filter</button>
+          ${this.isPopupOpen ? html`
+            <div class="popup">
+              <button @click="${this.sortAlphabetically}">Sort Alphabetically</button>
+            </div>
+          ` : ''}
           <ul class="spots-list">
-            ${this.studySpotIndex.map(renderItem)}
+            ${filteredStudySpots.map(renderItem)}
           </ul>
         </section>
       </main>
@@ -164,12 +168,15 @@ export class HomeViewElement extends View<Model, Msg> {
         font-size: 0.875rem;
         color: var(--color-text-primary);
       }
-
-      .filter-section {
-        display: flex;
-        justify-content: flex-end;
-        padding: 0;
-        margin: 0;
+      
+      .popup {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: white;
+        padding: 20px;
+        border: 1px solid black;
       }
 
     `

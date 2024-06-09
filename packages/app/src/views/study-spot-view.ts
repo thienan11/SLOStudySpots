@@ -1,10 +1,11 @@
-import { define, View } from "@calpoly/mustang";
+import { View } from "@calpoly/mustang";
 import { css, html, TemplateResult } from "lit";
 import { property, state } from "lit/decorators.js";
 import resetCSS from "../css/reset";
 import {
   StudySpot,
-  Review
+  Review,
+  OperatingHours
 } from "server/models";
 import { Msg } from "../messages";
 import { Model } from "../model";
@@ -57,24 +58,45 @@ export class StudySpotViewElement extends View<Model, Msg> {
     const {
       name,
       address,
-      locationType,
       hoursOfOperation,
       ratings,
-      tags,
-      photos,
       link,
     } = this.studySpot || {};
     
-    const photoURL = this.studySpot?.photos?.[0] || '/icons/default-photo.webp';
+    const photo_URL = this.studySpot?.photos?.[0] || '/icons/default-spot.webp';
 
     const tags_html = this.studySpot?.tags?.map(s => html`<span class="feature-tag">${s}</span>`) || html``;
 
     const reviews = this.model.reviews || [];
 
+    const websiteLink_html = link ? html`<a href="${link}" target="_blank" class="web-link">${link}</a>` : html`<span class="placeholder-text">Website not available</span>`;
+
+    const hoursOfOperation_html = hoursOfOperation && hoursOfOperation.length > 0 ? hoursOfOperation.map(hour => html`
+      <div class="hours">
+        <span>${hour.startDay} - ${hour.endDay}: ${formatOperatingHours(hour)}</span>
+      </div>
+    `) : html`<span class="placeholder-text">Hours not available</span>`;
+
+    function formatTime(minutes: number): string {
+      if (minutes === -1) return "Closed";
+      const hours = Math.floor(minutes / 60);
+      const mins = minutes % 60;
+      const period = hours >= 12 ? "PM" : "AM";
+      const formattedHours = hours % 12 === 0 ? 12 : hours % 12;
+      const formattedMins = mins < 10 ? `0${mins}` : mins;
+      return `${formattedHours}:${formattedMins} ${period}`;
+    }
+    
+    function formatOperatingHours(hours: OperatingHours): string {
+      const openTime = formatTime(hours.open || 0);
+      const closeTime = formatTime(hours.close || 0);
+      return hours.isOpen24Hours ? "Open 24 Hours" : `${openTime} - ${closeTime}`;
+    }
+
     return html`
       <main>
         <section class="gallery-preview">
-        <img src="${photoURL}" alt="View of ${this.studySpot?.name}" class="featured-image">
+          <img src="${photo_URL}" alt="View of ${this.studySpot?.name}" class="featured-image">
           <div class="view-gallery-overlay">
             <h2 class="spot-title">${name}</h2>
             <a href="" class="btn-view-gallery">
@@ -100,10 +122,14 @@ export class StudySpotViewElement extends View<Model, Msg> {
             <section class="spot-details">
               <h3>Details</h3>
               <p><strong>Address: </strong>${address}</p>
-              <p><strong>Website Link: </strong> <a href="${link}" target="_blank">Link</a></p>
+              <p><strong>Website Link:</strong> ${websiteLink_html}</p>
               <p>
                 <strong>Features:</strong>
                 ${tags_html}
+              </p>
+              <p>
+                <strong>Hours of Operation:</strong>
+                ${hoursOfOperation_html}
               </p>
             </section>
             <section class="rating-breakdown">
@@ -124,7 +150,7 @@ export class StudySpotViewElement extends View<Model, Msg> {
             <h3>User Reviews</h3>
             ${reviews.length > 0 ? reviews.map(review => html`
           <div class="review">
-            <h4>${review.userId.name}</h4>
+            <h4>${review.userId.userid}</h4>
             
             <br/>
             <p><strong>Comment: </strong>${review.comment}</p>
@@ -278,6 +304,10 @@ export class StudySpotViewElement extends View<Model, Msg> {
         padding-top: 20px; /* Space at the top to separate from details *
       } */
       
+      .hours {
+        margin-top: 10px;
+      }
+
       .overall-rating-image-container {
         display: flex;
         align-items: center;
@@ -325,7 +355,21 @@ export class StudySpotViewElement extends View<Model, Msg> {
       .review ul {
         margin: 10px 0 0 15px;
       }
-    
+
+      .web-link {
+        color: var(--color-secondary);
+        text-decoration: none;
+        transition: color 0.3s ease, text-decoration 0.3s ease;
+      }
+  
+      .web-link:hover {
+        color: var(--color-links);
+        text-decoration: underline;
+      }
+
+      .placeholder-text {
+        color: var(--color-text-secondary);
+      }
     `
   ];
 }

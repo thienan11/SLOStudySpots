@@ -5,8 +5,12 @@ import { StudySpot } from "server/models";
 import resetCSS from "../css/reset";
 import { Msg } from "../messages";
 import { Model } from "../model";
+import { FilterPopup } from "../components/filter-popup";
 
 export class HomeViewElement extends View<Model, Msg> {
+  static uses = define({
+    "filter-popup": FilterPopup,
+  })
 
   @state()
   get studySpotIndex(): StudySpot[] {
@@ -19,8 +23,12 @@ export class HomeViewElement extends View<Model, Msg> {
   @state()
   private filterTerm: string = '';
 
+  @state()
+  private filteredStudySpots: StudySpot[] = [];
+
   constructor() {
     super("slostudyspots:model");
+    this.updateFilteredStudySpots();
   }
 
   connectedCallback() {
@@ -32,21 +40,57 @@ export class HomeViewElement extends View<Model, Msg> {
     this.isPopupOpen = !this.isPopupOpen;
   }
 
-  sortAlphabetically() {
-    this.studySpotIndex.sort((a, b) => a.name.localeCompare(b.name));
+  private updateFilteredStudySpots() {
+    this.filteredStudySpots = this.studySpotIndex.filter(spot =>
+      spot.name.toLowerCase().includes(this.filterTerm.toLowerCase())
+    );
+  }
+
+  handleSortRequested(event: CustomEvent) {
+    const sortType = event.detail.sortType;
+    if (sortType === "alphabetically") {
+      this.studySpotIndex.sort((a, b) => a.name.localeCompare(b.name));
+      this.filteredStudySpots = this.studySpotIndex.filter(spot =>
+        spot.name.toLowerCase().includes(this.filterTerm.toLowerCase())
+      );
+    }
     this.isPopupOpen = false;
   }
 
   updateFilterTerm(e: Event) {
     const input = e.target as HTMLInputElement;
     this.filterTerm = input.value;
+    this.updateFilteredStudySpots(); // Update filtered study spots when filter term changes
+  }
+
+  renderStars(rating: number): TemplateResult {
+    const fullStars = Math.floor(rating);
+    const halfStars = rating % 1 >= 0.5 ? 1 : 0;
+    const emptyStars = 5 - fullStars - halfStars;
+
+    const stars = [];
+
+    for (let i = 0; i < fullStars; i++) {
+      stars.push(html`<span class="star full"></span>`);
+    }
+
+    if (halfStars) {
+      stars.push(html`<span class="star half"></span>`);
+    }
+
+    for (let i = 0; i < emptyStars; i++) {
+      stars.push(html`<span class="star empty"></span>`);
+    }
+
+    return html`${stars}`;
   }
 
   render(): TemplateResult {
     const renderItem = (s: StudySpot) => {
-      const { name } = s;
+      const { name, ratings} = s;
       const { _id } = s as unknown as { _id: string };
       const photoURL = s.photos?.[0] || '/icons/default-spot.webp';
+      const overallRating = ratings.overall.toFixed(1);
 
       return html`
       <li class="study-spot-container">
@@ -54,36 +98,37 @@ export class HomeViewElement extends View<Model, Msg> {
           <img src="${photoURL}" alt="${name}" />
           <div class="study-spot-content">
             <h3>${name}</h3>
-            <p> Reviews: 1 </p>
+            <div class="rating-container">
+              <p class="overall-rating">${overallRating}</p>
+              <div class="stars">
+                ${this.renderStars(ratings.overall)}
+              </div>
+            </div>
           </div>
         </a>
       </li>
     `;
     };
-    // <p> ${this.renderRatings(spot.ratings.overall)} (${spot.ratings.overall} reviews)</p>
 
-    const filteredStudySpots = this.studySpotIndex.filter(spot =>
-      spot.name.toLowerCase().includes(this.filterTerm.toLowerCase())
-    );
+    const spotsToRender = this.filteredStudySpots.length > 0 ? this.filteredStudySpots : this.studySpotIndex;
 
     return html`
       <main>
         <section class="welcome-section">
           <h1>Welcome to SLOStudySpots</h1>
           <p>Find the best spots to study in San Luis Obispo!</p>
+          <div class="search-box">
+            <form>
+              <input type="search" @input="${this.updateFilterTerm}" placeholder="Search for study spots..." />
+            </form>
+          </div>
         </section>
 
         <section class="featured-spots">
           <h2>Featured Study Spots</h2>
-          <input type="text" @input="${this.updateFilterTerm}" placeholder="Search spots..." />
-          <button @click="${this.togglePopup}">Filter</button>
-          ${this.isPopupOpen ? html`
-            <div class="popup">
-              <button @click="${this.sortAlphabetically}">Sort Alphabetically</button>
-            </div>
-          ` : ''}
+          <filter-popup .open="${this.isPopupOpen}" @sort-requested="${this.handleSortRequested}"></filter-popup>
           <ul class="spots-list">
-            ${filteredStudySpots.map(renderItem)}
+            ${spotsToRender.map(renderItem)}
           </ul>
         </section>
       </main>
@@ -108,6 +153,33 @@ export class HomeViewElement extends View<Model, Msg> {
         font-size: var(--font-size-large); /* can prob be removed*/
         color: var(--color-primary);
         padding-bottom: var(--space-small);
+      }
+
+      .search-box {
+        width: 100%;
+        max-width: 470px;
+        margin: 0 auto;
+        padding-top: var(--space-regular);
+      }
+  
+      .search-box form {
+        width: 100%;
+        display: flex;
+      }
+  
+      .search-box input[type="search"] {
+        width: 100%;
+        padding: 10px 15px;
+        font-size: 1rem;
+        border: 2px solid var(--color-primary);
+        border-radius: var(--border-radius);
+        outline: none;
+        text-align: center;
+        font-family: inherit;
+      }
+  
+      .search-box input[type="search"]:focus {
+        border-color: var(--color-secondary);
       }
 
       .featured-spots {
@@ -168,15 +240,47 @@ export class HomeViewElement extends View<Model, Msg> {
         font-size: 0.875rem;
         color: var(--color-text-primary);
       }
+
+      .rating-container {
+        display: flex;
+        align-items: center;
+      }
+    
+      .overall-rating {
+        margin-right: var(--space-small);
+        font-size: 1rem;
+        color: var(--color-secondary);
+      }
+    
+      .stars {
+        display: flex;
+      }
+    
+      .star {
+        display: inline-block;
+        width: 1rem;
+        height: 1rem;
+        background: lightgray;
+        clip-path: polygon(
+          50% 0%, 
+          61% 35%, 
+          98% 35%, 
+          68% 57%, 
+          79% 91%, 
+          50% 70%, 
+          21% 91%, 
+          32% 57%, 
+          2% 35%, 
+          39% 35%
+        );
+      }
       
-      .popup {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background: white;
-        padding: 20px;
-        border: 1px solid black;
+      .star.full {
+        background: gold;
+      }
+      
+      .star.half {
+        background: linear-gradient(90deg, gold 50%, lightgray 50%);
       }
 
     `

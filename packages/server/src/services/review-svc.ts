@@ -53,7 +53,7 @@ function getReviewById(id: string): Promise<Review | null> {
 
 // Return all reviews for a given spot
 function getReviewsBySpotId(spotId: string): Promise<Review[]> {
-  return ReviewModel.find({ spotId }).populate('userId', 'userid name email avatar')
+  return ReviewModel.find({ spotId }).populate('userId', 'userid name')
     .exec()
     .then((reviews) => {
       return reviews;

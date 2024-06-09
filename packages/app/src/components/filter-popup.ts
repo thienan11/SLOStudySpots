@@ -1,26 +1,72 @@
 import { LitElement, html, css } from "lit";
 import { property, state } from "lit/decorators.js";
+import resetCSS from "../css/reset";
 
 export class FilterPopup extends LitElement {
-  @property({ reflect: true, type: Boolean })
+  @property({ type: Boolean })
   open: boolean = false;
 
   @state()
   sort: boolean = false;
 
-  static styles = css`
-    * {
-      margin: 0;
-      padding: 0;
-    }
+  openPopup() {
+    this.open = true;
+  }
 
+  closePopup(event: MouseEvent) {
+    const clickedElement = event.target as HTMLElement;
+    if (clickedElement.classList.contains("popup-overlay")) {
+      this.open = false;
+    }
+  }
+
+  triggerSort(sortType: string) {
+    this.dispatchEvent(new CustomEvent("sort-requested", { detail: { sortType } }));
+    this.open = false;
+  }
+
+  render() {
+    return html`
+      <button class="filter-container" @click="${this.openPopup}">
+        <svg class="filter-icon">
+          <use href="/icons/filter.svg#icon-filter" />
+        </svg>
+        <h4>Filter</h4>
+      </button>
+
+      ${this.open
+        ? html`
+            <div class="popup-overlay" @click="${this.closePopup}">
+              <div class="popup">
+                <div class="filter-title">
+                  <h3>Change Filters</h3>
+                  <img
+                    class="close"
+                    src="/icons/close.svg"
+                    alt="close"
+                    @click="${() => (this.open = false)}"
+                    width="30px"
+                  />
+                </div>
+
+                <button @click="${() => this.triggerSort('alphabetically')}">Sort Alphabetically</button>
+              </div>
+            </div>
+          `
+        : ""}
+    `;
+  }
+
+  static styles = [
+    resetCSS,
+    css`
     .popup-overlay {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background-color: rgba(0, 0, 0, 0.5); /* Darkens the background */
+      background-color: rgba(0, 0, 0, 0.5);
       display: flex;
       justify-content: center;
       align-items: center;
@@ -30,10 +76,11 @@ export class FilterPopup extends LitElement {
     .popup {
       background-color: white;
       padding: 20px;
-      height: 40vh;
-      width: 40vw;
+      height: 25vh;
+      width: 25vw;
       border-radius: 5px;
       position: relative;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
 
     .filter-container {
@@ -43,19 +90,15 @@ export class FilterPopup extends LitElement {
       gap: 10px;
       padding: 10px;
       border-radius: 10px;
-      background-color: var(--color-main-bg);
-      margin-left: 30px;
-      border: 1px solid var(--color-light);
+      background-color: var(--color-background-primary);
+      cursor: pointer;
     }
 
     .filter-icon {
-      display: inline;
       height: 25px;
       width: 25px;
-      vertical-align: top;
       fill: var(--color-primary);
       stroke: var(--color-primary);
-      transform: translate(1.5px, 1px);
       background-color: inherit;
     }
 
@@ -67,8 +110,7 @@ export class FilterPopup extends LitElement {
     }
 
     .filter-container:hover {
-      cursor: pointer;
-      background-color: var(--color-links);
+      background-color: rgb(230, 230, 230);
     }
 
     .filter-title {
@@ -85,82 +127,14 @@ export class FilterPopup extends LitElement {
     button {
       cursor: pointer;
       background-color: white;
-      border: 1px solid var(--color-light);
+      border: 1px solid var(--color-background-secondary);
       padding: 10px 20px;
       border-radius: 5px;
       margin-top: 10px;
     }
 
     button:hover {
-      background-color: rgb(230, 230, 230);
+      background-color: var(--color-links);
     }
-    
-  `;
-
-  openPopup() {
-    this.open = true;
-    // document.body.style.overflow = 'hidden'; // Disable scrolling on the background
-  }
-
-  closePopup(event: MouseEvent) {
-    const clickedElement = event.target as HTMLElement;
-    if (clickedElement.classList.contains("popup-overlay")) {
-      this.open = false;
-      document.body.style.overflow = ""; // Enable scrolling back on the background
-      console.log("Closing popup...");
-    }
-  }
-
-  triggerSort() {
-    this.sort = !this.sort;
-    this.dispatchEvent(
-      new CustomEvent("sort-requested", { detail: this.sort })
-    );
-    // this.open = false;
-  }
-
-  render() {
-    return html`
-  
-        <button class="filter-container" @click="${this.openPopup}">
-          <svg class="filter-icon">
-            <use href="/icons/filter.svg#icon-filter" />
-          </svg>
-          <h4>Filter</h4>
-        </button>
-
-        ${
-          this.open
-            ? html`
-                <div class="popup-overlay" @click="${this.closePopup}">
-                  <div class="popup">
-                    <div class="filter-title">
-                      <h3>Change Filters</h3>
-
-                      <img
-                        class="close"
-                        src="/icons/close.svg"
-                        alt="close"
-                        class="close-button"
-                        @click="${() => (this.open = false)}"
-                        width="30px"
-                      />
-                    </div>
-
-                    <button @click="${this.triggerSort}" class="sort-button">
-                      Sort Alphabetically
-                    </button>
-
-                    <button @click="${this.triggerSort}" class="sort-button">
-                      Sort By Highest Reviews
-                    </button>
-
-                  </div>
-                </div>
-              `
-            : ""
-        }
-      </div>
-    `;
-  }
+  `];
 }

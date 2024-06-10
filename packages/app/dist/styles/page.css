@@ -2,10 +2,12 @@ body {
   background-color: var(--color-background-primary);
   color: var(--color-text-primary);
   font-family: var(--font-family-body);
-  display: flex;
-  flex-direction: column; /* Stack children vertically */
+  /* display: flex;
+  flex-direction: column; Stack children vertically */
   min-height: 100vh; /* Minimum height is full viewport height */
   /* position: relative; */
+  position: relative; /* Needed to position the footer correctly */
+  padding-bottom: 50px;
 }
 
 main {
@@ -807,9 +809,11 @@ html-fragment {
 }
 
 footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
   background-color: var(--color-text-primary);
   color: var(--color-background-primary);
   text-align: center;
   padding: var(--space-small) 0;
-  margin-top: auto;
 }

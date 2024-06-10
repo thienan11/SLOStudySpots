@@ -12,30 +12,30 @@ export class RegisterViewElement extends LitElement {
 
   render() {
     return html`
-    <div class="login-register-container">
-      <h2>Signup as a new User</h2>
-      <main class="card">
-        <p>
-          <a href="/app">← Back to home</a>
-        </p>
-        <register-form>
-          <label>
-            <span>Username:</span>
-            <input name="username" autocomplete="off" />
-          </label>
-          <label>
-            <span>Password:</span>
-            <input type="password" name="password" />
-          </label>
-        </register-form>
-        <p>
-          Already signed up? Then you can
-          <a href="/app/login">log in</a> instead.
-        </p>
-        <img src="./images/person-studying.svg" alt="Person Studying">
-      </main>
-    </div>
-  `;
+      <div class="login-register-container">
+        <h2>Signup as a new User</h2>
+        <main class="card">
+          <p>
+            <a href="/app">← Back to home</a>
+          </p>
+          <register-form>
+            <label>
+              <span>Username:</span>
+              <input name="username" autocomplete="off" />
+            </label>
+            <label>
+              <span>Password:</span>
+              <input type="password" name="password" />
+            </label>
+          </register-form>
+          <p>
+            Already signed up? Then you can
+            <a href="/app/login">log in</a> instead.
+          </p>
+          <img src="/images/person-studying.svg" alt="Person Studying">
+        </main>
+      </div>
+    `;
   }
 
   static styles = [

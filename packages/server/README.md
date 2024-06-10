@@ -35,6 +35,12 @@ the frontend:
 npm run dev
 ```
 
+To start the server with the SPA:
+
+```shell
+npm run start:app
+```
+
 ## Documentation
 
 The source files for the server are written in Typescript. This

@@ -3,6 +3,7 @@ import { define, Events, Auth, Observer} from "@calpoly/mustang";
 import { DropdownElement } from "./drop-down";
 import { state } from "lit/decorators.js";
 import resetCSS from "../css/reset";
+import "../dark-mode";
 
 export class HeaderElement extends LitElement {
   static uses = define({
@@ -59,6 +60,12 @@ export class HeaderElement extends LitElement {
           -->
 
           <nav class="right-navbar-links">
+            <img
+              @click=${toggleDarkMode}
+              src="/icons/light-dark.svg"
+              alt="Dark mode"
+              id="light-dark-icon"
+            />
             ${this.username === "anonymous"
               ? html`
                  <!-- <a class="navbar-button" href="/app/login">Login</a>
@@ -101,12 +108,12 @@ export class HeaderElement extends LitElement {
                         Add a Spot
                       </a>
                     </li>
-                    <li>
+                    <!-- <li>
                       <label class="light-dark-switch" @change=${toggleDarkMode}>
                         <input type="checkbox" autocomplete="off" />
                         Dark mode
                       </label>
-                    </li>
+                    </li> -->
                     <li>
                       <a href="#" @click=${signOutUser}>Sign out</a>
                     </li>
@@ -277,6 +284,14 @@ export class HeaderElement extends LitElement {
     .light-dark-switch:hover {
       color: var(--color-links);
     }
+
+    img {
+      padding-right: 15px;
+    }
+
+    img:hover {
+      cursor: pointer;
+    }
   `
   ];
 
@@ -287,14 +302,19 @@ export class HeaderElement extends LitElement {
   );
 }
 
-type Checkbox = HTMLInputElement & { checked: boolean };
+// type Checkbox = HTMLInputElement & { checked: boolean };
 
+// function toggleDarkMode(ev: InputEvent) {
+//   const target = ev.target as Checkbox;
+//   const checked = target.checked;
+
+//   Events.relay(ev, "dark-mode", { checked });
+//   document.body.classList.toggle("dark-mode", checked);
+// }
 function toggleDarkMode(ev: InputEvent) {
-  const target = ev.target as Checkbox;
-  const checked = target.checked;
-
-  Events.relay(ev, "dark-mode", { checked });
-  document.body.classList.toggle("dark-mode", checked);
+  Events.relay(ev, "dark-mode", {
+    checked: undefined,
+  });
 }
 
 function signOutUser(ev: Event) {

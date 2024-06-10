@@ -58,7 +58,43 @@ export class StudySpotViewElement extends View<Model, Msg> {
 
   // formatDate(date: Date): string {
   //   return `${date.toLocaleString('default', { month: 'long' })} ${date.getDate()}, ${date.getFullYear()}`;
-  // }  
+  // }
+
+  renderStars(rating: number): TemplateResult {
+    const fullStars = Math.floor(rating);
+    const halfStars = rating % 1 >= 0.5 ? 1 : 0;
+    const emptyStars = 5 - fullStars - halfStars;
+
+    const stars = [];
+
+    for (let i = 0; i < fullStars; i++) {
+      stars.push(html`<span class="star full"></span>`);
+    }
+
+    if (halfStars) {
+      stars.push(html`<span class="star half"></span>`);
+    }
+
+    for (let i = 0; i < emptyStars; i++) {
+      stars.push(html`<span class="star empty"></span>`);
+    }
+
+    return html`${stars}`;
+  }
+
+  formatDate(dateStr: string): string {
+    const date = new Date(dateStr);
+    return date.toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      // hour: '2-digit',
+      // minute: '2-digit',
+      // hour12: true
+    });
+  }
+  
+  
 
   render(): TemplateResult {
     const {
@@ -98,7 +134,7 @@ export class StudySpotViewElement extends View<Model, Msg> {
       const closeTime = formatTime(hours.close || 0);
       return hours.isOpen24Hours ? "Open 24 Hours" : `${openTime} - ${closeTime}`;
     }
-
+    
     return html`
       <main>
         <section class="gallery-preview">
@@ -145,38 +181,32 @@ export class StudySpotViewElement extends View<Model, Msg> {
                 <h4 class="rating-value">${ratings?.overall}</h4>
               </div>
               <h3>Rating Breakdown</h3>
-              <p><strong>Quietness:</strong> ${ratings?.quietness} / 5</p>
-              <p><strong>Wifi Quality:</strong> ${ratings?.wifiQuality} / 5</p>
-              <p><strong>Crowdedness:</strong> ${ratings?.crowdedness} / 5</p>
-              <p><strong>Power Outlets:</strong> ${ratings?.powerOutlets} / 5</p>
-              <p><strong>Amenities:</strong> ${ratings?.amenities} / 5</p>
+              <p><strong>Quietness:</strong> ${this.renderStars(ratings?.quietness ?? 0)} ${ratings?.quietness}/ 5</p>
+              <p><strong>Wifi Quality:</strong> ${this.renderStars(ratings?.wifiQuality ?? 0)} ${ratings?.wifiQuality} / 5</p>
+              <p><strong>Crowdedness:</strong> ${this.renderStars(ratings?.crowdedness ?? 0)} ${ratings?.crowdedness}/ 5</p>
+              <p><strong>Power Outlets:</strong> ${this.renderStars(ratings?.powerOutlets ?? 0)} ${ratings?.powerOutlets} / 5</p>
+              <p><strong>Amenities:</strong> ${this.renderStars(ratings?.amenities ?? 0)} ${ratings?.amenities}/ 5</p>
             </section>
           </div>
           <section class="user-reviews">
             <h3>User Reviews</h3>
             ${this.reviews.length > 0 ? this.reviews.map(review => html`
-          <div class="review">
-            <h4>${review.userId.userid}</h4>
-            
-            <br/>
-            <p><strong>Comment: </strong>${review.comment}</p>
-            <br/>
-            <p><strong>Best Time to Go</strong>: ${review.bestTimeToGo}</p>
-            <br/>
-            <div>
-              <strong>Overall Rating:</strong> ${review.overallRating} / 5
-              <br/>
-              <strong>Quietness:</strong> ${review.quietnessRating} / 5
-              <br/>
-              <strong>Wifi Quality:</strong> ${review.wifiQualityRating} / 5
-              <br/>
-              <strong>Crowdedness:</strong> ${review.crowdednessRating} / 5
-              <br/>
-              <strong>Power Outlets:</strong> ${review.powerOutletRating} / 5
-              <br/>
-              <strong>Amenities:</strong> ${review.amenitiesRating} / 5
+            <div class="review-card">
+              <div class="review-header">
+                <h4 class="review-author">${review.userId.userid}</h4>
+                <span class="review-date">${this.formatDate(review.createdAt.toString())}</span>
+              </div>
+              <div class="review-body">
+                <div class="review-rating">
+                  ${this.renderStars(review.overallRating)}
+                  <span class="rating-text">${review.overallRating} / 5</span>
+                </div>
+                <p class="review-comment">${review.comment}</p>
+              </div>
+              <div class="review-footer">
+                <span class="review-time-to-go">Best Time to Go: ${review.bestTimeToGo}</span>
+              </div>
             </div>
-          </div>
         `) : html`<p>No reviews yet.</p>`}
           </section>
         </div>
@@ -376,6 +406,111 @@ export class StudySpotViewElement extends View<Model, Msg> {
       .placeholder-text {
         color: var(--color-text-secondary);
       }
+
+      .star {
+        display: inline-block;
+        width: 1rem;
+        height: 1rem;
+        background: lightgray;
+        clip-path: polygon(
+          50% 0%, 
+          61% 35%, 
+          98% 35%, 
+          68% 57%, 
+          79% 91%, 
+          50% 70%, 
+          21% 91%, 
+          32% 57%, 
+          2% 35%, 
+          39% 35%
+        );
+      }
+      
+      .star.full {
+        background: gold;
+      }
+      
+      .star.half {
+        background: linear-gradient(90deg, gold 50%, lightgray 50%);
+      }
+      
+      .star.empty {
+        background: lightgray;
+      }
+
+      .user-reviews {
+        flex: 2;
+        padding-left: 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px; /* space between reviews */
+      }
+      
+      .review-card {
+        background-color: var(--color-background-secondary);
+        box-shadow: var(--shadow-hover-small);
+        padding: 20px;
+        border-radius: var(--border-radius);
+        margin-top: 10px;
+      }
+      
+      .review-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+      }
+      
+      .review-author {
+        font-size: 1.25rem;
+        color: var(--color-primary);
+      }
+      
+      .review-date {
+        font-size: 0.875rem;
+        color: var(--color-text-secondary);
+      }
+      
+      .review-body {
+        padding-bottom: 10px;
+      }
+      
+      .review-rating {
+        display: flex;
+        align-items: center;
+        margin-bottom: 5px;
+      }
+      
+      .rating-text {
+        margin-left: 10px;
+        font-size: 1rem;
+        color: var(--color-secondary);
+      }
+      
+      .review-comment {
+        font-size: 1rem;
+        color: var(--color-text-primary);
+        white-space: pre-wrap; /* Ensures that whitespace in the comment is respected */
+      }
+      
+      .review-footer {
+        margin-top: 10px;
+        font-size: 0.875rem;
+        color: var(--color-text-secondary);
+      }
+      
+      .review-time-to-go {
+      display: block;
+      font-size: 0.875rem;
+      color: var(--color-secondary); /* Different color */
+      background-color: var(--color-background-light); /* Light background */
+      padding: 5px 10px;
+      margin-top: 10px;
+      border-radius: 15px; /* Rounded corners for a chip-like appearance */
+      font-style: italic; /* Italicize text */
+      display: flex;
+      align-items: center; /* Center align if using icon */
+    }
     `
   ];
 }

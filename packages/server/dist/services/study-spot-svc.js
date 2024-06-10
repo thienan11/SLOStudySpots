@@ -84,6 +84,7 @@ const StudySpotSchema = new import_mongoose.Schema(
       powerOutlets: { type: Number, default: 0, min: 0, max: 5 },
       amenities: { type: Number, default: 0, min: 0, max: 5 }
     },
+    reviewsCount: { type: Number, default: 0 },
     tags: { type: [String], default: [] },
     photos: { type: [String], default: [] },
     link: { type: String, default: null },
@@ -136,4 +137,12 @@ function getFavoriteStudySpots(favoriteStudySpotIds) {
     }
   });
 }
-var study_spot_svc_default = { index, getStudySpotbyId, create, getStudySpotsByTag, getFavoriteStudySpots };
+function update(id, updatedStudySpot) {
+  return StudySpotModel.findByIdAndUpdate(id, updatedStudySpot, { new: true }).exec().then((studySpot) => {
+    return studySpot;
+  }).catch((error) => {
+    console.error("Error updating study spot:", error);
+    throw error;
+  });
+}
+var study_spot_svc_default = { index, getStudySpotbyId, create, getStudySpotsByTag, getFavoriteStudySpots, update };

@@ -24,7 +24,9 @@ export class StudySpotViewElement extends View<Model, Msg> {
   }
 
   @state()
-  reviews: Review[] = [];
+  get reviews(): Review[] {
+    return this.model.reviews || [];
+  }
 
   constructor() {
     super("slostudyspots:model");
@@ -42,11 +44,15 @@ export class StudySpotViewElement extends View<Model, Msg> {
       newValue
     ) {
       console.log("Study Spot Page:", newValue);
+      
+      // Clear reviews in the model when changing study spots
+      this.dispatchMessage(["review/clear"]);
+
       this.dispatchMessage([
         "study-spot/select",
         { spotid: newValue }
       ]);
-      this.dispatchMessage(["review/load", { spotId: newValue }]);
+      this.dispatchMessage(["review/list-by-spot", { spotId: newValue }]);
     }
   }
 
@@ -67,7 +73,7 @@ export class StudySpotViewElement extends View<Model, Msg> {
 
     const tags_html = this.studySpot?.tags?.map(s => html`<span class="feature-tag">${s}</span>`) || html``;
 
-    const reviews = this.model.reviews || [];
+    // const reviews = this.model.reviews || [];
 
     const websiteLink_html = link ? html`<a href="${link}" target="_blank" class="web-link">${link}</a>` : html`<span class="placeholder-text">Website not available</span>`;
 
@@ -111,7 +117,7 @@ export class StudySpotViewElement extends View<Model, Msg> {
             <img src="/icons/upload-photo.svg" alt="Add Photo Icon" class="btn-icon-white">
             Add Photo
           </a>
-          <a href="app/study-spot/${this.spotid}/write-review" class="btn-write-review">
+          <a href="../add-review/${this.spotid}" class="btn-write-review">
             <img src="/icons/create.svg" alt="Write Review Icon" class="btn-icon-white">
             Write Review
           </a>
@@ -148,7 +154,7 @@ export class StudySpotViewElement extends View<Model, Msg> {
           </div>
           <section class="user-reviews">
             <h3>User Reviews</h3>
-            ${reviews.length > 0 ? reviews.map(review => html`
+            ${this.reviews.length > 0 ? this.reviews.map(review => html`
           <div class="review">
             <h4>${review.userId.userid}</h4>
             

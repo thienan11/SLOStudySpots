@@ -58,7 +58,7 @@ function getReviewById(id) {
   });
 }
 function getReviewsBySpotId(spotId) {
-  return ReviewModel.find({ spotId }).populate("userId", "userid name email avatar").exec().then((reviews) => {
+  return ReviewModel.find({ spotId }).populate("userId", "userid name").exec().then((reviews) => {
     return reviews;
   }).catch((error) => {
     console.error("Error fetching reviews by spot id:", error);
@@ -66,9 +66,7 @@ function getReviewsBySpotId(spotId) {
   });
 }
 function getReviewsByUserId(userId) {
-  return ReviewModel.find({ userId }).exec().then((reviews) => {
-    return reviews;
-  }).catch((error) => {
+  return ReviewModel.find({ userId: new import_mongoose.Types.ObjectId(userId) }).populate("userId", "userid name").exec().then((reviews) => reviews).catch((error) => {
     console.error("Error fetching reviews by user id:", error);
     throw error;
   });

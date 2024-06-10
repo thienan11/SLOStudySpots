@@ -22,26 +22,6 @@ export class RankingsViewElement extends View<Model, Msg> {
     this.dispatchMessage(["study-spot/index"]);
   }
 
-  render(): TemplateResult {
-    return html`
-      <main>
-        <section class="rankings-container">
-          <h2>Top Rated Study Spots</h2>
-          <ol>
-            ${this.sortedStudySpots.map(spot => html`
-              <li class="ranking">
-                <div class="content">
-                  <h3>${spot.name}</h3>
-                  <p><strong>Rating: </strong>${spot.ratings.overall.toFixed(1)} ${this.renderStars(spot.ratings.overall)}</p>
-                </div>
-              </li>
-            `)}
-          </ol>
-        </section>
-      </main>
-    `;
-  }
-
   renderStars(rating: number): TemplateResult {
     const fullStars = Math.floor(rating);
     const halfStars = rating % 1 >= 0.5 ? 1 : 0;
@@ -58,6 +38,35 @@ export class RankingsViewElement extends View<Model, Msg> {
       stars.push(html`<span class="star empty"></span>`);
     }
     return html`${stars}`;
+  }
+  
+  render(): TemplateResult {
+    const renderItem = (s: StudySpot) => {
+      const { name, ratings} = s;
+      const { _id } = s as unknown as { _id: string };
+
+      return html`
+      <a href="study-spot/${_id}">
+        <li class="ranking">
+          <div class="content">
+            <h3>${name}</h3>
+            <p><strong>Rating: </strong>${ratings.overall.toFixed(1)} ${this.renderStars(ratings.overall)}</p>
+          </div>
+        </li>
+      </a>
+    `;
+    };
+
+    return html`
+      <main>
+        <section class="rankings-container">
+          <h2>Top Rated Study Spots</h2>
+          <ol>
+            ${this.sortedStudySpots.map(renderItem)}
+          </ol>
+        </section>
+      </main>
+    `;
   }
 
   static styles = [
@@ -156,6 +165,10 @@ export class RankingsViewElement extends View<Model, Msg> {
         top: 20px; /* Adjust vertical alignment */
         font-size: 1.2em; /* Larger number font */
         color: var(--color-primary); /* Color for the numbers */
+      }
+
+      a {
+        text-decoration: none;
       }
     `
   ];

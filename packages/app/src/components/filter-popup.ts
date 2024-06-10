@@ -126,8 +126,7 @@ export class FilterPopup extends LitElement {
 
     button {
       cursor: pointer;
-      background-color: white;
-      border: 1px solid var(--color-background-secondary);
+      border: 1px solid var(--color-background-primary);
       padding: 10px 20px;
       border-radius: 5px;
       margin-top: 10px;

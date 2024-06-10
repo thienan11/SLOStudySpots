@@ -9,20 +9,18 @@ import { html } from "lit";
 import { Msg } from "./messages";
 import { Model, init } from "./model";
 import update from "./update";
-import { HeaderElement } from "./components/study-spots-header";
+import { HeaderElement } from "./components/nav-header";
 import { ProfileViewElement } from "./views/profile-view";
 import { LoginViewElement } from "./views/login-view";
 import { RegisterViewElement } from "./views/register-view";
 import { HomeViewElement } from "./views/home-view";
 import { StudySpotViewElement } from "./views/study-spot-view";
+// import { UserReviewViewElement } from "./views/user-review-view";
+import { AddSpotViewElement } from "./views/add-spot-view";
+import { RankingsViewElement } from "./views/rankings-view";
+import { AddReviewViewElement } from "./views/add-review";
 
 const routes: Switch.Route[] = [
-  // {
-  //   path: "/app/study-spots/:id",
-  //   view: (params: Switch.Params) => html`
-  //     <study-spots-view spot-id=${params.id}></study-spots-view>
-  //   `
-  // },
   {
     auth: "protected",
     path: "/app/profile/:id/edit",
@@ -38,11 +36,37 @@ const routes: Switch.Route[] = [
     `
   },
   {
-    path: "/app/study-spots/:id",
+    path: "/app/study-spot/:id",
     view: (params: Switch.Params) => html`
       <study-spot-view spot-id=${params.id}></study-spot-view>
     `
   },
+  {
+    auth: "protected",
+    path: "/app/add-spot",
+    view: () => html`
+      <add-spot-view></add-spot-view>
+    `
+  },
+  {
+    auth: "protected",
+    path: "/app/add-review/:id",
+    view: (params: Switch.Params) => html`
+      <add-review-view spot-id=${params.id}></add-review-view>
+    `
+  },
+  {
+    path: "/app/rankings",
+    view: () => html`
+      <rankings-view></rankings-view>
+    `
+  },
+  // {
+  //   path: "/app/user-reviews/:id",
+  //   view: (params: Switch.Params) => html`
+  //     <user-review-view user-id=${params.id}></user-review-view>
+  //   `
+  // },
   {
     path: "/app/login",
     view: () => html` <login-view></login-view> `,
@@ -79,10 +103,14 @@ define({
       super(routes, "slostudyspots:history", "slostudyspots:auth");
     }
   },
-  "study-spots-header": HeaderElement,
+  "nav-header": HeaderElement,
   "profile-view": ProfileViewElement,
   "login-view": LoginViewElement,
   "register-view": RegisterViewElement,
   "home-view": HomeViewElement,
-  "study-spot-view": StudySpotViewElement
+  "study-spot-view": StudySpotViewElement,
+  "add-spot-view": AddSpotViewElement,
+  "rankings-view": RankingsViewElement,
+  "add-review-view": AddReviewViewElement,
+  // "user-review-view": UserReviewViewElement
 });

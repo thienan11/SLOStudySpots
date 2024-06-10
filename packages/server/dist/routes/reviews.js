@@ -93,7 +93,7 @@ router.get("/user/:userid", (req, res) => {
     if (reviews2) {
       res.json(reviews2);
     } else {
-      res.status(404).send("Reviews not found!");
+      res.status(404).send("No reviews found for this user!");
     }
   }).catch((error) => {
     res.status(500).send(error);

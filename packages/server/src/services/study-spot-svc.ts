@@ -34,6 +34,7 @@ const StudySpotSchema = new Schema<StudySpot>(
       powerOutlets: { type: Number, default: 0, min: 0, max: 5},
       amenities: { type: Number, default: 0, min: 0, max: 5},
     },
+    reviewsCount: { type: Number, default: 0 },
     tags: { type: [String], default: [] },
     photos: { type: [String], default: [] },
     link: { type: String, default: null },
@@ -101,4 +102,17 @@ async function getFavoriteStudySpots(
   }
 }
 
-export default { index, getStudySpotbyId, create, getStudySpotsByTag, getFavoriteStudySpots };
+function update(id: string, updatedStudySpot: StudySpot): Promise<StudySpot | null> {
+  return StudySpotModel.findByIdAndUpdate
+    (id, updatedStudySpot, { new: true })
+    .exec()
+    .then((studySpot) => {
+      return studySpot;
+    })
+    .catch((error) => {
+      console.error("Error updating study spot:", error);
+      throw error;
+    });
+}
+
+export default { index, getStudySpotbyId, create, getStudySpotsByTag, getFavoriteStudySpots, update };

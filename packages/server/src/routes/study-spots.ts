@@ -50,4 +50,23 @@ router.post("/", (req: Request, res: Response) => {
     });
 });
 
+// PUT route
+router.put("/:id", (req: Request, res: Response) => {
+  const id = req.params.id;
+  const updatedStudySpot = req.body;
+
+  studySpots
+    .update(id, updatedStudySpot)
+    .then((studySpot) => {
+      if (studySpot) {
+        res.json(studySpot);
+      } else {
+        res.status(404).send("Study spot not found!");
+      }
+    })
+    .catch((error) => {
+      res.status(500).send(error);
+    });
+});
+
 export default router;

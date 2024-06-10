@@ -32,6 +32,8 @@ export class AddSpotViewElement extends View<Model, Msg> {
     <main>
       <section class="create-spot-container">
         <h2>Add a Study Spot</h2>
+        <p>Note: Make sure it's a new study spot and not an already existing one!</p>
+        </br>
             <form id="addSpotForm" autocomplete="off">
               <div class="form-group">
                 <label for="name">Name of the Study Spot:</label>
@@ -132,6 +134,7 @@ export class AddSpotViewElement extends View<Model, Msg> {
             powerOutlets: 0,
             amenities: 0
           },
+          reviewsCount : 0,
           photos: [],
           hoursOfOperation: []
         },

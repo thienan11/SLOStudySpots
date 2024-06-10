@@ -87,14 +87,14 @@ export class HomeViewElement extends View<Model, Msg> {
 
   render(): TemplateResult {
     const renderItem = (s: StudySpot) => {
-      const { name, ratings} = s;
+      const { name, ratings, reviewsCount} = s;
       const { _id } = s as unknown as { _id: string };
       const photoURL = s.photos?.[0] || '/icons/default-spot.webp';
       const overallRating = ratings.overall.toFixed(1);
 
       return html`
       <li class="study-spot-container">
-        <a href="/app/study-spots/${_id}">
+        <a href="/app/study-spot/${_id}">
           <img src="${photoURL}" alt="${name}" />
           <div class="study-spot-content">
             <h3>${name}</h3>
@@ -103,6 +103,7 @@ export class HomeViewElement extends View<Model, Msg> {
               <div class="stars">
                 ${this.renderStars(ratings.overall)}
               </div>
+              <p>(${reviewsCount} reviews)</p>
             </div>
           </div>
         </a>

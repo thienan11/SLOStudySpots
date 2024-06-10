@@ -7,7 +7,6 @@ import {
 import { css, html, LitElement } from "lit";
 import { property, state } from "lit/decorators.js";
 import { Profile } from "server/models";
-// import { ProfileAvatarElement } from "../components/profile-avatar";
 import resetStyles from "../css/reset";
 import { Msg } from "../messages";
 import { Model } from "../model";
@@ -15,14 +14,24 @@ import { Model } from "../model";
 const gridStyles = css`
   slot[name="avatar"] {
     display: block;
-    grid-row: 1 / span 4;
+    grid-row: 1 / span 2;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 20px;
   }
   nav {
-    display: contents;
-    text-align: right;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--color-border);
+    margin-bottom: 20px;
   }
-  nav > * {
-    grid-column: controls;
+  nav a {
+    color: var(--color-primary);
+    text-decoration: none;
+    font-weight: bold;
   }
 `;
 
@@ -31,137 +40,101 @@ class ProfileViewer extends LitElement {
   username?: string;
 
   render() {
-    return html`
-      <section>
+  return html`
+    <section class="profile-container">
+      <div class="profile-header">
         <slot name="avatar"></slot>
-        <h1><slot name="name"></slot></h1>
-        <nav>
-          <a href="${this.username}/edit" class="edit">Edit</a>
-        </nav>
-        <div class="profile-section">
-          <h2>General Information</h2>
-          <dl>
-            <dt>Username: </dt>
-            <dd><slot name="userid"></slot></dd>
-            <dt>Email: </dt>
-            <dd><slot name="email"></slot></dd>
-            <dt>Bio: </dt>
-            <dd><slot name="bio"></slot></dd>
-            <dt>Date Joined:</dt>
-            <dd><slot name="dateJoined"></slot></dd>
-          </dl>
+        <div>
+          <h1><slot name="name"></slot></h1>
+          <nav>
+            <a href="${this.username}/edit" class="edit">Edit Profile</a>
+          </nav>
         </div>
-        <div class="profile-section">
-          <h2>Reviews</h2>
-          <dl>
-            <dt>Number of Reviews:</dt>
-            <dd><slot name="reviewsCount"></slot></dd>
-          </dl>
-        </div>
-        <div class="profile-section">
-          <h2>Favorite Study Spots</h2>
-          <dl>
-            <dt>Favorite Study Spots:</dt>
-            <dd><slot name="favSpots"></slot></dd>
-          </dl>
-        </div>
-      </section>
-    `;
+      </div>
+      <div class="profile-section">
+        <h2>General Information</h2>
+        <dl>
+          <dt>Username:</dt>
+          <dd><slot name="userid"></slot></dd>
+          <dt>Email:</dt>
+          <dd><slot name="email"></slot></dd>
+          <dt>Bio:</dt>
+          <dd><slot name="bio"></slot></dd>
+          <dt>Date Joined:</dt>
+          <dd><slot name="dateJoined"></slot></dd>
+        </dl>
+      </div>
+    </section>
+  `;
   }
+  
+  // TODO: Add reviews and favorite study spots sections
+  // <div class="profile-section">
+  //       <h2>Reviews</h2>
+  //       <dl>
+  //         <dt>Number of Reviews:</dt>
+  //         <dd><slot name="reviewsCount"></slot></dd>
+  //       </dl>
+  //       <a href="/reviews/${this.username}" class="link-view-all">View All Reviews</a>
+  //     </div>
+  //     <div class="profile-section">
+  //       <h2>Favorite Study Spots</h2>
+  //       <dl>
+  //         <dt>Favorite Study Spots:</dt>
+  //         <dd><slot name="favSpots"></slot></dd>
+  //       </dl>
+  //       <a href="/favorites/${this.username}" class="link-view-all">View Favorite Spots</a>
+  //     </div>
+
 
   static styles = [
     resetStyles,
     gridStyles,
     css`
-      * {
-        margin: 0;
-        box-sizing: border-box;
+      :host {
+        padding: 20px;
       }
-      section {
+
+      .profile-container {
         display: flex;
         flex-direction: column;
-        align-items: center;
-        gap: var(--size-spacing-medium);
         background-color: var(--color-background-secondary);
-        padding: var(--space-regular);
-        margin: auto;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         max-width: 800px;
-        border-radius: var(--border-radius);
-        box-shadow: var(--shadow-hover-small);
+        margin: auto;
+      }
+      .profile-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
       }
       h1 {
-        margin: var(--space-small) 0;
         color: var(--color-primary);
-        text-align: center;
       }
       dl {
         display: grid;
         grid-template-columns: 1fr 3fr;
-        gap: var(--size-spacing-medium) var(--size-spacing-xlarge);
-        align-items: baseline;
+        gap: 10px;
       }
       dt {
         font-weight: bold;
         color: var(--color-primary);
-        font-family: var(--font-family-display);
-        padding-right: var(--size-spacing-medium);
-        border-right: 2px solid var(--color-border);
+        padding-right: 20px;
       }
       dd {
-        color: var(--color-text-primary);
-        padding-left: var(--size-spacing-medium);
-        font-family: var(--font-family-body);
-        text
+        padding-left: 20px;
       }
-      ::slotted(ul) {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-      }
-      ::slotted(ul > li) {
-        padding: var(--size-spacing-small) 0;
-        border-bottom: 1px solid var(--color-border);
-        color: var(--color-text-primary);
-      }
-      .profile-actions {
-        margin-top: var(--space-regular);
-        text-align: center;
-      }
-      .profile-actions h3 {
-        color: var(--color-secondary);
-      }
-      .profile-actions a {
-        margin-top: var(--space-regular);
-        background-color: var(--color-primary);
-        color: var(--color-background-primary);
-        padding: 10px 20px;
-        border-radius: var(--border-radius);
-        text-decoration: none;
-        margin-right: var(--space-small);
-        display: inline-block;
-        transition: background-color 0.3s ease;
-      }
-      .profile-actions a:hover {
-        background-color: var(--color-links);
-        color: var(--color-background-primary);
-      }
-      button {
-        grid-column: input;
-        justify-self: start;
-        width: 100%;
-        padding: var(--space-small);
-        background-color: var(--color-primary);
-        color: var(--color-background-primary);
-        border: none;
-        border-radius: var(--border-radius);
-        cursor: pointer;
-        font-size: var(--font-size-body);
-        margin-top: 20px;
+      .profile-section {
+        background-color: var(--color-background-primary);
+        padding: 15px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
         margin-bottom: 20px;
-        margin-right: 20px;
       }
-      button:hover {
-        background-color: var(--color-links);
+      nav > a:hover {
+        color: var(--color-secondary);
       }
     `
   ];
@@ -202,10 +175,6 @@ class ProfileEditor extends LitElement {
           <label>
             <span>Bio</span>
             <textarea name="bio"></textarea>
-          </label>
-          <label>
-            <span>Favorite Study Spots</span>
-            <input name="favSpots" />
           </label>
           <label>
             <span>Avatar</span>
@@ -312,7 +281,7 @@ export class ProfileViewElement extends View<Model, Msg> {
           ${avatarElement}
           <span slot="name">${name}</span>
           <span slot="userid">${userid}</span>
-          <span slot="email">${email}</span>
+          <span slot="email">${email || 'No email available'}</span>
           <span slot="bio">${bio || 'No bio available'}</span>
           <span slot="dateJoined">${formattedDate}</span>
           <span slot="reviewsCount">${reviewsCount}</span>

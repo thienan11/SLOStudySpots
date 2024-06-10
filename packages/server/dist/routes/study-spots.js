@@ -62,4 +62,17 @@ router.post("/", (req, res) => {
     res.status(500).send(err);
   });
 });
+router.put("/:id", (req, res) => {
+  const id = req.params.id;
+  const updatedStudySpot = req.body;
+  import_study_spot_svc.default.update(id, updatedStudySpot).then((studySpot) => {
+    if (studySpot) {
+      res.json(studySpot);
+    } else {
+      res.status(404).send("Study spot not found!");
+    }
+  }).catch((error) => {
+    res.status(500).send(error);
+  });
+});
 var study_spots_default = router;

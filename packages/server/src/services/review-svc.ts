@@ -76,6 +76,7 @@ function getReviewsByUserId(userId: string): Promise<Review[]> {
   //     throw error;
   //   });
   return ReviewModel.find({ userId: new Types.ObjectId(userId) })
+    .populate('userId', 'userid name')
     .exec()
     .then((reviews) => reviews)
     .catch((error) => {

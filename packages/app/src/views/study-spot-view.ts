@@ -178,14 +178,14 @@ export class StudySpotViewElement extends View<Model, Msg> {
               <h3><strong>Overall Rating:</strong></h3>
               <div class="overall-rating-image-container">
                 <img src="/icons/star-rating.svg" alt="Star Rating" class="star-icon"/>
-                <h4 class="rating-value">${ratings?.overall}</h4>
+                <h4 class="rating-value">${ratings?.overall.toFixed(2)}</h4>
               </div>
               <h3>Rating Breakdown</h3>
-              <p><strong>Quietness:</strong> ${this.renderStars(ratings?.quietness ?? 0)} ${ratings?.quietness}/ 5</p>
-              <p><strong>Wifi Quality:</strong> ${this.renderStars(ratings?.wifiQuality ?? 0)} ${ratings?.wifiQuality} / 5</p>
-              <p><strong>Crowdedness:</strong> ${this.renderStars(ratings?.crowdedness ?? 0)} ${ratings?.crowdedness}/ 5</p>
-              <p><strong>Power Outlets:</strong> ${this.renderStars(ratings?.powerOutlets ?? 0)} ${ratings?.powerOutlets} / 5</p>
-              <p><strong>Amenities:</strong> ${this.renderStars(ratings?.amenities ?? 0)} ${ratings?.amenities}/ 5</p>
+              <p><strong>Quietness:</strong> ${this.renderStars(ratings?.quietness ?? 0)} ${ratings?.quietness.toFixed(2)}/ 5</p>
+              <p><strong>Wifi Quality:</strong> ${this.renderStars(ratings?.wifiQuality ?? 0)} ${ratings?.wifiQuality.toFixed(2)} / 5</p>
+              <p><strong>Crowdedness:</strong> ${this.renderStars(ratings?.crowdedness ?? 0)} ${ratings?.crowdedness.toFixed(2)}/ 5</p>
+              <p><strong>Power Outlets:</strong> ${this.renderStars(ratings?.powerOutlets ?? 0)} ${ratings?.powerOutlets.toFixed(2)} / 5</p>
+              <p><strong>Amenities:</strong> ${this.renderStars(ratings?.amenities ?? 0)} ${ratings?.amenities.toFixed(2)}/ 5</p>
             </section>
           </div>
           <section class="user-reviews">

@@ -1197,14 +1197,14 @@ Expecting `+jt.join(", ")+", got '"+(this.terminals_[A]||A)+"'":ce="Parse error 
               <h3><strong>Overall Rating:</strong></h3>
               <div class="overall-rating-image-container">
                 <img src="/icons/star-rating.svg" alt="Star Rating" class="star-icon"/>
-                <h4 class="rating-value">${r==null?void 0:r.overall}</h4>
+                <h4 class="rating-value">${r==null?void 0:r.overall.toFixed(2)}</h4>
               </div>
               <h3>Rating Breakdown</h3>
-              <p><strong>Quietness:</strong> ${this.renderStars((r==null?void 0:r.quietness)??0)} ${r==null?void 0:r.quietness}/ 5</p>
-              <p><strong>Wifi Quality:</strong> ${this.renderStars((r==null?void 0:r.wifiQuality)??0)} ${r==null?void 0:r.wifiQuality} / 5</p>
-              <p><strong>Crowdedness:</strong> ${this.renderStars((r==null?void 0:r.crowdedness)??0)} ${r==null?void 0:r.crowdedness}/ 5</p>
-              <p><strong>Power Outlets:</strong> ${this.renderStars((r==null?void 0:r.powerOutlets)??0)} ${r==null?void 0:r.powerOutlets} / 5</p>
-              <p><strong>Amenities:</strong> ${this.renderStars((r==null?void 0:r.amenities)??0)} ${r==null?void 0:r.amenities}/ 5</p>
+              <p><strong>Quietness:</strong> ${this.renderStars((r==null?void 0:r.quietness)??0)} ${r==null?void 0:r.quietness.toFixed(2)}/ 5</p>
+              <p><strong>Wifi Quality:</strong> ${this.renderStars((r==null?void 0:r.wifiQuality)??0)} ${r==null?void 0:r.wifiQuality.toFixed(2)} / 5</p>
+              <p><strong>Crowdedness:</strong> ${this.renderStars((r==null?void 0:r.crowdedness)??0)} ${r==null?void 0:r.crowdedness.toFixed(2)}/ 5</p>
+              <p><strong>Power Outlets:</strong> ${this.renderStars((r==null?void 0:r.powerOutlets)??0)} ${r==null?void 0:r.powerOutlets.toFixed(2)} / 5</p>
+              <p><strong>Amenities:</strong> ${this.renderStars((r==null?void 0:r.amenities)??0)} ${r==null?void 0:r.amenities.toFixed(2)}/ 5</p>
             </section>
           </div>
           <section class="user-reviews">

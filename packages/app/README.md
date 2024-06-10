@@ -20,7 +20,7 @@ npm run start
 These commands will activate both the frontend and backend servers, setting up the full environment for development and testing.
 
 ## NOTE (features not implemented yet)
-- No image uploads (for profiles and study spots)
+- No image uploads for study spots (only for avatar as dataURI)
   - So no photo gallery for study spots
 - Users can't see to their reviews for now (so no editing or deleting reviews)
 - When adding a new study spot, there is no input for hours of operations

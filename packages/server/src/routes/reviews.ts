@@ -104,4 +104,21 @@ router.get("/user/:userid", (req: Request, res: Response) => {
     });
 });
 
+// DELETE route
+router.delete("/:id", (req: Request, res: Response) => {
+  const id = req.params.id;
+  reviews
+    .deleteReviewById(id)
+    .then((review) => {
+      if (review) {
+        res.status(200).send({ message: "Review deleted successfully" });
+      } else {
+        res.status(404).send("Review not found!");
+      }
+    })
+    .catch((error) => {
+      res.status(500).send(error.message);
+    });
+});
+
 export default router;

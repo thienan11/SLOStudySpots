@@ -33,6 +33,15 @@ const gridStyles = css`
     text-decoration: none;
     font-weight: bold;
   }
+
+  .avatar, slot[name="avatar"]::slotted(img) {
+    display: block;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 20px;
+  }
 `;
 
 class ProfileViewer extends LitElement {
@@ -44,7 +53,7 @@ class ProfileViewer extends LitElement {
     <main>
       <section class="profile-container">
         <div class="profile-header">
-          <slot name="avatar"></slot>
+          <slot name="avatar" class="avatar"></slot>
           <div>
             <h1><slot name="name"></slot></h1>
             <nav>
@@ -157,29 +166,25 @@ class ProfileEditor extends LitElement {
   @property({ attribute: false })
   init?: Profile;
 
-  connectedCallback() {
-    super.connectedCallback();
-    if (!this.init) {
-      console.error("Profile data is not initialized.");
-    } else {
-      console.log("Profile data is initialized:", this.init);
-    }
+  constructor() {
+    super();
+    this._handleAvatarSelected = this._handleAvatarSelected.bind(this);
   }
 
   render() {
     return html`
       <main>
         <section class="profile-editor">
-          <slot name="avatar"></slot>
+          
           <h1><slot name="name"></slot></h1>
           <nav>
             <a class="close" href="../${this.username}">Close</a>
-            <button class="delete">Delete</button>
+            <!-- <button class="delete">Delete</button> -->
           </nav>
           <mu-form .init=${this.init}>
             <label>
             <span>Username</span>
-            <input name="userid"/>
+            <input disabled name="userid" />
             </label>
             <label>
               <span>Name</span>
@@ -195,12 +200,15 @@ class ProfileEditor extends LitElement {
             </label>
             <label>
               <span>Avatar</span>
-              <input name="avatar" />
+              <!-- <input name="avatar" /> -->
               <!-- <input
               name="avatar"
               type="file"
               @change=${this._handleAvatarSelected} /> -->
+              <input id="avatarInput" type="file" style="display: none" />
+              <button @click="${this._triggerFileInput}">Upload Avatar</button>
             </label>
+            <slot name="avatar" class="avatar"></slot>
           </mu-form>
         </section>
       </main>
@@ -221,6 +229,10 @@ class ProfileEditor extends LitElement {
       mu-form input {
         grid-column: input;
       }
+      mu-form label:has(input[type="file"]) {
+        grid-row-end: span 4;
+        padding-bottom: 20px;
+      }
       .profile-editor {
         display: flex;
         flex-direction: column;
@@ -231,30 +243,36 @@ class ProfileEditor extends LitElement {
     `
   ];
 
+  _triggerFileInput() {
+    this.shadowRoot?.getElementById('avatarInput')?.click();
+  }
+
   _handleAvatarSelected(ev: Event) {
-    console.log("Avatar file selection triggered");
-    const target = ev.target as HTMLInputElement;
-    const selectedFile = (target.files as FileList)[0];
+    const files = (ev.target as HTMLInputElement)?.files;
+    if (files && files.length > 0) {
+      const file = files[0];
+      const reader = new FileReader();
+      reader.onload = () => {
+        const url = reader.result;
+        console.log("Avatar Loaded:", url);
+        this.dispatchEvent(new CustomEvent("profile:new-avatar", {
+          bubbles: true, composed: true, detail: url
+        }));
+      };
+      reader.onerror = () => console.error("Error loading file");
+      reader.readAsDataURL(file);
+    }
+  }
 
-    const reader: Promise<string> = new Promise(
-      (resolve, reject) => {
-        const fr = new FileReader();
-        fr.onload = () => resolve(fr.result as string);
-        fr.onerror = (err) => reject(err);
-        fr.readAsDataURL(selectedFile);
-      }
-    );
+  firstUpdated() {
+    const input = this.shadowRoot?.getElementById('avatarInput');
+    input?.addEventListener('change', this._handleAvatarSelected);
+  }
 
-    reader.then((url: string) => {
-      console.log("Dispatching new avatar URL:", url);
-      this.dispatchEvent(
-        new CustomEvent("profile:new-avatar", {
-          bubbles: true,
-          composed: true,
-          detail: url
-        })
-      );
-    });
+  disconnectedCallback() {
+    const input = this.shadowRoot?.getElementById('avatarInput');
+    input?.removeEventListener('change', this._handleAvatarSelected);
+    super.disconnectedCallback();
   }
 }
 
@@ -284,14 +302,13 @@ export class ProfileViewElement extends View<Model, Msg> {
     // this.addEventListener("mu-form:submit", (event) =>
     //   this._handleSubmit(event as Form.SubmitEvent<Profile>)
     // );
-    this.addEventListener("profile:new-avatar", (event: Event) => {
-      const newAvatarURL = (event as CustomEvent).detail as string;
-      console.log("New avatar URL received:", newAvatarURL);
-      if (this.profile) {
-        this.profile.avatar = newAvatarURL; // Update the avatar property directly if possible
-        this.requestUpdate(); // Request an update to re-render the component
+    this.addEventListener(
+      "profile:new-avatar",
+      (event: Event) => {
+        this.newAvatar = (event as CustomEvent)
+          .detail as string;
       }
-    });
+    );
   }
 
   attributeChangedCallback(
@@ -356,25 +373,28 @@ export class ProfileViewElement extends View<Model, Msg> {
           <span slot="bio">${bio || 'No bio available'}</span>
           <span slot="dateJoined">${formattedDate}</span>
           <span slot="reviewsCount">${reviewsCount}</span>
-          <ul slot="favSpots">${fav_spots_html}</ul>
+          <!-- <ul slot="favSpots">${fav_spots_html}</ul> -->
         </profile-viewer>
       `;
   }
 
   _handleSubmit(event: Form.SubmitEvent<Profile>) {
     console.log("Handling submit of mu-form");
+    const profile = this.newAvatar
+      ? { ...event.detail, avatar: this.newAvatar }
+      : event.detail;
     this.dispatchMessage([
       "profile/save",
       {
         userid: this.userid,
-        profile: event.detail,
+        profile,
         onSuccess: () =>
           History.dispatch(this, "history/navigate", {
             href: `/app/profile/${this.userid}`
           }),
         onFailure: (error: Error) =>
           console.log("ERROR:", error)
-      } as { userid: string; profile: Profile; onSuccess: () => void; }
+      }
     ]);
   }
 

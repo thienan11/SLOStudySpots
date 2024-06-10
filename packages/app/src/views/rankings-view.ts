@@ -8,9 +8,19 @@ import resetCSS from '../css/reset';
 
 export class RankingsViewElement extends View<Model, Msg> {
   @state()
+  // get sortedStudySpots(): StudySpot[] {
+  //   return [...(this.model.studySpotIndex || [])].sort((a, b) => b.ratings.overall - a.ratings.overall);
+  //   // TODO: for tie breakers, sort by number of reviews
+  // }
   get sortedStudySpots(): StudySpot[] {
-    return [...(this.model.studySpotIndex || [])].sort((a, b) => b.ratings.overall - a.ratings.overall);
-    // TODO: for tie breakers, sort by number of reviews
+    return [...(this.model.studySpotIndex || [])].sort((a, b) => {
+      // Sort primarily by overall rating
+      const ratingDifference = b.ratings.overall - a.ratings.overall;
+      if (ratingDifference !== 0) return ratingDifference;
+      
+      // If ratings are the same, sort by the number of reviews (as a secondary criterion)
+      return b.reviewsCount - a.reviewsCount;
+    });
   }
  
   constructor() {

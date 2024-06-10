@@ -99,4 +99,16 @@ router.get("/user/:userid", (req, res) => {
     res.status(500).send(error);
   });
 });
+router.delete("/:id", (req, res) => {
+  const id = req.params.id;
+  import_review_svc.default.deleteReviewById(id).then((review) => {
+    if (review) {
+      res.status(200).send({ message: "Review deleted successfully" });
+    } else {
+      res.status(404).send("Review not found!");
+    }
+  }).catch((error) => {
+    res.status(500).send(error.message);
+  });
+});
 var reviews_default = router;

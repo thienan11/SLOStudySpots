@@ -47,6 +47,7 @@ export class LoginFormElement extends LitElement {
       "auth/signin",
       { token, redirect }
     ]);
+    window.location.pathname = "/app";
   }
 
   _handleError(event: CustomEvent) {

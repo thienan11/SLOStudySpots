@@ -4,7 +4,8 @@ export default {
       "/api": "http://localhost:3000",
       "/auth": "http://localhost:3000",
       "/study-spots": "http://localhost:3000",
-      "/reviews": "http://localhost:3000"
+      "/reviews": "http://localhost:3000",
+      // "/images": "http://localhost:3000",
     }
   }
 };

@@ -40,31 +40,33 @@ class ProfileViewer extends LitElement {
   username?: string;
 
   render() {
-  return html`
-    <section class="profile-container">
-      <div class="profile-header">
-        <slot name="avatar"></slot>
-        <div>
-          <h1><slot name="name"></slot></h1>
-          <nav>
-            <a href="${this.username}/edit" class="edit">Edit Profile</a>
-          </nav>
+    return html`
+    <main>
+      <section class="profile-container">
+        <div class="profile-header">
+          <slot name="avatar"></slot>
+          <div>
+            <h1><slot name="name"></slot></h1>
+            <nav>
+              <a href="${this.username}/edit" class="edit">Edit Profile</a>
+            </nav>
+          </div>
         </div>
-      </div>
-      <div class="profile-section">
-        <h2>General Information</h2>
-        <dl>
-          <dt>Username:</dt>
-          <dd><slot name="userid"></slot></dd>
-          <dt>Email:</dt>
-          <dd><slot name="email"></slot></dd>
-          <dt>Bio:</dt>
-          <dd><slot name="bio"></slot></dd>
-          <dt>Date Joined:</dt>
-          <dd><slot name="dateJoined"></slot></dd>
-        </dl>
-      </div>
-    </section>
+        <div class="profile-section">
+          <h2>General Information</h2>
+          <dl>
+            <dt>Username:</dt>
+            <dd><slot name="userid"></slot></dd>
+            <dt>Email:</dt>
+            <dd><slot name="email"></slot></dd>
+            <dt>Bio:</dt>
+            <dd><slot name="bio"></slot></dd>
+            <dt>Date Joined:</dt>
+            <dd><slot name="dateJoined"></slot></dd>
+          </dl>
+        </div>
+      </section>
+    </main>
   `;
   }
   
@@ -93,6 +95,11 @@ class ProfileViewer extends LitElement {
     css`
       :host {
         padding: 20px;
+      }
+
+      main {
+        padding: var(--space-regular);
+        flex-grow: 1;
       }
 
       .profile-container {
@@ -150,38 +157,53 @@ class ProfileEditor extends LitElement {
   @property({ attribute: false })
   init?: Profile;
 
+  connectedCallback() {
+    super.connectedCallback();
+    if (!this.init) {
+      console.error("Profile data is not initialized.");
+    } else {
+      console.log("Profile data is initialized:", this.init);
+    }
+  }
+
   render() {
     return html`
-      <section>
-        <slot name="avatar"></slot>
-        <h1><slot name="name"></slot></h1>
-        <nav>
-          <a class="close" href="../${this.username}">Close</a>
-          <button class="delete">Delete</button>
-        </nav>
-        <mu-form .init=${this.init}>
-          <label>
-          <span>Username</span>
-          <input name="userid"/>
-          </label>
-          <label>
-            <span>Name</span>
-            <input name="name"/>
-          </label>
-          <label>
-            <span>Email</span>
-            <input name="email">
-          </label>
-          <label>
-            <span>Bio</span>
-            <textarea name="bio"></textarea>
-          </label>
-          <label>
-            <span>Avatar</span>
-            <input name="avatar" />
-          </label>
-        </mu-form>
-      </section>
+      <main>
+        <section class="profile-editor">
+          <slot name="avatar"></slot>
+          <h1><slot name="name"></slot></h1>
+          <nav>
+            <a class="close" href="../${this.username}">Close</a>
+            <button class="delete">Delete</button>
+          </nav>
+          <mu-form .init=${this.init}>
+            <label>
+            <span>Username</span>
+            <input name="userid"/>
+            </label>
+            <label>
+              <span>Name</span>
+              <input name="name"/>
+            </label>
+            <label>
+              <span>Email</span>
+              <input name="email">
+            </label>
+            <label>
+              <span>Bio</span>
+              <textarea name="bio"></textarea>
+            </label>
+            <label>
+              <span>Avatar</span>
+              <input name="avatar" />
+              <!-- <input
+              name="avatar"
+              type="file"
+              @change=${this._handleAvatarSelected} /> -->
+            </label>
+          </mu-form>
+        </section>
+      </main>
     `;
   }
 
@@ -189,14 +211,51 @@ class ProfileEditor extends LitElement {
     resetStyles,
     gridStyles,
     css`
+      main {
+        padding: var(--space-regular);
+        flex-grow: 1;
+      }
       mu-form {
         grid-column: key / end;
       }
       mu-form input {
         grid-column: input;
       }
+      .profile-editor {
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+        max-width: 600px;
+        margin: auto;
+      }
     `
   ];
+
+  _handleAvatarSelected(ev: Event) {
+    console.log("Avatar file selection triggered");
+    const target = ev.target as HTMLInputElement;
+    const selectedFile = (target.files as FileList)[0];
+
+    const reader: Promise<string> = new Promise(
+      (resolve, reject) => {
+        const fr = new FileReader();
+        fr.onload = () => resolve(fr.result as string);
+        fr.onerror = (err) => reject(err);
+        fr.readAsDataURL(selectedFile);
+      }
+    );
+
+    reader.then((url: string) => {
+      console.log("Dispatching new avatar URL:", url);
+      this.dispatchEvent(
+        new CustomEvent("profile:new-avatar", {
+          bubbles: true,
+          composed: true,
+          detail: url
+        })
+      );
+    });
+  }
 }
 
 export class ProfileViewElement extends View<Model, Msg> {
@@ -217,11 +276,22 @@ export class ProfileViewElement extends View<Model, Msg> {
     return this.model.profile;
   }
 
+  @state()
+  newAvatar?: string;
+ 
   constructor() {
     super("slostudyspots:model");
     // this.addEventListener("mu-form:submit", (event) =>
     //   this._handleSubmit(event as Form.SubmitEvent<Profile>)
     // );
+    this.addEventListener("profile:new-avatar", (event: Event) => {
+      const newAvatarURL = (event as CustomEvent).detail as string;
+      console.log("New avatar URL received:", newAvatarURL);
+      if (this.profile) {
+        this.profile.avatar = newAvatarURL; // Update the avatar property directly if possible
+        this.requestUpdate(); // Request an update to re-render the component
+      }
+    });
   }
 
   attributeChangedCallback(
@@ -261,9 +331,10 @@ export class ProfileViewElement extends View<Model, Msg> {
 
     const formattedDate = this.profile?.dateJoined ? new Date(this.profile.dateJoined).toLocaleDateString() : 'Date unavailable';
 
-    const avatarElement = avatar
-    ? html`<img src=${avatar} alt="Profile Avatar" slot="avatar">`
-      : html`<div slot="avatar">No Avatar</div>`;
+    const avatarElement = this.newAvatar || avatar
+      ? html`<img src=${this.newAvatar || avatar} alt="Profile Avatar" slot="avatar">`
+      : html`<img slot="avatar" src="/icons/default-profile.svg">`;
+
 
     return this.edit
     ? html`

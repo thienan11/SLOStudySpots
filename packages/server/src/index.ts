@@ -6,6 +6,7 @@ import auth, { authenticateUser } from "./routes/auth";
 import { connect } from "./services/mongo";
 import fs from "node:fs/promises";
 import path from "path";
+import { getFile, saveFile } from "./services/filesystem";
 
 // MongoDB connection
 connect("slostudyspots");
@@ -18,6 +19,10 @@ const staticDir = process.env.STATIC || "public";
 console.log("Serving static files from ", staticDir);
 app.use(express.static(staticDir));
 
+// Middleware:
+app.use(express.raw({ type: "image/*", limit: "32Mb" }));
+app.use(express.json({ limit: "500kb" }));
+
 // JSON parsing middleware
 app.use(express.json());
 
@@ -28,6 +33,10 @@ const nodeModules = path.resolve(
 );
 console.log("Serving NPM packages from", nodeModules);
 app.use("/node_modules", express.static(nodeModules));
+
+// Images routes
+app.post("/images", saveFile);
+app.get("/images/:id", getFile);
 
 // Auth routes
 app.use("/auth", auth);

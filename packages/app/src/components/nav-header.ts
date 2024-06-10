@@ -34,12 +34,13 @@ export class HeaderElement extends LitElement {
   connectedCallback() {
     super.connectedCallback();
     this._authObserver.observe(({ user }) => {
-    if (user) {
+      if (user) {
         this.username = user.username;
+      } else {
+        this.username = "anonymous";
       }
     });
   }
-
   render() {
     return html`
       <header class="navbar">
@@ -49,44 +50,69 @@ export class HeaderElement extends LitElement {
             <h1>SLOStudySpots</h1>
           </a>
 
+          <!--
           <div class="search-box">
             <form>
               <input type="search" placeholder="Search for study spots..." />
             </form>
           </div>
+          -->
 
           <nav class="right-navbar-links">
-            <drop-down>
-              <ul>
-                <li>
-                  <a class="navbar-menu" href="/app/profile/${this.username}">
-                    <!-- <img src="icons/avatar.svg" alt="profile-icon" /> -->
-                    Profile
-                  </a>
-                </li>
-                <li>
-                  <a class="group-icon" href="/app/rankings">
-                    <!-- <img src="icons/ranking.svg" alt="ranking-icon" /> -->
-                    Community Rankings
-                  </a>
-                </li>
-                <li>
-                  <a class="group-icon" href="/app/add-spot">
-                    <!-- <img src="icons/create.svg" alt="create-icon" /> -->
-                    Add a Spot
-                  </a>
-                </li>
-                <li>
-                  <label class="light-dark-switch" @change=${toggleDarkMode}>
-                    <input type="checkbox" autocomplete="off" />
-                    Dark mode
-                  </label>
-                </li>
-                <li>
-                  <a href="#" @click=${signOutUser}> Sign out </a>
-                </li>
-              </ul>
-            </drop-down>
+            ${this.username === "anonymous"
+              ? html`
+                 <!-- <a class="navbar-button" href="/app/login">Login</a>
+                  <a class="navbar-button signup-button" href="/app/register">Sign Up</a>
+                -->
+                <drop-down>
+                  <ul>
+                    <li>
+                      <a class="navbar-menu" href="/app/login">
+                        Login
+                      </a>
+                    </li>
+                    <li>
+                      <a class="navbar-menu" href="/app/register">
+                        Sign Up
+                      </a>
+                    </li>
+                    <li>
+                      <a class="group-icon" href="/app/rankings">
+                        Community Rankings
+                      </a>
+                    </li>
+                  </ul>
+                `
+              : html`
+                <drop-down>
+                  <ul>
+                    <li>
+                      <a class="navbar-menu" href="/app/profile/${this.username}">
+                        Profile
+                      </a>
+                    </li>
+                    <li>
+                      <a class="group-icon" href="/app/rankings">
+                        Community Rankings
+                      </a>
+                    </li>
+                    <li>
+                      <a class="group-icon" href="/app/add-spot">
+                        Add a Spot
+                      </a>
+                    </li>
+                    <li>
+                      <label class="light-dark-switch" @change=${toggleDarkMode}>
+                        <input type="checkbox" autocomplete="off" />
+                        Dark mode
+                      </label>
+                    </li>
+                    <li>
+                      <a href="#" @click=${signOutUser}>Sign out</a>
+                    </li>
+                  </ul>
+                </drop-down>
+              `}
           </nav>
         </div>
       </header>
@@ -96,12 +122,6 @@ export class HeaderElement extends LitElement {
   static styles = [
     resetCSS,
     css`
-    * {
-      margin: 0;
-      box-sizing: border-box;
-      padding: 0;
-    }
-
     header.navbar {
       display: flex;
       justify-content: space-between;
@@ -111,6 +131,8 @@ export class HeaderElement extends LitElement {
       position: sticky;
       top: 0; /* Ensures it sticks at the very top */
       z-index: 1000; /* Ensures the header stays on top of other content */
+      /* position: fixed;
+      width: 100vw; */
     }
 
     .navbar-content {
@@ -171,6 +193,39 @@ export class HeaderElement extends LitElement {
 
     .search-box input[type="search"]:focus {
       border-color: var(--color-secondary);
+    }
+
+    .right-navbar-links {
+      display: flex;
+      align-items: center;
+    }
+
+    .right-navbar-links .navbar-button {
+      padding: 10px 15px;
+      color: var(--color-background-primary);
+      background-color: var(--color-text-secondary);
+      border: none;
+      border-radius: var(--border-radius);
+      text-decoration: none;
+      font-family: inherit;
+      font-size: 1rem;
+      cursor: pointer;
+      margin-left: var(--space-small);
+      transition: background-color 0.3s;
+    }
+
+    .right-navbar-links .navbar-button:hover {
+      background-color: var(--color-secondary);
+      color: white;
+    }
+
+    .right-navbar-links .signup-button {
+      margin-left: var(--space-regular);
+      background-color: var(--color-text-secondary);
+    }
+
+    .right-navbar-links .signup-button:hover {
+      background-color: var(--color-secondary);
     }
 
     .right-navbar-links ul {

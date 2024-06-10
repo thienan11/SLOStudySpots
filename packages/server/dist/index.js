@@ -29,12 +29,15 @@ var import_auth = __toESM(require("./routes/auth"));
 var import_mongo = require("./services/mongo");
 var import_promises = __toESM(require("node:fs/promises"));
 var import_path = __toESM(require("path"));
+var import_filesystem = require("./services/filesystem");
 (0, import_mongo.connect)("slostudyspots");
 const app = (0, import_express.default)();
 const port = process.env.PORT || 3e3;
 const staticDir = process.env.STATIC || "public";
 console.log("Serving static files from ", staticDir);
 app.use(import_express.default.static(staticDir));
+app.use(import_express.default.raw({ type: "image/*", limit: "32Mb" }));
+app.use(import_express.default.json({ limit: "500kb" }));
 app.use(import_express.default.json());
 const nodeModules = import_path.default.resolve(
   __dirname,
@@ -42,6 +45,8 @@ const nodeModules = import_path.default.resolve(
 );
 console.log("Serving NPM packages from", nodeModules);
 app.use("/node_modules", import_express.default.static(nodeModules));
+app.post("/images", import_filesystem.saveFile);
+app.get("/images/:id", import_filesystem.getFile);
 app.use("/auth", import_auth.default);
 app.use("/api/profiles", import_auth.authenticateUser, import_profiles.default);
 app.use("/study-spots", import_study_spots.default);

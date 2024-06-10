@@ -42,7 +42,7 @@ export class RankingsViewElement extends View<Model, Msg> {
   
   render(): TemplateResult {
     const renderItem = (s: StudySpot) => {
-      const { name, ratings} = s;
+      const { name, ratings, reviewsCount} = s;
       const { _id } = s as unknown as { _id: string };
 
       return html`
@@ -50,7 +50,7 @@ export class RankingsViewElement extends View<Model, Msg> {
         <li class="ranking">
           <div class="content">
             <h3>${name}</h3>
-            <p><strong>Rating: </strong>${ratings.overall.toFixed(1)} ${this.renderStars(ratings.overall)}</p>
+            <p><strong>Rating: </strong>${ratings.overall.toFixed(1)} ${this.renderStars(ratings.overall)} (${reviewsCount} reviews)</p>
           </div>
         </li>
       </a>

@@ -11,7 +11,7 @@ For development, run the following command in the directory `packages/app`:
 ```shell
 npm run dev
 ```
-In a separate terminal, navigate to `packages/server` and execute:
+And in a separate terminal, navigate to `packages/server` and execute:
 
 ```shell
 npm run start
@@ -21,7 +21,10 @@ These commands will activate both the frontend and backend servers, setting up t
 
 ## NOTE (features not implemented yet)
 - No image uploads (for profiles and study spots)
-- No photo gallery for study spots
-- Users don't have access to their reviews (so no editing or deleting reviews)
+  - So no photo gallery for study spots
+- Users can't see to their reviews for now (so no editing or deleting reviews)
 - When adding a new study spot, there is no input for hours of operations
 - Clicking tags doesn't filter out spots with same tags
+- Responsive design (overall styling could be better)
+
+For future, I'd like to make it so that a study spot can only be posted after approval by an admin.

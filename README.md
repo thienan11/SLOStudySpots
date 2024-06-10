@@ -18,4 +18,4 @@ Then, refer to the README.md in the following packages:
 
 - [Prototype](packages/proto/README.md) uses only static HTML, CSS, and Javascript.
 - [Server](packages/server/README.md) adds a backend API, communication with a database, and authentication.
-- [App](packages/server/README.md) adds routing and state management to the frontend, making it a single-page app.
+- [App](packages/app/README.md) adds routing and state management to the frontend, making it a single-page app.

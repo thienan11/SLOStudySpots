@@ -18,7 +18,7 @@ import { StudySpotViewElement } from "./views/study-spot-view";
 // import { UserReviewViewElement } from "./views/user-review-view";
 import { AddSpotViewElement } from "./views/add-spot-view";
 import { RankingsViewElement } from "./views/rankings-view";
-import { AddReviewViewElement } from "./views/add-review";
+import { AddReviewViewElement } from "./views/add-review-view";
 
 const routes: Switch.Route[] = [
   {

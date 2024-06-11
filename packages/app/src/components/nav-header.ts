@@ -64,7 +64,7 @@ export class HeaderElement extends LitElement {
               @click=${toggleDarkMode}
               src="/icons/light-dark.svg"
               alt="Dark mode"
-              id="light-dark-icon"
+              class="light-dark-icon"
             />
             ${this.username === "anonymous"
               ? html`
@@ -285,7 +285,7 @@ export class HeaderElement extends LitElement {
       color: var(--color-links);
     }
 
-    img {
+    .light-dark-icon {
       padding-right: 15px;
     }
 

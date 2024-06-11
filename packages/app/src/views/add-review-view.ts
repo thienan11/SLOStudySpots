@@ -367,6 +367,30 @@ export class AddReviewViewElement extends View<Model, Msg> {
       .btn-large:hover {
         background-color: var(--color-links);
       }
+
+      /* Responsive adjustments */
+      @media (max-width: 768px) {
+        .star-form-group {
+          flex-direction: column;
+        }
+
+        .star-form-group label {
+          margin-bottom: 4px; /* Adds space between the label and input on smaller screens */
+        }
+
+        .add-review {
+          padding: 10px;
+        }
+
+        .form-group input[type="text"],
+        .form-group textarea {
+          padding: 8px; /* Smaller padding on smaller screens */
+        }
+
+        .btn-large {
+          font-size: 0.9rem; /* Smaller font size on smaller screens */
+        }
+      }
     `
   ];
 }

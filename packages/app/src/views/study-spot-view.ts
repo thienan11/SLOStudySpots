@@ -189,7 +189,7 @@ export class StudySpotViewElement extends View<Model, Msg> {
             </section>
           </div>
           <section class="user-reviews">
-            <h3>User Reviews</h3>
+            <h3>${this.studySpot?.reviewsCount} User Reviews</h3>
             ${this.reviews.length > 0 ? this.reviews.map(review => html`
             <div class="review-card">
               <div class="review-header">
@@ -207,7 +207,7 @@ export class StudySpotViewElement extends View<Model, Msg> {
                 <span class="review-time-to-go">Best Time to Go: ${review.bestTimeToGo}</span>
               </div>
             </div>
-        `) : html`<p>No reviews yet.</p>`}
+        `) : html`<p>No reviews yet. Be the first to review <strong>${this.studySpot?.name}</strong>!</p>`}
           </section>
         </div>
       </main>
@@ -219,35 +219,34 @@ export class StudySpotViewElement extends View<Model, Msg> {
     css`
       main {
         padding: var(--space-regular);
+        display: flex;
+        flex-direction: column;
         flex-grow: 1;
       }
 
       .gallery-preview {
         position: relative;
-        /* are the below needed? */
-        width: 100%; /* Full width */
-        margin: 0 auto; /* Center aligning */
+        width: 100%;
       }
-      
+
       .featured-image {
         width: 100%;
-        display: block;
-        height: 300px;
+        height: auto; /* Changed to auto to maintain aspect ratio */
+        max-height: 300px;
         object-fit: cover;
       }
-      
+
       .view-gallery-overlay {
         position: absolute;
         bottom: 0;
-        left: 0; /* not needed? */
         width: 100%;
         background: linear-gradient(to top, rgba(0,0,0,0.8) 10%, transparent 90%);
         padding: 10px 20px;
       }
-      
+
       .spot-title {
         color: white;
-        font-size: 2rem;
+        font-size: 1.8rem; /* Adjusted for smaller screens */
       }
       
       .btn-view-gallery {
@@ -305,8 +304,7 @@ export class StudySpotViewElement extends View<Model, Msg> {
       
       .details-reviews-container {
         display: flex;
-        justify-content: space-between; /* might not need? */
-        margin-top: 20px;
+        flex-direction: column; /* Switch to column layout on smaller screens */
       }
       
       .feature-tag {
@@ -321,9 +319,9 @@ export class StudySpotViewElement extends View<Model, Msg> {
       }
 
       /* Details and Ratings Container Styles */
-      .details-ratings {
+      .details-ratings, .user-reviews {
         flex: 1;
-        padding-right: 10px;
+        padding: 10px;
       }
       
       .details-ratings h3 {
@@ -510,6 +508,32 @@ export class StudySpotViewElement extends View<Model, Msg> {
       font-style: italic; /* Italicize text */
       display: flex;
       align-items: center; /* Center align if using icon */
+    }
+
+    /* Media Queries for Responsive Adjustments */
+    @media (min-width: 768px) {
+      .details-reviews-container {
+        flex-direction: row;
+        justify-content: space-between;
+      }
+
+      .details-ratings, .user-reviews {
+        padding: 10px;
+      }
+
+      .spot-title {
+        font-size: 2rem; /* Larger font size for larger screens */
+      }
+    }
+
+    @media (max-width: 480px) {
+      .btn-view-gallery {
+        font-size: 0.8rem; /* Smaller button text on very small screens */
+      }
+
+      .review-author, .review-date, .rating-text {
+        font-size: 0.75rem; /* Smaller text for compact display */
+      }
     }
     `
   ];

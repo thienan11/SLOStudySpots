@@ -1,7 +1,7 @@
 import { html, css } from "lit";
 import { Model } from "../model";
 import { Msg } from "../messages";
-import { View, Auth, Observer } from "@calpoly/mustang";
+import { View, Auth, Observer, History } from "@calpoly/mustang";
 import { property, state } from "lit/decorators.js";
 import resetCSS from "../css/reset";
 import { Profile, StudySpot, Review } from "server/models";
@@ -211,11 +211,14 @@ export class AddReviewViewElement extends View<Model, Msg> {
         review,
         onSuccess: () => {
           console.log('Review saved successfully');
-          window.location.pathname = `/app/study-spot/${this.spotid}`;
+          // window.location.pathname = `/app/study-spot/${this.spotid}`;
+          History.dispatch(this, "history/navigate", {
+            href: `/app/study-spot/${this.spotid}`
+          });
         },
         onFailure: (error: Error) => {
           console.error('Failed to save review:', error);
-          alert('Failed to save study spot');
+          alert('Failed to save review!');
         }
       }
     ]);

@@ -1,7 +1,7 @@
 import { html, css } from "lit";
 import { Model } from "../model";
 import { Msg } from "../messages";
-import { View, Auth, Observer } from "@calpoly/mustang";
+import { View, Auth, Observer, History } from "@calpoly/mustang";
 import { property } from "lit/decorators.js";
 import resetCSS from "../css/reset";
 
@@ -141,7 +141,10 @@ export class AddSpotViewElement extends View<Model, Msg> {
         onSuccess: () => {
           console.log('Study spot saved successfully');
           alert('Study Spot saved successfully!');
-          window.location.pathname = "/app";
+          // window.location.pathname = "/app";
+          History.dispatch(this, "history/navigate", {
+            href: `/app`
+          });
         },
         onFailure: (error: Error) => {
           console.error('Failed to save study spot:', error);

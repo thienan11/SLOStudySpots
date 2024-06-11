@@ -1,4 +1,4 @@
-import { define, Events, Rest } from "@calpoly/mustang";
+import { define, Events, Rest, History } from "@calpoly/mustang";
 import { css, html, LitElement } from "lit";
 import { property } from "lit/decorators.js";
 
@@ -47,7 +47,10 @@ export class LoginFormElement extends LitElement {
       "auth/signin",
       { token, redirect }
     ]);
-    window.location.pathname = "/app";
+    // window.location.pathname = "/app";
+    History.dispatch(this, "history/navigate", {
+      href: `/app`
+    });
   }
 
   _handleError(event: CustomEvent) {

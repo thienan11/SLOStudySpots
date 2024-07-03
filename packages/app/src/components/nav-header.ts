@@ -138,8 +138,9 @@ export class HeaderElement extends LitElement {
       position: sticky;
       top: 0; /* Ensures it sticks at the very top */
       z-index: 1000; /* Ensures the header stays on top of other content */
-      /* position: fixed;
-      width: 100vw; */
+      position: fixed;
+      width: 100%;
+      /* width: 100vw; */
     }
 
     .navbar-content {

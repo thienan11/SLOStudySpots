@@ -13,26 +13,25 @@ export class RegisterViewElement extends LitElement {
   render() {
     return html`
       <div class="login-register-container">
-        <h2>Signup as a new User</h2>
+        <p>
+          <a href="/app">← Back to home</a>
+        </p>
+        <h1>Sign Up</h1>
         <main class="card">
-          <p>
-            <a href="/app">← Back to home</a>
-          </p>
           <register-form>
             <label>
-              <span>Username:</span>
-              <input name="username" autocomplete="off" />
+              <input name="username" autocomplete="off" placeholder="Username"/>
             </label>
             <label>
-              <span>Password:</span>
-              <input type="password" name="password" />
+              <input type="password" name="password" placeholder="Password"/>
             </label>
+            <button slot="submit" id="submit-btn" type="submit">Register</button>
           </register-form>
           <p>
             Already signed up? Then you can
-            <a href="/app/login">log in</a> instead.
+            <a href="/app/login">log in</a> instead
           </p>
-          <img src="/images/person-studying.svg" alt="Person Studying">
+          <img src="/images/login-register-img.svg" alt="People Studying">
         </main>
       </div>
     `;
@@ -42,11 +41,6 @@ export class RegisterViewElement extends LitElement {
     resetStyles,
     css`
       :host {
-        --color-background-secondary: #f9f9f9;
-        --color-links: #0066cc;
-        --color-primary: #333;
-        --color-secondary: #555;
-        --color-text-primary: #000;
         --font-size-large: 1.5rem;
         --font-size-body: 1rem;
         --space-regular: 1rem;
@@ -65,16 +59,31 @@ export class RegisterViewElement extends LitElement {
         align-items: center;
         text-align: center;
         height: 100vh;
+        width: 100vw;
+        position: fixed; /* Fixed position to cover the whole screen including any sticky headers */
+        top: 0; /* Align to the top of the viewport */
+        left: 0; /* Align to the left of the viewport */
+        z-index: 1000; /* Ensure it sits above other content */
+        box-sizing: border-box; /* Include padding and border in the element's total width and height */
+        padding-top: 45px;
       }
 
       .login-register-container a {
         color: var(--color-links);
+        text-decoration: none;
       }
 
-      .login-register-container h2 {
+      .login-register-container a:hover {
+        text-decoration: underline;
+      }
+
+      .login-register-container h1 {
+        color: var(--color-text-primary);
+      }
+
+      .login-register-container p {
         margin-bottom: var(--space-medium);
-        font-size: var(--font-size-large);
-        color: var(--color-primary);
+        /* align-self: flex-start; */
       }
 
       .login-register-container .card {
@@ -106,6 +115,22 @@ export class RegisterViewElement extends LitElement {
       .login-register-container input:focus {
         border-color: var(--color-secondary);
         outline: none;
+      }
+
+      .login-register-container button[slot="submit"] {
+        margin-top: 20px;
+        padding: 10px 20px;
+        background-color: var(--color-primary);
+        border: none;
+        color: white;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-bottom: 16px;
+        width: 100%;
+      }
+
+      .login-register-container button[slot="submit"]:hover {
+        background-color: var(--color-links);
       }
     `
   ];

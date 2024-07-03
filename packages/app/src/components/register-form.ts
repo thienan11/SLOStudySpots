@@ -8,8 +8,32 @@ export class RegisterFormElement extends LitElement {
     return html`
       <restful-form new src="/auth/register">
         <slot></slot>
+        <slot slot="submit" name="submit" @click=${this._handleSubmit}></slot>
       </restful-form>
     `;
+  }
+
+  firstUpdated() {
+    this.injectStylesIntoRestfulForm();
+  }
+
+  injectStylesIntoRestfulForm() {
+    const restfulForm = this.shadowRoot?.querySelector('restful-form');
+    if (restfulForm && restfulForm.shadowRoot) {
+      const style = document.createElement('style');
+      style.textContent = `
+        form {
+          display: block; /* Override the grid display here */
+        }
+      `;
+      restfulForm.shadowRoot.appendChild(style);
+    }
+  }
+
+  _handleSubmit(event: Event) {
+    event.preventDefault();
+    const restfulForm = this.shadowRoot?.querySelector('restful-form') as Rest.FormElement;
+    restfulForm?.form?.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
   }
 
   get next() {

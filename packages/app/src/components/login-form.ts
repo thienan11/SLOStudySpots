@@ -18,6 +18,7 @@ export class LoginFormElement extends LitElement {
         @mu-rest-form:created=${this._handleSuccess}
         @mu-rest-form:error=${this._handleError}>
         <slot></slot>
+        <slot slot="submit" name="submit" @click=${this._handleSubmit}></slot>
       </restful-form>
       <p class="error">
         ${this.message ? "Invalid Username or Password" : ""}
@@ -35,6 +36,29 @@ export class LoginFormElement extends LitElement {
   get next() {
     let query = new URLSearchParams(document.location.search);
     return query.get("next");
+  }
+
+  firstUpdated() {
+    this.injectStylesIntoRestfulForm();
+  }
+
+  injectStylesIntoRestfulForm() {
+    const restfulForm = this.shadowRoot?.querySelector('restful-form');
+    if (restfulForm && restfulForm.shadowRoot) {
+      const style = document.createElement('style');
+      style.textContent = `
+        form {
+          display: block; /* Override the grid display here */
+        }
+      `;
+      restfulForm.shadowRoot.appendChild(style);
+    }
+  }
+
+  _handleSubmit(event: Event) {
+    event.preventDefault();
+    const restfulForm = this.shadowRoot?.querySelector('restful-form') as Rest.FormElement;
+    restfulForm?.form?.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
   }
 
   _handleSuccess(event: CustomEvent) {

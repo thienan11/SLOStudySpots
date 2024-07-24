@@ -102,6 +102,12 @@ define({
     constructor() {
       super(routes, "slostudyspots:history", "slostudyspots:auth");
     }
+
+    // Scroll to top when the view updates
+    updated(changedProperties: Map<PropertyKey, unknown>) {
+      super.updated(changedProperties);
+      window.scrollTo(0, 0);
+    }
   },
   "nav-header": HeaderElement,
   "profile-view": ProfileViewElement,

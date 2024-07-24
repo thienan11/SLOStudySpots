@@ -18,7 +18,7 @@
     "start:proto": "cross-env STATIC=../proto/public npm run start",
     "check": "tsc --noEmit"
   },
-  "author": "",
+  "author": "Thien An Tran",
   "license": "ISC",
   "dependencies": {
     "@calpoly/mustang": "^0.1.0",

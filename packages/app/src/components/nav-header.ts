@@ -47,7 +47,7 @@ export class HeaderElement extends LitElement {
       <header class="navbar">
         <div class="navbar-content">
           <a class="logo" href="/app">
-            <img src="/icons/desk-lamp.svg" alt="SLOStudySpots Logo" />
+            <img src="/icons/book.png" alt="SLOStudySpots Logo" />
             <h1>SLOStudySpots</h1>
           </a>
 
@@ -134,6 +134,8 @@ export class HeaderElement extends LitElement {
       justify-content: space-between;
       align-items: center;
       background-color: var(--color-primary);
+      /* background-color: var(--color-primary-transparent); */
+      /* backdrop-filter: blur(10px); */
       padding: var(--space-small) var(--space-regular);
       position: sticky;
       top: 0; /* Ensures it sticks at the very top */
@@ -165,7 +167,7 @@ export class HeaderElement extends LitElement {
 
     .logo h1 {
       font-size: var(--font-size-large);
-      color: var(--color-background-primary);
+      color: var(--color-background-secondary);
       margin: 0;
     }
 

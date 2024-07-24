@@ -4,10 +4,11 @@
 :root {
   /* Color Palette */
   --color-primary: #668586; /* Soft teal */
+  --color-primary-transparent: rgba(102, 133, 134, 0.9); /* Soft teal with 50% transparency */
   --color-secondary: #D7A8A2; /* Dusty rose */
   --color-text-primary: #7A6F72; /* Earthy brown */
   --color-text-secondary: #333;
-  --color-background-primary: #FFF8E7; /* Cream */
+  --color-background-primary: #FFF8E7; /* Cream (alt: Light Gray #E0E0E0) */
   --color-background-secondary: #FFFDF6; /* Lighter cream */
   --color-links: #CAB8D9; /* Soft lavender */
   --color-tags: #9CAD92; /* Soothing green */
@@ -35,6 +36,7 @@
 
 body.dark-mode {
   --color-primary: #33736B;
+  --color-primary-transparent: rgba(51, 115, 107, 0.9); /* Dark mode teal with 50% transparency */
   --color-secondary: #79504F;
   --color-text-primary: #E8E1E2;
   --color-text-secondary: #fff;

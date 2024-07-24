@@ -8,7 +8,7 @@
     "dev": "npx vite",
     "build": "npx tsc && npx vite build"
   },
-  "author": "",
+  "author": "Thien An Tran",
   "license": "ISC",
   "dependencies": {
     "@calpoly/mustang": "^0.1.13",

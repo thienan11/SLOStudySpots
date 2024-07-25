@@ -90,7 +90,17 @@ function remove(userid) {
     }
   );
 }
-var profile_svc_default = { index, get, create, update, remove };
+function incrementReviewCount(userid) {
+  return ProfileModel.findOneAndUpdate({ userid }, { $inc: { reviewsCount: 1 } }).exec().then((updated) => {
+    if (!updated) {
+      throw new Error(`incrementReviewCount: ${userid} Not Found`);
+    }
+  }).catch((error) => {
+    console.error("Error incrementing review count:", error);
+    throw error;
+  });
+}
+var profile_svc_default = { index, get, create, update, remove, incrementReviewCount };
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
   ProfileModel

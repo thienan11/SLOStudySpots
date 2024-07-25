@@ -87,4 +87,18 @@ function remove(userid: String): Promise<void> {
   );
 }
 
-export default { index, get, create, update , remove};
+function incrementReviewCount(userid: string): Promise<void> {
+  return ProfileModel.findOneAndUpdate({ userid }, { $inc: { reviewsCount: 1 } })
+    .exec()
+    .then((updated) => {
+    if (!updated) {
+      throw new Error(`incrementReviewCount: ${userid} Not Found`);
+    }
+  })
+  .catch((error) => {
+    console.error("Error incrementing review count:", error);
+    throw error;
+  });
+}
+
+export default { index, get, create, update , remove, incrementReviewCount};

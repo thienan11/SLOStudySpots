@@ -1,5 +1,6 @@
 import { Schema, Model, Document, model, Types } from "mongoose";
 import { Review } from "../models/review";
+import profileSvc from "./profile-svc";
 
 const ReviewSchema = new Schema<Review>(
   {
@@ -41,6 +42,7 @@ function index(): Promise<Review[]> {
 // Return a review by its ID
 function getReviewById(id: string): Promise<Review | null> {
   return ReviewModel.findById(id)
+    .populate('userId', 'userid name')
     .exec()
     .then((review) => {
       return review;
@@ -91,8 +93,24 @@ function create(reviewData: Review): Promise<Review> {
 
   return newReview
     .save()
-    .then((reviewData) => {
-      return reviewData;
+    .then((review) => {
+      // Increment the review count for the user
+      return profileSvc.incrementReviewCount(reviewData.userId.userid)
+        .then(() => {
+          // Populate (in order to access userid from review's profile field); return the review if needed
+          return ReviewModel.findById(review._id)
+            .populate('userId', 'userid name')
+            .exec();
+        })
+        .then((populatedReview) => {
+          // makes sure populatedReview is not null
+          if (populatedReview) {
+            console.log("Creating review for user:", populatedReview.userId.userid);
+          }
+          console.log("Review Data:", populatedReview);
+
+          return populatedReview as Review; // Cast the populatedReview to Review type
+        });
     })
     .catch((error) => {
       console.error("Error creating review:", error);

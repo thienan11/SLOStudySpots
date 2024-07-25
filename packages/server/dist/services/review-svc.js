@@ -1,7 +1,9 @@
 "use strict";
+var __create = Object.create;
 var __defProp = Object.defineProperty;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
 var __getOwnPropNames = Object.getOwnPropertyNames;
+var __getProtoOf = Object.getPrototypeOf;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
 var __export = (target, all) => {
   for (var name in all)
@@ -15,6 +17,14 @@ var __copyProps = (to, from, except, desc) => {
   }
   return to;
 };
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(
+  // If the importer is in node compatibility mode or this is not an ESM
+  // file that has been converted to a CommonJS file using a Babel-
+  // compatible transform (i.e. "__esModule" has not been set), then set
+  // "default" to the CommonJS "module.exports" for node compatibility.
+  isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target,
+  mod
+));
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 var review_svc_exports = {};
 __export(review_svc_exports, {
@@ -22,6 +32,7 @@ __export(review_svc_exports, {
 });
 module.exports = __toCommonJS(review_svc_exports);
 var import_mongoose = require("mongoose");
+var import_profile_svc = __toESM(require("./profile-svc"));
 const ReviewSchema = new import_mongoose.Schema(
   {
     userId: { type: import_mongoose.Schema.Types.ObjectId, ref: "Profile", required: true },
@@ -50,7 +61,7 @@ function index() {
   return ReviewModel.find();
 }
 function getReviewById(id) {
-  return ReviewModel.findById(id).exec().then((review) => {
+  return ReviewModel.findById(id).populate("userId", "userid name").exec().then((review) => {
     return review;
   }).catch((error) => {
     console.error("Error fetching review by id:", error);
@@ -73,8 +84,16 @@ function getReviewsByUserId(userId) {
 }
 function create(reviewData) {
   const newReview = new ReviewModel(reviewData);
-  return newReview.save().then((reviewData2) => {
-    return reviewData2;
+  return newReview.save().then((review) => {
+    return import_profile_svc.default.incrementReviewCount(reviewData.userId.userid).then(() => {
+      return ReviewModel.findById(review._id).populate("userId", "userid name").exec();
+    }).then((populatedReview) => {
+      if (populatedReview) {
+        console.log("Creating review for user:", populatedReview.userId.userid);
+      }
+      console.log("Review Data:", populatedReview);
+      return populatedReview;
+    });
   }).catch((error) => {
     console.error("Error creating review:", error);
     throw error;

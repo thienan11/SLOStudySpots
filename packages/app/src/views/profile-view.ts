@@ -61,8 +61,8 @@ class ProfileViewer extends LitElement {
             </nav>
           </div>
         </div>
+        <h2>General Information</h2>
         <div class="profile-section">
-          <h2>General Information</h2>
           <dl>
             <dt>Username:</dt>
             <dd><slot name="userid"></slot></dd>
@@ -73,6 +73,14 @@ class ProfileViewer extends LitElement {
             <dt>Date Joined:</dt>
             <dd><slot name="dateJoined"></slot></dd>
           </dl>
+        </div>
+        <h2>Reviews</h2>
+        <div class="profile-section">
+          <dl>
+            <dt>Number of Reviews:</dt>
+            <dd><slot name="reviewsCount"></slot></dd>
+          </dl>
+          <a href="/reviews/${this.username}" class="link-view-all">View All Reviews</a>
         </div>
       </section>
     </main>
@@ -129,6 +137,9 @@ class ProfileViewer extends LitElement {
       h1 {
         color: var(--color-primary);
       }
+      h2 {
+        margin-top: 15px;
+      }
       dl {
         display: grid;
         grid-template-columns: 1fr 3fr;
@@ -143,10 +154,11 @@ class ProfileViewer extends LitElement {
         padding-left: 20px;
       }
       .profile-section {
-        background-color: var(--color-background-primary);
+        /* background-color: var(--color-background-primary); */
         padding: 15px;
         border-radius: 8px;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        /* box-shadow: 0 2px 4px rgba(0,0,0,0.05); */
+        border: 1px solid #E0E0E0;
         margin-bottom: 20px;
       }
       nav > a:hover {

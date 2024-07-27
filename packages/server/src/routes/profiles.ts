@@ -1,11 +1,12 @@
 import express, { Request, Response } from "express";
 import profiles from "../services/profile-svc";
 import { Profile } from "../models/profile";
+import authorizeProfileAccess from "../middleware/auth-check";
 
 const router = express.Router();
 
 // GET route (get by userid)
-router.get("/:userid", (req: Request, res: Response) => {
+router.get("/:userid", authorizeProfileAccess, (req: Request, res: Response) => {
   const { userid } = req.params;
 
   profiles
@@ -33,7 +34,7 @@ router.get("/", (req: Request, res: Response) => {
 });
 
 // PUT route (update by userid)
-router.put("/:userid", (req: Request, res: Response) => {
+router.put("/:userid", authorizeProfileAccess, (req: Request, res: Response) => {
   const { userid } = req.params;
   const newProfile = req.body;
 
@@ -44,7 +45,7 @@ router.put("/:userid", (req: Request, res: Response) => {
 });
 
 // DELETE route (delete by userid)
-router.delete("/:userid", (req: Request, res: Response) => {
+router.delete("/:userid", authorizeProfileAccess, (req: Request, res: Response) => {
   const { userid } = req.params;
 
   profiles

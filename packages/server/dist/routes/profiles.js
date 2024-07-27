@@ -33,8 +33,9 @@ __export(profiles_exports, {
 module.exports = __toCommonJS(profiles_exports);
 var import_express = __toESM(require("express"));
 var import_profile_svc = __toESM(require("../services/profile-svc"));
+var import_auth_check = __toESM(require("../middleware/auth-check"));
 const router = import_express.default.Router();
-router.get("/:userid", (req, res) => {
+router.get("/:userid", import_auth_check.default, (req, res) => {
   const { userid } = req.params;
   import_profile_svc.default.get(userid).then((profile) => res.json(profile)).catch((err) => res.status(404).end());
 });
@@ -45,12 +46,12 @@ router.post("/", (req, res) => {
 router.get("/", (req, res) => {
   import_profile_svc.default.index().then((list) => res.json(list)).catch((err) => res.status(500).send(err));
 });
-router.put("/:userid", (req, res) => {
+router.put("/:userid", import_auth_check.default, (req, res) => {
   const { userid } = req.params;
   const newProfile = req.body;
   import_profile_svc.default.update(userid, newProfile).then((profile) => res.json(profile)).catch((err) => res.status(404).end());
 });
-router.delete("/:userid", (req, res) => {
+router.delete("/:userid", import_auth_check.default, (req, res) => {
   const { userid } = req.params;
   import_profile_svc.default.remove(userid).then(() => res.status(204).end()).catch((err) => res.status(404).send(err));
 });

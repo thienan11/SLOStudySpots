@@ -94,7 +94,7 @@ export class HeaderElement extends LitElement {
                 <drop-down>
                   <ul>
                     <li>
-                      <a class="navbar-menu" href="/app/profile/${this.username}">
+                      <a class="navbar-menu" href="/app/account">
                         Profile
                       </a>
                     </li>

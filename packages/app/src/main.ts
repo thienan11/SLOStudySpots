@@ -19,6 +19,7 @@ import { StudySpotViewElement } from "./views/study-spot-view";
 import { AddSpotViewElement } from "./views/add-spot-view";
 import { RankingsViewElement } from "./views/rankings-view";
 import { AddReviewViewElement } from "./views/add-review-view";
+import { AccountViewElement } from "./views/account-view";
 
 const routes: Switch.Route[] = [
   {
@@ -33,6 +34,13 @@ const routes: Switch.Route[] = [
     path: "/app/profile/:id",
     view: (params: Switch.Params) => html`
       <profile-view user-id=${params.id}></profile-view>
+    `
+  },
+  {
+    auth: "protected",
+    path: "/app/account",
+    view: () => html`
+      <account-view></account-view>
     `
   },
   {
@@ -119,4 +127,5 @@ define({
   "rankings-view": RankingsViewElement,
   "add-review-view": AddReviewViewElement,
   // "user-review-view": UserReviewViewElement
+  "account-view": AccountViewElement
 });

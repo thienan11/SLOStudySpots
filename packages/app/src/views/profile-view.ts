@@ -44,6 +44,8 @@ const gridStyles = css`
   }
 `;
 
+const DEFAULT_AVATAR_URL = "/icons/default-profile.png";
+
 class ProfileViewer extends LitElement {
   @property()
   username?: string;
@@ -61,7 +63,6 @@ class ProfileViewer extends LitElement {
             </nav>
           </div>
         </div>
-        <h2>General Information</h2>
         <div class="profile-section">
           <dl>
             <dt>Username:</dt>
@@ -73,14 +74,6 @@ class ProfileViewer extends LitElement {
             <dt>Date Joined:</dt>
             <dd><slot name="dateJoined"></slot></dd>
           </dl>
-        </div>
-        <h2>Reviews</h2>
-        <div class="profile-section">
-          <dl>
-            <dt>Number of Reviews:</dt>
-            <dd><slot name="reviewsCount"></slot></dd>
-          </dl>
-          <a href="/reviews/${this.username}" class="link-view-all">View All Reviews</a>
         </div>
       </section>
     </main>
@@ -147,19 +140,23 @@ class ProfileViewer extends LitElement {
       }
       dt {
         font-weight: bold;
-        color: var(--color-primary);
+        color: var(--color-text-primary);
         padding-right: 20px;
       }
       dd {
         padding-left: 20px;
+        color: var(--color-text-secondary);
       }
       .profile-section {
         /* background-color: var(--color-background-primary); */
         padding: 15px;
-        border-radius: 8px;
+        border-radius: var(--border-radius);
         /* box-shadow: 0 2px 4px rgba(0,0,0,0.05); */
         border: 1px solid #E0E0E0;
         margin-bottom: 20px;
+      }
+      nav a {
+        text-decoration: underline;
       }
       nav > a:hover {
         color: var(--color-secondary);
@@ -181,6 +178,7 @@ class ProfileEditor extends LitElement {
   constructor() {
     super();
     this._handleAvatarSelected = this._handleAvatarSelected.bind(this);
+    this._clearAvatar = this._clearAvatar.bind(this);
   }
 
   render() {
@@ -219,6 +217,7 @@ class ProfileEditor extends LitElement {
               @change=${this._handleAvatarSelected} /> -->
               <input id="avatarInput" type="file" style="display: none" />
               <button @click="${this._triggerFileInput}">Upload Avatar</button>
+              <button @click="${this._clearAvatar}">Clear Avatar</button>
             </label>
             <slot name="avatar" class="avatar"></slot>
           </mu-form>
@@ -274,6 +273,12 @@ class ProfileEditor extends LitElement {
       reader.onerror = () => console.error("Error loading file");
       reader.readAsDataURL(file);
     }
+  }
+
+  _clearAvatar() {
+    this.dispatchEvent(new CustomEvent("profile:new-avatar", {
+      bubbles: true, composed: true, detail: DEFAULT_AVATAR_URL
+    }));
   }
 
   firstUpdated() {
@@ -360,10 +365,13 @@ export class ProfileViewElement extends View<Model, Msg> {
 
     const formattedDate = this.profile?.dateJoined ? new Date(this.profile.dateJoined).toLocaleDateString() : 'Date unavailable';
 
-    const avatarElement = this.newAvatar || avatar
-      ? html`<img src=${this.newAvatar || avatar} alt="Profile Avatar" slot="avatar">`
-      : html`<img slot="avatar" src="/icons/default-profile.svg">`;
+    // const avatarElement = this.newAvatar || avatar
+    //   ? html`<img src=${this.newAvatar || avatar} alt="Profile Avatar" slot="avatar">`
+    //   : html`<img slot="avatar" src="/icons/default-profile.svg">`;
 
+    // const DEFAULT_AVATAR_URL = "/icons/default-profile.png";
+    const avatarUrl = this.newAvatar ?? avatar ?? DEFAULT_AVATAR_URL;
+    const isDefaultAvatar = avatarUrl === DEFAULT_AVATAR_URL;
 
     return this.edit
     ? html`
@@ -373,12 +381,12 @@ export class ProfileViewElement extends View<Model, Msg> {
           @mu-form:submit=${(
             event: Form.SubmitEvent<Profile>
           ) => this._handleSubmit(event)}>
-          ${avatarElement}
+          <img slot="avatar" src="${avatarUrl}" class="avatar ${isDefaultAvatar ? 'invert' : ''}">
         </profile-editor>
       `
     : html`
         <profile-viewer username=${userid}>
-          ${avatarElement}
+          <img slot="avatar" src="${avatarUrl}" class="avatar ${isDefaultAvatar ? 'invert' : ''}">
           <span slot="name">${name}</span>
           <span slot="userid">${userid}</span>
           <span slot="email">${email || 'No email available'}</span>
@@ -410,5 +418,11 @@ export class ProfileViewElement extends View<Model, Msg> {
     ]);
   }
 
-  static styles = [resetStyles];
+  static styles = [resetStyles,
+    css`
+      .invert {
+        filter: var(--invert-state);
+      }
+    `
+  ];
 }

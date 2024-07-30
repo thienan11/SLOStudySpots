@@ -44,7 +44,7 @@ const gridStyles = css`
   }
 `;
 
-const DEFAULT_AVATAR_URL = "/icons/default-profile.png";
+const DEFAULT_AVATAR_URL = "/icons/avatar.svg";
 
 class ProfileViewer extends LitElement {
   @property()
@@ -54,6 +54,7 @@ class ProfileViewer extends LitElement {
     return html`
     <main>
       <section class="profile-container">
+        <a href="/app/account" class="back">← Back to About Me</a>
         <div class="profile-header">
           <slot name="avatar" class="avatar"></slot>
           <div>
@@ -159,7 +160,17 @@ class ProfileViewer extends LitElement {
         text-decoration: underline;
       }
       nav > a:hover {
-        color: var(--color-secondary);
+        color: var(--color-links);
+      }
+      .back {
+        color: var(--color-links);
+        text-decoration: none;
+        font-weight: bold;
+        margin-bottom: 20px;
+        display: inline-block;
+      }
+      .back:hover {
+        text-decoration: underline;
       }
     `
   ];
@@ -367,9 +378,9 @@ export class ProfileViewElement extends View<Model, Msg> {
 
     // const avatarElement = this.newAvatar || avatar
     //   ? html`<img src=${this.newAvatar || avatar} alt="Profile Avatar" slot="avatar">`
-    //   : html`<img slot="avatar" src="/icons/default-profile.svg">`;
+    //   : html`<img slot="avatar" src="/icons/avatar.svg">`;
 
-    // const DEFAULT_AVATAR_URL = "/icons/default-profile.png";
+    // const DEFAULT_AVATAR_URL = "/icons/avatar.svg";
     const avatarUrl = this.newAvatar ?? avatar ?? DEFAULT_AVATAR_URL;
     const isDefaultAvatar = avatarUrl === DEFAULT_AVATAR_URL;
 
@@ -421,7 +432,7 @@ export class ProfileViewElement extends View<Model, Msg> {
   static styles = [resetStyles,
     css`
       .invert {
-        filter: var(--invert-state);
+        filter: var(--invert-black-to-white);
       }
     `
   ];

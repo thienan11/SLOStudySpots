@@ -105,7 +105,7 @@ export class StudySpotViewElement extends View<Model, Msg> {
       link,
     } = this.studySpot || {};
     
-    const photo_URL = this.studySpot?.photos?.[0] || '/icons/default-spot.webp';
+    const photo_URL = this.studySpot?.photos?.[0] || '/icons/default-spot.png';
 
     const tags_html = this.studySpot?.tags?.map(s => html`<span class="feature-tag">${s}</span>`) || html``;
 

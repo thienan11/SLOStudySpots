@@ -15,6 +15,7 @@ function setDarkMode(checked: boolean) {
   else disableDarkMode();
 }
 
+// Initialize the dark mode based on the stored preference
 setDarkMode(darkMode);
 
 document.body.addEventListener("dark-mode", () => {

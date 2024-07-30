@@ -13,6 +13,9 @@ export class HeaderElement extends LitElement {
   @state()
   username = "anonymous";
 
+  @state()
+  isDarkMode = localStorage.getItem("dark-mode") === "true";
+
   // @state()
   // user: Auth.Model["user"] | null = null;
 
@@ -42,6 +45,13 @@ export class HeaderElement extends LitElement {
       }
     });
   }
+
+  toggleDarkMode() {
+    this.isDarkMode = !this.isDarkMode;
+    localStorage.setItem("dark-mode", this.isDarkMode.toString());
+    document.body.classList.toggle("dark-mode", this.isDarkMode);
+  }
+
   render() {
     return html`
       <header class="navbar">
@@ -61,8 +71,8 @@ export class HeaderElement extends LitElement {
 
           <nav class="right-navbar-links">
             <img
-              @click=${toggleDarkMode}
-              src="/icons/light-dark.svg"
+              @click=${this.toggleDarkMode}
+              src=${this.isDarkMode ? "/icons/dark-mode.svg" : "/icons/light-mode.svg"}
               alt="Dark mode"
               class="light-dark-icon"
             />
@@ -74,48 +84,49 @@ export class HeaderElement extends LitElement {
                 <drop-down>
                   <ul>
                     <li>
-                      <a class="navbar-menu" href="/app/login">
+                      <a href="/app/login">
                         Login
                       </a>
                     </li>
                     <li>
-                      <a class="navbar-menu" href="/app/register">
+                      <a href="/app/register">
                         Sign Up
                       </a>
                     </li>
                     <li>
-                      <a class="group-icon" href="/app/rankings">
+                      <a href="/app/rankings">
                         Community Rankings
                       </a>
                     </li>
                   </ul>
+                </drop-down>
                 `
               : html`
                 <drop-down>
                   <ul>
                     <li>
-                      <a class="navbar-menu" href="/app/account">
-                        Profile
+                      <a href="/app/account">
+                        <img src="/icons/about-me.svg" alt="about-me-icon" class="navbar-icon"/>
+                        About Me
                       </a>
                     </li>
                     <li>
-                      <a class="group-icon" href="/app/rankings">
+                      <a href="/app/rankings">
+                        <img src="/icons/ranking.svg" alt="ranking-icon" class="navbar-icon"/>
                         Community Rankings
                       </a>
                     </li>
                     <li>
-                      <a class="group-icon" href="/app/add-spot">
+                      <a href="/app/add-spot">
+                        <img src="/icons/add-spot.svg" alt="add-spot-icon" class="navbar-icon"/>
                         Add a Spot
                       </a>
                     </li>
-                    <!-- <li>
-                      <label class="light-dark-switch" @change=${toggleDarkMode}>
-                        <input type="checkbox" autocomplete="off" />
-                        Dark mode
-                      </label>
-                    </li> -->
                     <li>
-                      <a href="#" @click=${signOutUser}>Sign out</a>
+                      <a href="#" @click=${signOutUser}>
+                        <img src="/icons/signout.svg" alt="signout-icon" class="navbar-icon"/>
+                        Sign out
+                      </a>
                     </li>
                   </ul>
                 </drop-down>
@@ -167,7 +178,8 @@ export class HeaderElement extends LitElement {
 
     .logo h1 {
       font-size: var(--font-size-large);
-      color: var(--color-background-secondary);
+      /* color: var(--color-background-secondary); */
+      color: #fff;
       margin: 0;
     }
 
@@ -248,25 +260,35 @@ export class HeaderElement extends LitElement {
       list-style: none;
       display: flex;
       flex-direction: column;
-      align-items: flex-end;
+      align-items: flex-start;
+      padding: 0;
+      margin: 0;
     }
 
     .right-navbar-links li {
       /* margin-left: var(--space-regular); */
-      padding: 10px;
+      width: 100%; /* Full width */
     }
 
-    .right-navbar-links a {
+    .right-navbar-links li:hover {
+      background-color: rgba(0, 0, 0, 0.1); /* Light gray background on hover */
+      border-radius: var(--border-radius);
+    }
+
+    .right-navbar-links li a {
       color: var(--color-text-secondary);
       /* font-family: var(--font-family-display); */
       display: flex;
       align-items: center;
       text-decoration: none;
+      padding: 10px;
+      width: 100%; /* Ensure <a> takes full width of <li> */
+      height: 100%; /* Ensure <a> takes full height of <li> */
     }
 
-    .right-navbar-links a:hover {
+    /* .right-navbar-links a:hover {
       color: var(--color-links);
-    }
+    } */
 
     .right-navbar-links img {
       height: 27px;
@@ -288,12 +310,24 @@ export class HeaderElement extends LitElement {
       color: var(--color-links);
     }
 
+    /* .dark-light-container {
+      display: flex;
+      align-items: center;
+      padding: 10px;
+    } */
+
     .light-dark-icon {
       padding-right: 15px;
+      filter: var(--invert-black-to-white);
     }
 
     img:hover {
       cursor: pointer;
+    }
+
+    .navbar-icon {
+      padding-right: 10px;
+      filter: var(--invert-black-to-white);
     }
   `
   ];
@@ -314,11 +348,12 @@ export class HeaderElement extends LitElement {
 //   Events.relay(ev, "dark-mode", { checked });
 //   document.body.classList.toggle("dark-mode", checked);
 // }
-function toggleDarkMode(ev: InputEvent) {
-  Events.relay(ev, "dark-mode", {
-    checked: undefined,
-  });
-}
+
+// function toggleDarkMode(ev: InputEvent) {
+//   Events.relay(ev, "dark-mode", {
+//     checked: undefined,
+//   });
+// }
 
 function signOutUser(ev: Event) {
   Events.relay(ev, "auth:message", ["auth/signout"]);

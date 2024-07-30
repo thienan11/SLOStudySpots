@@ -34,7 +34,8 @@
   --border-radius: 8px;
 
   /* Invert State */
-  --invert-state: invert(0);
+  --invert-black-to-white: invert(0);
+  --invert-white-to-black: invert(1);
 }
 
 body.dark-mode {
@@ -52,5 +53,6 @@ body.dark-mode {
   --shadow-hover-small: 0 2px 5px rgba(255,255,255,0.04);
   --shadow-hover-med: 0 4px 20px rgba(255,255,255,0.07);
 
-  --invert-state: invert(1);
+  --invert-black-to-white: invert(1);
+  --invert-white-to-black: invert(0);
 }

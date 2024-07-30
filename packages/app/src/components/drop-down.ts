@@ -41,6 +41,7 @@ export class DropdownElement extends LitElement {
       width: 24px;
       height: auto;
       transition: transform 0.3s ease;
+      filter: var(--invert-black-to-white);
     }
   `;
 

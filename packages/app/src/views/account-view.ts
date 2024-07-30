@@ -33,17 +33,17 @@ export class AccountViewElement extends LitElement {
 
         <div class="profile-tabs">
           <div @click=${() => this.navigateTo("/app/profile/" + this.username)}>
-            <img src="/icons/default-profile.png" alt="profile-icon" />
+            <img src="/icons/avatar.svg" alt="profile-icon" />
             <h3>My Personal Info</h3>
             <p>View your personal account information</p>
           </div>
           <div @click=${() => this.navigateTo("/app/my-reviews")}>
-            <img src="/icons/review-icon.png" alt="review-icon" />
+            <img src="/icons/review-icon.svg" alt="review-icon" />
             <h3>My Reviews</h3>
             <p>View your reviews</p>
           </div>
           <div @click=${() => this.navigateTo("/app/my-fav-spots")}>
-            <img src="/icons/favorite-icon.png" alt="fav-spot-icon" />
+            <img src="/icons/favorite-icon.svg" alt="fav-spot-icon" />
             <h3>My Favorite Spots</h3>
             <p>View your saved favorite spots</p>
           </div>
@@ -110,7 +110,7 @@ export class AccountViewElement extends LitElement {
       .profile-tabs img {
         width: 40px;
         margin-bottom: 10px;
-        filter: var(--invert-state);
+        filter: var(--invert-black-to-white);
       }
 
       @media screen and (max-width: 988px) {

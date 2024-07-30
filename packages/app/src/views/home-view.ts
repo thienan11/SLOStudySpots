@@ -89,7 +89,7 @@ export class HomeViewElement extends View<Model, Msg> {
     const renderItem = (s: StudySpot) => {
       const { name, ratings, reviewsCount} = s;
       const { _id } = s as unknown as { _id: string };
-      const photoURL = s.photos?.[0] || '/icons/default-spot.webp';
+      const photoURL = s.photos?.[0] || '/icons/default-spot.png';
       const overallRating = ratings.overall.toFixed(1);
 
       return html`

@@ -3,6 +3,7 @@ import { css, html, TemplateResult } from "lit";
 import { state } from "lit/decorators.js";
 import { StudySpot } from "server/models";
 import resetCSS from "../css/reset";
+import starsCSS from "../css/stars";
 import { Msg } from "../messages";
 import { Model } from "../model";
 import { FilterPopup } from "../components/filter-popup";
@@ -139,6 +140,7 @@ export class HomeViewElement extends View<Model, Msg> {
 
   static styles = [
     resetCSS,
+    starsCSS,
     css`
       main {
         padding: var(--space-regular);
@@ -252,38 +254,6 @@ export class HomeViewElement extends View<Model, Msg> {
         font-size: 1rem;
         color: var(--color-secondary);
       }
-    
-      .stars {
-        display: flex;
-      }
-    
-      .star {
-        display: inline-block;
-        width: 1rem;
-        height: 1rem;
-        background: lightgray;
-        clip-path: polygon(
-          50% 0%, 
-          61% 35%, 
-          98% 35%, 
-          68% 57%, 
-          79% 91%, 
-          50% 70%, 
-          21% 91%, 
-          32% 57%, 
-          2% 35%, 
-          39% 35%
-        );
-      }
-      
-      .star.full {
-        background: gold;
-      }
-      
-      .star.half {
-        background: linear-gradient(90deg, gold 50%, lightgray 50%);
-      }
-
     `
   ];
 }

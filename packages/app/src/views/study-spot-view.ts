@@ -2,6 +2,7 @@ import { View } from "@calpoly/mustang";
 import { css, html, TemplateResult } from "lit";
 import { property, state } from "lit/decorators.js";
 import resetCSS from "../css/reset";
+import starsCSS from "../css/stars";
 import {
   StudySpot,
   Review,
@@ -45,7 +46,7 @@ export class StudySpotViewElement extends View<Model, Msg> {
     ) {
       console.log("Study Spot Page:", newValue);
       
-      // Clear reviews in the model when changing study spots
+      // Clear reviews in the model when changing study spots (is this necessary?)
       this.dispatchMessage(["review/clear"]);
 
       this.dispatchMessage([
@@ -216,6 +217,7 @@ export class StudySpotViewElement extends View<Model, Msg> {
 
   static styles = [
     resetCSS,
+    starsCSS,
     css`
       main {
         padding: var(--space-regular);
@@ -403,37 +405,6 @@ export class StudySpotViewElement extends View<Model, Msg> {
 
       .placeholder-text {
         color: var(--color-text-secondary);
-      }
-
-      .star {
-        display: inline-block;
-        width: 1rem;
-        height: 1rem;
-        background: lightgray;
-        clip-path: polygon(
-          50% 0%, 
-          61% 35%, 
-          98% 35%, 
-          68% 57%, 
-          79% 91%, 
-          50% 70%, 
-          21% 91%, 
-          32% 57%, 
-          2% 35%, 
-          39% 35%
-        );
-      }
-      
-      .star.full {
-        background: gold;
-      }
-      
-      .star.half {
-        background: linear-gradient(90deg, gold 50%, lightgray 50%);
-      }
-      
-      .star.empty {
-        background: lightgray;
       }
 
       .user-reviews {

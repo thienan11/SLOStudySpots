@@ -5,6 +5,7 @@ import { Msg } from '../messages';
 import { Model } from '../model';
 import { View } from '@calpoly/mustang';
 import resetCSS from '../css/reset';
+import starsCSS from '../css/stars';
 
 export class RankingsViewElement extends View<Model, Msg> {
   @state()
@@ -81,35 +82,11 @@ export class RankingsViewElement extends View<Model, Msg> {
 
   static styles = [
     resetCSS,
+    starsCSS,
     css`
       main {
         padding: var(--space-regular);
         flex-grow: 1;
-      }
-
-      .star {
-        display: inline-block;
-        width: 1rem;
-        height: 1rem;
-        background: lightgray;
-        clip-path: polygon(
-          50% 0%, 
-          61% 35%, 
-          98% 35%, 
-          68% 57%, 
-          79% 91%, 
-          50% 70%, 
-          21% 91%, 
-          32% 57%, 
-          2% 35%, 
-          39% 35%
-        );
-      }
-      .star.full {
-        background: gold;
-      }
-      .star.half {
-        background: linear-gradient(90deg, gold 50%, lightgray 50%);
       }
 
       .rankings-container {

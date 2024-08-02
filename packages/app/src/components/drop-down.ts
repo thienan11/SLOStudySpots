@@ -1,4 +1,5 @@
 import { LitElement, html, css } from "lit";
+import { property } from "lit/decorators.js";
 
 export class DropdownElement extends LitElement {
   static styles = css`
@@ -11,7 +12,8 @@ export class DropdownElement extends LitElement {
       display: none;
       position: absolute;
       right: 0;
-      margin-top: var(--space-small);
+      /* margin-top: var(--space-small); */
+      margin-top: 3px;
       width: max-content;
       padding: var(--space-small);
       border-radius: var(--border-radius);
@@ -24,7 +26,8 @@ export class DropdownElement extends LitElement {
       display: block;
     }
     button {
-      background: var(--color-primary);
+      /* background: var(--color-primary); */
+      background: inherit;
       border: none;
       padding: 8px;
       color: var(--color-text);
@@ -33,8 +36,10 @@ export class DropdownElement extends LitElement {
       display: flex;
       align-items: center;
       justify-content: center;
+      transition: background 0.3s;
     }
-    button:hover {
+    button:hover,
+    :host([open]) button {
       background: var(--color-links);
     }
     #menu-icon {
@@ -45,11 +50,13 @@ export class DropdownElement extends LitElement {
     }
   `;
 
+  @property({ type: String }) iconSrc = '/icons/menu.svg';
+
   render() {
     return html`
       <slot name="actuator">
         <button @click="${this.toggle}">
-          <img src="/icons/menu.svg" alt="Menu" id="menu-icon" />
+          <img src="${this.iconSrc}" alt="Menu" id="menu-icon" />
         </button>
       </slot>
       <div id="panel">

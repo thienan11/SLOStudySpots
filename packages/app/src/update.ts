@@ -103,6 +103,23 @@ export default function update(
           if (onFailure) onFailure(error);
         });
       break;
+    case "review/delete":
+      deleteReview(message[1].reviewId)
+      .then(() => {
+        apply((model) => ({
+          ...model,
+          reviews: model.reviews?.filter(review => (review as Review & { _id: string })._id !== message[1].reviewId)
+        }));
+      })
+      .then(() => {
+        const { onSuccess } = message[1];
+        if (onSuccess) onSuccess();
+      })
+      .catch((error: Error) => {
+        const { onFailure } = message[1];
+        if (onFailure) onFailure(error);
+      });
+      break;
     case "review/clear":
       apply(model => ({ ...model, reviews: [] }));
       break;
@@ -322,6 +339,26 @@ function addReview(
       if (json) return json as Review;
       return undefined;
     });
+}
+
+function deleteReview(reviewId: string) {
+  return fetch(`/reviews/${reviewId}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json"
+    }
+  })
+  .then((response: Response) => {
+    if (response.status === 204) {
+      return;
+    } else if (response.status === 404) {
+      // Handle 404 specifically for the case where the review is not found
+      console.log(`Review ${reviewId} not found`);
+    } else {
+      // For other statuses, throw an error
+      throw new Error(`Failed to delete review ${reviewId}`);
+    }
+  });
 }
 
 function listReviewsByUser(userId: string) {

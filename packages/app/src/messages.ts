@@ -34,5 +34,10 @@ export type Msg =
       onSuccess?: () => void;
       onFailure?: (err: Error) => void;
     }]
+  | ["review/delete", {
+    reviewId: string;
+    onSuccess?: () => void;
+    onFailure?: (err: Error) => void;
+  }]
   | ["review/list-by-user", { userId: string }]
   | ["review/clear"];

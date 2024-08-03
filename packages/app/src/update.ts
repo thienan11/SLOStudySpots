@@ -120,6 +120,31 @@ export default function update(
         if (onFailure) onFailure(error);
       });
       break;
+    case "review/update":
+      updateReview(message[1].review, user)
+        .then((updatedReview) => {
+          if (updatedReview) {
+            apply((model) => ({
+              ...model,
+              reviews: model.reviews?.map(r =>
+                (r as Review & { _id: string })._id === (updatedReview as Review & { _id: string })._id ? updatedReview : r)
+            }));
+          }
+        })
+        .then(() => {
+          const { onSuccess } = message[1];
+          if (onSuccess) onSuccess();
+        })
+        .catch((error: Error) => {
+          const { onFailure } = message[1];
+          if (onFailure) onFailure(error);
+        });
+      break;
+    case "review/select":
+      selectReview(message[1]).then((review: Review | undefined) =>
+        apply((model) => ({ ...model, review }))
+      );
+      break;
     case "review/clear":
       apply(model => ({ ...model, reviews: [] }));
       break;
@@ -358,6 +383,53 @@ function deleteReview(reviewId: string) {
       // For other statuses, throw an error
       throw new Error(`Failed to delete review ${reviewId}`);
     }
+  });
+}
+
+function updateReview(
+  review: Review,
+  user: Auth.User
+) {
+  return fetch(`/reviews/${(review as Review & { _id: string })._id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      ...Auth.headers(user)
+    },
+    body: JSON.stringify(review)
+  })
+  .then((response: Response) => {
+    if (response.status === 200) {
+      return response.json();
+    } else {
+      throw new Error(`Failed to update review ${(review as Review & { _id: string })._id}`);
+    }
+  })
+  .then((json: unknown) => {
+    if (json) {
+      return json as Review;
+    }
+    return undefined;
+  });
+}
+
+function selectReview(
+  msg: { reviewId: string }
+) {
+  return fetch(`/reviews/${msg.reviewId}`, {
+    method: "GET"
+  })
+    .then((response: Response) => {
+      if (response.status === 200) {
+        return response.json();
+      }
+      return undefined;
+    })
+    .then((json: unknown) => {
+      if (json) {
+        console.log("Review Found:", json);
+        return json as Review;
+      }
   });
 }
 

@@ -5,6 +5,7 @@ export interface Model {
   studySpot?: StudySpot;
   studySpotIndex?: StudySpot[];
   reviews?: Review[];
+  review?: Review;
 }
 
 export const init: Model = {};

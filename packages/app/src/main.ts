@@ -20,6 +20,7 @@ import { AddSpotViewElement } from "./views/add-spot-view";
 import { RankingsViewElement } from "./views/rankings-view";
 import { AddReviewViewElement } from "./views/add-review-view";
 import { AccountViewElement } from "./views/account-view";
+import { UpdateReviewViewElement } from "./views/user-review-edit-view";
 
 const routes: Switch.Route[] = [
   {
@@ -77,6 +78,13 @@ const routes: Switch.Route[] = [
     `
   },
   {
+    auth: "protected",
+    path: "/app/my-reviews/:id",
+    view: (params: Switch.Params) => html`
+      <update-review-view review-id=${params.id}></update-review-view>
+    `
+  },
+  {
     path: "/app/login",
     view: () => html` <login-view></login-view> `,
   },
@@ -128,5 +136,6 @@ define({
   "rankings-view": RankingsViewElement,
   "add-review-view": AddReviewViewElement,
   "user-review-view": UserReviewViewElement,
-  "account-view": AccountViewElement
+  "account-view": AccountViewElement,
+  "update-review-view": UpdateReviewViewElement
 });

@@ -12,6 +12,8 @@
   --color-background-secondary: #FFFDF6; /* Lighter cream */
   --color-links: #CAB8D9; /* Soft lavender */
   --color-tags: #9CAD92; /* Soothing green */
+  --color-accent: #E6AC8F; /* Dark Peach */
+  --color-background-highlight: #F2F2F2; /* Light gray */
 
   /* Shadows */
   --shadow-hover-large: 0px 8px 15px rgba(0,0,0,0.1);
@@ -48,6 +50,8 @@ body.dark-mode {
   --color-background-secondary: #404040;
   --color-links: #6E5D84;
   --color-tags: #495D50;
+  --color-accent: #F2D3B2;
+  --color-background-highlight: #333;
 
   --shadow-hover-large: 0px 8px 15px rgba(255,255,255,0.05);
   --shadow-hover-small: 0 2px 5px rgba(255,255,255,0.04);

@@ -86,64 +86,94 @@ export class AddReviewViewElement extends View<Model, Msg> {
           <h2>Add Your Review for ${this.studySpot?.name}</h2>
             <form id="addReviewForm" autocomplete="off">
               <div class="star-form-group">
-                <label><strong>Quietness:</strong> <small>(Rate how quiet the area is)</small></label>
-                  <input
-                    type="number"
-                    name="quietnessRating"
-                    placeholder="Quietness Rating (0-5)"
-                    @change=${(e: any) => (this.quietnessRating = parseInt(e.target.value))}
-                    required
-                    min="0"
-                    max="5"
-                  />
+                <div class="label-container">
+                  <label><strong>Quietness:</strong></label>
+                  <p><small>Consider how quiet the area is</small></p>
+                </div>
+                <div class="star-rating">
+                  <input type="radio" id="star5-quietness" name="quietnessRating" value="5" @change=${(e: any) => (this.quietnessRating = parseInt(e.target.value))} />
+                  <label for="star5-quietness" title="5 stars">★</label>
+                  <input type="radio" id="star4-quietness" name="quietnessRating" value="4" @change=${(e: any) => (this.quietnessRating = parseInt(e.target.value))} />
+                  <label for="star4-quietness" title="4 stars">★</label>
+                  <input type="radio" id="star3-quietness" name="quietnessRating" value="3" @change=${(e: any) => (this.quietnessRating = parseInt(e.target.value))} />
+                  <label for="star3-quietness" title="3 stars">★</label>
+                  <input type="radio" id="star2-quietness" name="quietnessRating" value="2" @change=${(e: any) => (this.quietnessRating = parseInt(e.target.value))} />
+                  <label for="star2-quietness" title="2 stars">★</label>
+                  <input type="radio" id="star1-quietness" name="quietnessRating" value="1" @change=${(e: any) => (this.quietnessRating = parseInt(e.target.value))} />
+                  <label for="star1-quietness" title="1 star">★</label>
+                </div>
               </div>
               <div class="star-form-group">
-                <label><strong>Wifi Quality:</strong> <small>(Evaluate the reliability and speed of the WiFi)</small></label>
-                <input
-                  type="number"
-                  name="wifiQualityRating"
-                  placeholder="WiFi Quality Rating (0-5)"
-                  @change=${(e: any) => (this.wifiQualityRating = parseInt(e.target.value))}
-                  required
-                  min="0"
-                  max="5"
-                />
+                <div class="label-container">
+                  <label><strong>Wifi Quality:</strong></label>
+                  <p><small>Consider the reliability and speed of the WiFi</small></p>
+                </div>
+                <div class="star-rating">
+                  <input type="radio" id="star5-wifi" name="wifiQualityRating" value="5" @change=${(e: any) => (this.wifiQualityRating = parseInt(e.target.value))} />
+                  <label for="star5-wifi" title="5 stars">★</label>
+                  <input type="radio" id="star4-wifi" name="wifiQualityRating" value="4" @change=${(e: any) => (this.wifiQualityRating = parseInt(e.target.value))} />
+                  <label for="star4-wifi" title="4 stars">★</label>
+                  <input type="radio" id="star3-wifi" name="wifiQualityRating" value="3" @change=${(e: any) => (this.wifiQualityRating = parseInt(e.target.value))} />
+                  <label for="star3-wifi" title="3 stars">★</label>
+                  <input type="radio" id="star2-wifi" name="wifiQualityRating" value="2" @change=${(e: any) => (this.wifiQualityRating = parseInt(e.target.value))} />
+                  <label for="star2-wifi" title="2 stars">★</label>
+                  <input type="radio" id="star1-wifi" name="wifiQualityRating" value="1" @change=${(e: any) => (this.wifiQualityRating = parseInt(e.target.value))} />
+                  <label for="star1-wifi" title="1 star">★</label>
+                </div>
               </div>
               <div class="star-form-group">
-                <label><strong>Crowdedness:</strong> <small>(Rate how uncrowded the spot is)</small></label>
-                <input
-                  type="number"
-                  name="crowdednessRating"
-                  placeholder="Crowdedness Rating (0-5)"
-                  @change=${(e: any) => (this.crowdednessRating = parseInt(e.target.value))}
-                  required
-                  min="0"
-                  max="5"
-                />
+                <div class="label-container">
+                  <label><strong>Crowdedness:</strong></label>
+                  <p><small>Consider how uncrowded the spot is</small></p>
+                </div>
+                <div class="star-rating">
+                  <input type="radio" id="star5-crowd" name="crowdednessRating" value="5" @change=${(e: any) => (this.crowdednessRating = parseInt(e.target.value))} />
+                  <label for="star5-crowd" title="5 stars">★</label>
+                  <input type="radio" id="star4-crowd" name="crowdednessRating" value="4" @change=${(e: any) => (this.crowdednessRating = parseInt(e.target.value))} />
+                  <label for="star4-crowd" title="4 stars">★</label>
+                  <input type="radio" id="star3-crowd" name="crowdednessRating" value="3" @change=${(e: any) => (this.crowdednessRating = parseInt(e.target.value))} />
+                  <label for="star3-crowd" title="3 stars">★</label>
+                  <input type="radio" id="star2-crowd" name="crowdednessRating" value="2" @change=${(e: any) => (this.crowdednessRating = parseInt(e.target.value))} />
+                  <label for="star2-crowd" title="2 stars">★</label>
+                  <input type="radio" id="star1-crowd" name="crowdednessRating" value="1" @change=${(e: any) => (this.crowdednessRating = parseInt(e.target.value))} />
+                  <label for="star1-crowd" title="1 star">★</label>
+                </div>
               </div>
               <div class="star-form-group">
-                <label><strong>Power Outlets:</strong> <small>(Assess the availability of power outlets)</small></label>
-                <input
-                  type="number"
-                  name="powerOutletRating"
-                  placeholder="Power Outlet Rating (0-5)"
-                  @change=${(e: any) => (this.powerOutletRating = parseInt(e.target.value))}
-                  required
-                  min="0"
-                  max="5"
-                />
+                <div class="label-container">
+                  <label><strong>Power Outlets:</strong></label>
+                  <p><small>Consider the availability of power outlets</small></p>
+                </div>
+                <div class="star-rating">
+                  <input type="radio" id="star5-power" name="powerOutletRating" value="5" @change=${(e: any) => (this.powerOutletRating = parseInt(e.target.value))} />
+                  <label for="star5-power" title="5 stars">★</label>
+                  <input type="radio" id="star4-power" name="powerOutletRating" value="4" @change=${(e: any) => (this.powerOutletRating = parseInt(e.target.value))} />
+                  <label for="star4-power" title="4 stars">★</label>
+                  <input type="radio" id="star3-power" name="powerOutletRating" value="3" @change=${(e: any) => (this.powerOutletRating = parseInt(e.target.value))} />
+                  <label for="star3-power" title="3 stars">★</label>
+                  <input type="radio" id="star2-power" name="powerOutletRating" value="2" @change=${(e: any) => (this.powerOutletRating = parseInt(e.target.value))} />
+                  <label for="star2-power" title="2 stars">★</label>
+                  <input type="radio" id="star1-power" name="powerOutletRating" value="1" @change=${(e: any) => (this.powerOutletRating = parseInt(e.target.value))} />
+                  <label for="star1-power" title="1 star">★</label>
+                </div>
               </div>
               <div class="star-form-group">
-                <label><strong>Amenities:</strong> <small>(Evaluate the availability and quality of amenities)</small></label>
-                <input
-                  type="number"
-                  name="amenitiesRating"
-                  placeholder="Amenities Rating (0-5)"
-                  @change=${(e: any) => (this.amenitiesRating = parseInt(e.target.value))}
-                  required
-                  min="0"
-                  max="5"
-                />
+                <div class="label-container">
+                  <label><strong>Amenities:</strong></label>
+                  <p><small>Consider the availability and quality of amenities</small></p>
+                </div>
+                <div class="star-rating">
+                  <input type="radio" id="star5-amenities" name="amenitiesRating" value="5" @change=${(e: any) => (this.amenitiesRating = parseInt(e.target.value))} />
+                  <label for="star5-amenities" title="5 stars">★</label>
+                  <input type="radio" id="star4-amenities" name="amenitiesRating" value="4" @change=${(e: any) => (this.amenitiesRating = parseInt(e.target.value))} />
+                  <label for="star4-amenities" title="4 stars">★</label>
+                  <input type="radio" id="star3-amenities" name="amenitiesRating" value="3" @change=${(e: any) => (this.amenitiesRating = parseInt(e.target.value))} />
+                  <label for="star3-amenities" title="3 stars">★</label>
+                  <input type="radio" id="star2-amenities" name="amenitiesRating" value="2" @change=${(e: any) => (this.amenitiesRating = parseInt(e.target.value))} />
+                  <label for="star2-amenities" title="2 stars">★</label>
+                  <input type="radio" id="star1-amenities" name="amenitiesRating" value="1" @change=${(e: any) => (this.amenitiesRating = parseInt(e.target.value))} />
+                  <label for="star1-amenities" title="1 star">★</label>
+                </div>
               </div>
               <div class="form-group">
                 <label for="comment">Comment:</label>
@@ -284,6 +314,11 @@ export class AddReviewViewElement extends View<Model, Msg> {
         box-sizing: border-box;
         outline: none;
       }
+
+      textarea {
+        height: 100px;
+        resize: vertical;
+      }
       
       .form-group input[type="text"]:focus,
       .form-group textarea:focus {
@@ -303,6 +338,7 @@ export class AddReviewViewElement extends View<Model, Msg> {
       .add-review h2 {
         text-align: center;
         color: var(--color-secondary);
+        padding-bottom: 20px;
       }
       
       .star-container {
@@ -321,7 +357,25 @@ export class AddReviewViewElement extends View<Model, Msg> {
         display: flex;
         justify-content: space-between;
         align-items: center;
+        padding-bottom: 20px;
+        /* border-bottom: 2px solid var(--color-primary); */
         margin-bottom: 20px;
+      }
+
+      .label-container {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 5px;
+      }
+
+      .label-container label {
+        color: var(--color-text-primary);
+        font-weight: bold;
+      }
+
+      .label-container small {
+        color: var(--color-text-secondary, #666);
+        font-size: 0.8em;
       }
       
       .star-form-group label {
@@ -341,7 +395,7 @@ export class AddReviewViewElement extends View<Model, Msg> {
       .star-rating label {
         float: right;
         padding: 5px;
-        font-size: 25px;
+        font-size: 30px;
         color: #ccc;
         transition: all 0.3s ease;
         cursor: pointer;
@@ -352,7 +406,7 @@ export class AddReviewViewElement extends View<Model, Msg> {
       .star-rating input[type='radio']:checked ~ label {
         /* color: #f5d315; */
         color: var(--color-links);
-        transform: scale(1.2);
+        transform: scale(1.3);
       }
 
       .btn-large {
@@ -371,10 +425,13 @@ export class AddReviewViewElement extends View<Model, Msg> {
         background-color: var(--color-links);
       }
 
-      /* Responsive adjustments */
       @media (max-width: 768px) {
         .star-form-group {
           flex-direction: column;
+        }
+
+        .label-container {
+          text-align: center;
         }
 
         .star-form-group label {
@@ -383,6 +440,7 @@ export class AddReviewViewElement extends View<Model, Msg> {
 
         .add-review {
           padding: 10px;
+          width: 100%;
         }
 
         .form-group input[type="text"],

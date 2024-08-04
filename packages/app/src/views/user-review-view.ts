@@ -158,7 +158,10 @@ export class UserReviewViewElement extends View<Model, Msg> {
           <h1>${this.profile.userid}'s Reviews (${this.profile.reviewsCount})</h1>
         </section>
         <section class="reviews-list">
-          ${this.reviews.map(review => this.renderReview(review))}
+          ${this.reviews.length === 0
+            ? html`<p>No reviews available.</p>`
+            : this.reviews.map(review => this.renderReview(review))
+          }
         </section>
       </main>
     `;
@@ -177,8 +180,10 @@ export class UserReviewViewElement extends View<Model, Msg> {
           </a>
           <div class="stars">${this.renderStars(overallRating)}</div>
           <drop-down iconSrc="/icons/three-dots.svg">
-            <div class="dropdown-option" @click="${() => this.updateReview(review)}">Update</div>
-            <div class="dropdown-option" @click="${() => this.deleteReview((review as Review & { _id: string })._id, review, this.profile)}">Delete</div>
+            <div class="dropdown-container">
+              <a class="dropdown-option" href="my-reviews/${(review as Review & { _id: string })._id}">Update</a>
+              <div class="dropdown-option" @click="${() => this.deleteReview((review as Review & { _id: string })._id, review, this.profile)}">Delete</div>
+            </div>
           </drop-down>
         </div>
         <p class="review-date">${date}</p>
@@ -187,13 +192,6 @@ export class UserReviewViewElement extends View<Model, Msg> {
         <p class="review-comment">${comment}</p>
       </div>
     `;
-  }
-
-  updateReview(review: Review): void {
-    // Implement the logic to update the review
-    console.log("Update review", review);
-    // Redirect to an update form or open a modal
-    // this.dispatchMessage(["review/update", { reviewId: review._id }]);
   }
 
   deleteReview(reviewId: string, review: Review, profile: Profile | undefined): void {
@@ -290,6 +288,8 @@ export class UserReviewViewElement extends View<Model, Msg> {
     css`
       main {
         padding: var(--space-regular);
+        max-width: 1200px;
+        margin: 0 auto;
       }
 
       .profile-header {
@@ -299,7 +299,9 @@ export class UserReviewViewElement extends View<Model, Msg> {
 
       .profile-header h1 {
         font-size: var(--font-size-large);
-        color: var(--color-primary);
+        color: var(--color-secondary);
+        margin: 0;
+        padding-bottom: var(--space-regular);
       }
 
       .reviews-list {
@@ -309,15 +311,17 @@ export class UserReviewViewElement extends View<Model, Msg> {
       }
 
       .review-container {
-        border: 1px solid var(--color-primary);
+        border: 1px solid #ccc;
         border-radius: var(--border-radius);
-        padding: var(--space-small);
+        padding: var(--space-regular);
         background-color: var(--color-background-secondary);
-        transition: box-shadow 0.3s ease-in-out;
+        transition: box-shadow 0.3s ease-in-out, transform 0.3s ease;
+        overflow: hidden; /* Prevents content from spilling out */
       }
 
       .review-container:hover {
         box-shadow: var(--shadow-hover-large);
+        transform: translateY(-5px);
       }
 
       .review-header {
@@ -327,10 +331,14 @@ export class UserReviewViewElement extends View<Model, Msg> {
         margin-bottom: var(--space-small);
       }
 
-      .review-header h3 {
-        margin: 0;
-        font-size: 1.25rem;
+      .review-link {
         color: var(--color-primary);
+        text-decoration: none;
+        font-weight: bold;
+      }
+
+      .review-link:hover {
+        text-decoration: underline;
       }
 
       .review-date {
@@ -341,14 +349,22 @@ export class UserReviewViewElement extends View<Model, Msg> {
 
       .review-best-time {
         font-size: 0.875rem;
-        color: var(--color-text-secondary);
+        color: var(--color-accent);
         margin-bottom: var(--space-small);
+        font-weight: bold;
+        background-color: var(--color-background-highlight);
+        padding: var(--space-small);
+        border-radius: var(--border-radius);
       }
 
       .review-comment {
         font-size: 1rem;
         color: var(--color-text-primary);
         margin-top: var(--space-small);
+        font-style: italic;
+        background-color: var(--color-background-highlight);
+        padding: var(--space-small);
+        border-radius: var(--border-radius);
       }
 
       .subratings-container {
@@ -370,31 +386,25 @@ export class UserReviewViewElement extends View<Model, Msg> {
         width: 6rem; /* To align stars in a column */
       }
 
-      .dropdown {
-        position: relative;
-        display: inline-block;
+      .dropdown-container {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
       }
 
       .dropdown-option {
         padding: var(--space-small);
         cursor: pointer;
         color: var(--color-text-primary);
-        border: 1px solid var(--color-border);
         border-radius: var(--border-radius);
         transition: background-color 0.3s ease;
+        text-decoration: none;
+        margin: 0;
       }
 
       .dropdown-option:hover {
         background-color: var(--color-primary);
         color: var(--color-background-primary);
-      }
-
-      .dropdown-option + .dropdown-option {
-        border-top: 1px solid var(--color-border);
-      }
-
-      .dropdown-option:last-child {
-        border-bottom: 1px solid var(--color-border);
       }
     `
   ];

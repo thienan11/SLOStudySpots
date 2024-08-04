@@ -154,7 +154,7 @@ export class StudySpotViewElement extends View<Model, Msg> {
             <img src="/icons/upload-photo.svg" alt="Add Photo Icon" class="btn-icon-white">
             Add Photo
           </a>
-          <a href="../add-review/${this.spotid}" class="btn-write-review">
+          <a href="/app/add-review/${this.spotid}" class="btn-write-review">
             <img src="/icons/create.svg" alt="Write Review Icon" class="btn-icon-white">
             Write Review
           </a>

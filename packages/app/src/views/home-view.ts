@@ -10,7 +10,7 @@ import { FilterPopup } from "../components/filter-popup";
 
 export class HomeViewElement extends View<Model, Msg> {
   static uses = define({
-    "filter-popup": FilterPopup,
+    "filter-popup": FilterPopup
   })
 
   @state()
@@ -90,7 +90,8 @@ export class HomeViewElement extends View<Model, Msg> {
     const renderItem = (s: StudySpot) => {
       const { name, ratings, reviewsCount} = s;
       const { _id } = s as unknown as { _id: string };
-      const photoURL = s.photos?.[0] || '/icons/default-spot.png';
+      // const photoURL = s.photos?.[0] || '/icons/default-spot.png';
+      const photoURL = (s.photos && s.photos.length > 0 ? s.photos[0].url : '/icons/default-spot.png');
       const overallRating = ratings.overall.toFixed(1);
 
       return html`

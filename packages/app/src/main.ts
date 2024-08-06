@@ -21,6 +21,7 @@ import { RankingsViewElement } from "./views/rankings-view";
 import { AddReviewViewElement } from "./views/add-review-view";
 import { AccountViewElement } from "./views/account-view";
 import { UpdateReviewViewElement } from "./views/user-review-edit-view";
+import { GalleryViewElement } from "./views/gallery-view";
 
 const routes: Switch.Route[] = [
   {
@@ -48,6 +49,12 @@ const routes: Switch.Route[] = [
     path: "/app/study-spot/:id",
     view: (params: Switch.Params) => html`
       <study-spot-view spot-id=${params.id}></study-spot-view>
+    `
+  },
+  {
+    path: "/app/study-spot/:id/gallery",
+    view: (params: Switch.Params) => html`
+      <gallery-view spot-id=${params.id}></gallery-view>
     `
   },
   {
@@ -137,5 +144,6 @@ define({
   "add-review-view": AddReviewViewElement,
   "user-review-view": UserReviewViewElement,
   "account-view": AccountViewElement,
-  "update-review-view": UpdateReviewViewElement
+  "update-review-view": UpdateReviewViewElement,
+  "gallery-view": GalleryViewElement
 });

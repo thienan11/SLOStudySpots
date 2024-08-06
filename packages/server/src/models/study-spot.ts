@@ -1,3 +1,5 @@
+import { create } from "node:domain";
+
 export interface StudySpot {
   name: string;
   address: string;
@@ -6,7 +8,7 @@ export interface StudySpot {
   ratings: Ratings;
   reviewsCount: number;
   tags: string[] | undefined;
-  photos: string[] | undefined;
+  photos: Photo[] | undefined;
   link: string | undefined; // any link to the study spot's website if available
   createdBy: string; // userid of the user who created the study spot (for future reference)
 }
@@ -37,3 +39,9 @@ type Day =
   | "Friday"
   | "Saturday"
   | "Sunday";
+
+export interface Photo {
+  url: string;
+  uploadedBy: string;
+  uploadDate: Date;
+}

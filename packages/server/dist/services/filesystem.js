@@ -26,6 +26,26 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
   mod
 ));
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
+var __async = (__this, __arguments, generator) => {
+  return new Promise((resolve, reject) => {
+    var fulfilled = (value) => {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var rejected = (value) => {
+      try {
+        step(generator.throw(value));
+      } catch (e) {
+        reject(e);
+      }
+    };
+    var step = (x) => x.done ? resolve(x.value) : Promise.resolve(x.value).then(fulfilled, rejected);
+    step((generator = generator.apply(__this, __arguments)).next());
+  });
+};
 var filesystem_exports = {};
 __export(filesystem_exports, {
   getFile: () => getFile,
@@ -35,26 +55,50 @@ module.exports = __toCommonJS(filesystem_exports);
 var import_promises = __toESM(require("node:fs/promises"));
 var import_node_stream = require("node:stream");
 var import_uuid = require("uuid");
-const IMAGES = process.env.IMAGES || "/tmp";
+var import_study_spot_svc = __toESM(require("../services/study-spot-svc"));
+const PHOTOS = process.env.PHOTOS || "/tmp";
 function saveFile(req, res) {
-  const filename = req.query.filename || "upload";
-  const uuid = (0, import_uuid.v4)();
-  const blobname = `${uuid}:${filename}`;
-  const stream = import_node_stream.Readable.from(req.body);
-  import_promises.default.open(`${IMAGES}/${blobname}`, "w").then((file) => import_promises.default.writeFile(file, stream)).then(() => {
-    res.status(201).send({
-      url: `/images/${blobname}`
-    });
-  }).catch((error) => {
-    res.status(500).send({
-      message: "failed to upload file to server filesysteem",
-      error
-    });
+  return __async(this, null, function* () {
+    const filename = req.query.filename || "upload";
+    const studySpotId = req.query.studySpotId;
+    const username = req.query.username;
+    const uuid = (0, import_uuid.v4)();
+    const blobname = `${uuid}:${filename}`;
+    const stream = import_node_stream.Readable.from(req.body);
+    try {
+      const filePath = `${PHOTOS}/${blobname}`;
+      yield import_promises.default.writeFile(filePath, yield streamToBuffer(stream));
+      const photoUrl = `/photos/${blobname}`;
+      console.log(`File saved at: ${filePath}`);
+      console.log(`Photo URL: ${photoUrl}`);
+      const photoDetails = {
+        url: photoUrl,
+        uploadedBy: username,
+        uploadDate: /* @__PURE__ */ new Date()
+      };
+      yield import_study_spot_svc.default.updatePhotoUrls(studySpotId, photoDetails);
+      res.status(201).send({
+        url: photoUrl
+      });
+    } catch (error) {
+      res.status(500).send({
+        message: "Failed to upload file to server filesystem",
+        error
+      });
+    }
+  });
+}
+function streamToBuffer(stream) {
+  return new Promise((resolve, reject) => {
+    const chunks = [];
+    stream.on("data", (chunk) => chunks.push(chunk));
+    stream.on("end", () => resolve(Buffer.concat(chunks)));
+    stream.on("error", reject);
   });
 }
 function getFile(req, res) {
   const { id } = req.params;
-  import_promises.default.readFile(`${IMAGES}/${id}`).then((buf) => {
+  import_promises.default.readFile(`${PHOTOS}/${id}`).then((buf) => {
     res.send(buf);
   }).catch((error) => {
     res.status(404).send({

@@ -45,8 +45,8 @@ const nodeModules = import_path.default.resolve(
 );
 console.log("Serving NPM packages from", nodeModules);
 app.use("/node_modules", import_express.default.static(nodeModules));
-app.post("/images", import_filesystem.saveFile);
-app.get("/images/:id", import_filesystem.getFile);
+app.post("/photos", import_filesystem.saveFile);
+app.get("/photos/:id", import_filesystem.getFile);
 app.use("/auth", import_auth.default);
 app.use("/api/profiles", import_auth.authenticateUser, import_profiles.default);
 app.use("/study-spots", import_study_spots.default);

@@ -106,7 +106,9 @@ export class StudySpotViewElement extends View<Model, Msg> {
       link,
     } = this.studySpot || {};
     
-    const photo_URL = this.studySpot?.photos?.[0] || '/icons/default-spot.png';
+    // const photo_URL = this.studySpot?.photos?.[0] || '/icons/default-spot.png';
+    const photo_URL = (this.studySpot?.photos && this.studySpot?.photos.length > 0
+      ? this.studySpot?.photos[0].url : '/icons/default-spot.png');
 
     const tags_html = this.studySpot?.tags?.map(s => html`<span class="feature-tag">${s}</span>`) || html``;
 
@@ -142,7 +144,7 @@ export class StudySpotViewElement extends View<Model, Msg> {
           <img src="${photo_URL}" alt="View of ${this.studySpot?.name}" class="featured-image">
           <div class="view-gallery-overlay">
             <h2 class="spot-title">${name}</h2>
-            <a href="" class="btn-view-gallery">
+            <a href="${this.spotid}/gallery" class="btn-view-gallery">
               <img src="/icons/default-photo.svg" alt="Gallery Icon">
               View Gallery
             </a>
@@ -150,10 +152,10 @@ export class StudySpotViewElement extends View<Model, Msg> {
         </section>
 
         <section class="study-spot-actions">
-          <a href="#" class="btn-add-photo">
+          <!-- <a href="#" class="btn-add-photo">
             <img src="/icons/upload-photo.svg" alt="Add Photo Icon" class="btn-icon-white">
             Add Photo
-          </a>
+          </a> -->
           <a href="/app/add-review/${this.spotid}" class="btn-write-review">
             <img src="/icons/create.svg" alt="Write Review Icon" class="btn-icon-white">
             Write Review

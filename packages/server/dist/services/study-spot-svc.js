@@ -86,7 +86,17 @@ const StudySpotSchema = new import_mongoose.Schema(
     },
     reviewsCount: { type: Number, default: 0 },
     tags: { type: [String], default: [] },
-    photos: { type: [String], default: [] },
+    // photos: { type: [String], default: [] },
+    photos: {
+      type: [
+        {
+          url: { type: String, required: true },
+          uploadedBy: { type: String, required: true },
+          uploadDate: { type: Date, default: Date.now }
+        }
+      ],
+      default: []
+    },
     link: { type: String, default: null },
     createdBy: { type: String, required: true }
   },
@@ -145,4 +155,16 @@ function update(id, updatedStudySpot) {
     throw error;
   });
 }
-var study_spot_svc_default = { index, getStudySpotbyId, create, getStudySpotsByTag, getFavoriteStudySpots, update };
+function updatePhotoUrls(id, photoDetails) {
+  return StudySpotModel.findByIdAndUpdate(
+    id,
+    { $push: { photos: photoDetails } },
+    { new: true }
+  ).exec().then((studySpot) => {
+    return studySpot;
+  }).catch((error) => {
+    console.error("Error adding photo URL:", error);
+    throw error;
+  });
+}
+var study_spot_svc_default = { index, getStudySpotbyId, create, getStudySpotsByTag, getFavoriteStudySpots, update, updatePhotoUrls };

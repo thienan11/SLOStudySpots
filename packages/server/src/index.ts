@@ -34,9 +34,9 @@ const nodeModules = path.resolve(
 console.log("Serving NPM packages from", nodeModules);
 app.use("/node_modules", express.static(nodeModules));
 
-// Images routes
-app.post("/images", saveFile);
-app.get("/images/:id", getFile);
+// Photos routes
+app.post("/photos", saveFile);
+app.get("/photos/:id", getFile);
 
 // Auth routes
 app.use("/auth", auth);

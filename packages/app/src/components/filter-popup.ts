@@ -135,5 +135,35 @@ export class FilterPopup extends LitElement {
     button:hover {
       background-color: var(--color-links);
     }
+
+    @media (max-width: 600px) {
+      .popup {
+        width: 90vw; /* Full width for small screens */
+        padding: 10px;
+      }
+
+      .filter-container {
+        padding: 8px;
+        gap: 8px;
+      }
+
+      .filter-icon {
+        height: 20px;
+        width: 20px;
+      }
+
+      .filter-container h4 {
+        font-size: 14px;
+      }
+
+      .filter-title h3 {
+        font-size: 18px; /* Adjust font size for smaller screens */
+      }
+
+      button {
+        width: 100%; /* Full-width buttons on mobile */
+        padding: 12px;
+      }
+    }
   `];
 }

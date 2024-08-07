@@ -39,6 +39,9 @@ export class UserReviewViewElement extends View<Model, Msg> {
     return map;
   }
 
+  @state()
+  loading = true;
+
   constructor() {
     super("slostudyspots:model");
   }
@@ -63,6 +66,10 @@ export class UserReviewViewElement extends View<Model, Msg> {
     this._authObserver.observe(({ user }) => {
       if (user && !this.reviewsFetched) {
         console.log("Authenticated user:", user.username);
+
+        // Set loading state to true before fetching data
+        this.loading = true;
+
         this.dispatchMessage([
           "profile/select",
           { userid: user.username }
@@ -82,6 +89,9 @@ export class UserReviewViewElement extends View<Model, Msg> {
         } else {
           console.warn("Profile _id is not set. Review list message not dispatched.");
         }
+
+        // temporary loading state (NEED TO FIX)
+        setTimeout(() => this.loading = false, 100);
       }
     });
   }
@@ -148,14 +158,17 @@ export class UserReviewViewElement extends View<Model, Msg> {
   }
 
   render(): TemplateResult {
-    if (!this.profile) {
-      return html`<p>Loading...</p>`;
+    // if (!this.profile) {
+    //   return html`<p>Loading...</p>`;
+    // }
+    if (this.loading) {
+      return html`<div class="loading-spinner"></div>`;
     }
 
     return html`
       <main>
         <section class="profile-header">
-          <h1>${this.profile.userid}'s Reviews (${this.profile.reviewsCount})</h1>
+          <h1>${this.profile?.userid}'s Reviews (${this.profile?.reviewsCount})</h1>
         </section>
         <section class="reviews-list">
           ${this.reviews.length === 0
@@ -405,6 +418,24 @@ export class UserReviewViewElement extends View<Model, Msg> {
       .dropdown-option:hover {
         background-color: var(--color-primary);
         color: var(--color-background-primary);
+      }
+
+      .loading-spinner {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border: 8px solid var(--color-background-secondary);
+        border-top: 8px solid var(--color-primary);
+        border-radius: 50%;
+        width: fit-content;
+        height: fit-content;
+        animation: spin 1s linear infinite;
+      }
+
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
       }
     `
   ];

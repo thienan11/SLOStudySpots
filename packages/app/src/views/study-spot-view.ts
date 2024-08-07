@@ -29,6 +29,9 @@ export class StudySpotViewElement extends View<Model, Msg> {
     return this.model.reviews || [];
   }
 
+  @state()
+  loading = true;
+
   constructor() {
     super("slostudyspots:model");
   }
@@ -45,6 +48,9 @@ export class StudySpotViewElement extends View<Model, Msg> {
       newValue
     ) {
       console.log("Study Spot Page:", newValue);
+
+      // Set loading state to true before fetching data
+      this.loading = true;
       
       // Clear reviews in the model when changing study spots (is this necessary?)
       this.dispatchMessage(["review/clear"]);
@@ -54,6 +60,9 @@ export class StudySpotViewElement extends View<Model, Msg> {
         { spotid: newValue }
       ]);
       this.dispatchMessage(["review/list-by-spot", { spotId: newValue }]);
+
+      // temporary loading state (NEED TO FIX)
+      setTimeout(() => this.loading = false, 100);
     }
   }
 
@@ -98,17 +107,21 @@ export class StudySpotViewElement extends View<Model, Msg> {
   
 
   render(): TemplateResult {
+    if (this.loading) {
+      return html`<div class="loading-spinner"></div>`;
+    }
+
     const {
       name,
       address,
       hoursOfOperation,
       ratings,
       link,
+      photos
     } = this.studySpot || {};
     
     // const photo_URL = this.studySpot?.photos?.[0] || '/icons/default-spot.png';
-    const photo_URL = (this.studySpot?.photos && this.studySpot?.photos.length > 0
-      ? this.studySpot?.photos[0].url : '/icons/default-spot.png');
+    const photo_URL = (photos && photos.length > 0 ? photos[0].url : '/icons/default-spot.png');
 
     const tags_html = this.studySpot?.tags?.map(s => html`<span class="feature-tag">${s}</span>`) || html``;
 
@@ -244,7 +257,7 @@ export class StudySpotViewElement extends View<Model, Msg> {
         position: absolute;
         bottom: 0;
         width: 100%;
-        background: linear-gradient(to top, rgba(0,0,0,0.8) 10%, transparent 90%);
+        background: linear-gradient(to top, rgba(0,0,0,0.8) 30%, transparent 95%);
         padding: 10px 20px;
       }
 
@@ -471,43 +484,64 @@ export class StudySpotViewElement extends View<Model, Msg> {
       }
       
       .review-time-to-go {
-      display: block;
-      font-size: 0.875rem;
-      color: var(--color-secondary); /* Different color */
-      background-color: var(--color-background-light); /* Light background */
-      padding: 5px 10px;
-      margin-top: 10px;
-      border-radius: 15px; /* Rounded corners for a chip-like appearance */
-      font-style: italic; /* Italicize text */
-      display: flex;
-      align-items: center; /* Center align if using icon */
-    }
-
-    /* Media Queries for Responsive Adjustments */
-    @media (min-width: 768px) {
-      .details-reviews-container {
-        flex-direction: row;
-        justify-content: space-between;
+        display: block;
+        font-size: 0.875rem;
+        color: var(--color-secondary); /* Different color */
+        background-color: var(--color-background-light); /* Light background */
+        padding: 5px 10px;
+        margin-top: 10px;
+        border-radius: 15px; /* Rounded corners for a chip-like appearance */
+        font-style: italic; /* Italicize text */
+        display: flex;
+        align-items: center; /* Center align if using icon */
       }
 
-      .details-ratings, .user-reviews {
-        padding: 10px;
+      .loading-spinner {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border: 8px solid var(--color-background-secondary);
+        border-top: 8px solid var(--color-primary);
+        border-radius: 50%;
+        width: fit-content;
+        height: fit-content;
+        animation: spin 1s linear infinite;
       }
 
-      .spot-title {
-        font-size: 2rem; /* Larger font size for larger screens */
-      }
-    }
-
-    @media (max-width: 480px) {
-      .btn-view-gallery {
-        font-size: 0.8rem; /* Smaller button text on very small screens */
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
       }
 
-      .review-author, .review-date, .rating-text {
-        font-size: 0.75rem; /* Smaller text for compact display */
+      /* Media Queries for Responsive Adjustments */
+      @media (min-width: 768px) {
+        .details-reviews-container {
+          flex-direction: row;
+          justify-content: space-between;
+        }
+
+        .details-ratings, .user-reviews {
+          padding: 10px;
+        }
+
+        .spot-title {
+          font-size: 2rem; /* Larger font size for larger screens */
+        }
       }
-    }
+
+      @media (max-width: 480px) {
+        .btn-view-gallery {
+          font-size: 0.8rem; /* Smaller button text on very small screens */
+          margin-top: 10px;
+          position: relative;
+          right: auto;
+        }
+
+        /* .review-author, .review-date, .rating-text {
+          font-size: 0.75rem;
+        } */
+      }
     `
   ];
 }

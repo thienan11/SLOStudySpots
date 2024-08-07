@@ -128,8 +128,10 @@ export class HomeViewElement extends View<Model, Msg> {
         </section>
 
         <section class="featured-spots">
-          <h2>Featured Study Spots</h2>
-          <filter-popup .open="${this.isPopupOpen}" @sort-requested="${this.handleSortRequested}"></filter-popup>
+          <div class="header-container">
+            <h2>Featured Study Spots</h2>
+            <filter-popup .open="${this.isPopupOpen}" @sort-requested="${this.handleSortRequested}"></filter-popup>
+          </div>
           <ul class="spots-list">
             ${spotsToRender.map(renderItem)}
           </ul>
@@ -189,11 +191,18 @@ export class HomeViewElement extends View<Model, Msg> {
       .featured-spots {
         margin: var(--space-regular) 0;
       }
+
+      .featured-spots .header-container {
+        display: flex;
+        justify-content: space-between; /* Aligns heading and button on opposite sides */
+        align-items: center; /* Vertically centers items */
+        margin-bottom: var(--space-small); /* Space between heading/button and list */
+      }
       
       .featured-spots h2 {
         font-size: var(--font-size-large);
         color: var(--color-secondary);
-        margin-bottom: var(--space-small);
+        margin: 0;
       }
       
       .spots-list {

@@ -72,6 +72,10 @@ export class GalleryViewElement extends View<Model, Msg> {
     this.selectedPhoto = null;
   }
 
+  private goBack() {
+    window.history.back();
+  }
+
   render(): TemplateResult {
     const {
       photos
@@ -85,9 +89,10 @@ export class GalleryViewElement extends View<Model, Msg> {
       <main>
         <section class="photo-upload">
           <a href="/app/study-spot/${this.spotid}">← Back to ${this.studySpot?.name}</a>
+          <!-- <a href="#" @click=${this.goBack}>← Back to ${this.studySpot?.name}</a> -->
           <h2>Upload Your Photos</h2>
           ${this.username === "anonymous" ? html`
-            <p>Please sign in to upload photos.</p>
+            <a href="/app/login">Please sign in to upload photos.</a>
           ` : html`
             <form @submit=${this._handleFileUpload}>
               <input

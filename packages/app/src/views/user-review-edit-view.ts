@@ -36,7 +36,7 @@ export class UpdateReviewViewElement extends View<Model, Msg> {
 
   connectedCallback() {
     super.connectedCallback();
-    this._authObserver.observe(async ({ user }) => {
+    this._authObserver.observe(({ user }) => {
       if (user && this.reviewId && !this.review) {
         this.fetchReview(this.reviewId);
       }
@@ -89,6 +89,7 @@ export class UpdateReviewViewElement extends View<Model, Msg> {
 
     return html`
       <main>
+        <a href="/app/my-reviews">← Back to my Reviews</a>
         <h1>Update Review for ${this.studySpot.name}</h1>
         <mu-form .init=${this.review}>
           <label>
@@ -117,7 +118,7 @@ export class UpdateReviewViewElement extends View<Model, Msg> {
       ${ratingFields.map(field => html`
         <label>
           <span>${this.modifyField(field)}:</span>
-          <input name="${field}" type="number" min="0" max="5" step="0.5">
+          <input name="${field}" type="number" min="0" max="5" step="1">
         </label>
       `)}
     `;
@@ -235,6 +236,7 @@ export class UpdateReviewViewElement extends View<Model, Msg> {
         padding: var(--space-regular);
         max-width: 900px;
         margin: 0 auto;
+        text-align: center;
       }
 
       h1 {
@@ -242,6 +244,7 @@ export class UpdateReviewViewElement extends View<Model, Msg> {
         color: var(--color-secondary);
         margin-bottom: var(--space-regular);
         text-align: center;
+        padding-top: var(--space-regular);
       }
 
       mu-form {
@@ -287,6 +290,15 @@ export class UpdateReviewViewElement extends View<Model, Msg> {
 
       button:hover {
         background-color: var(--color-links);
+      }
+
+      a {
+        color: var(--color-links);
+        text-decoration: none;
+      }
+
+      a:hover {
+        text-decoration: underline;
       }
     `
   ];

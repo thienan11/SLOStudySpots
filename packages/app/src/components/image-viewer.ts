@@ -41,7 +41,7 @@ export class ImageViewerElement extends LitElement {
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      background: #fff;
+      background: var(--color-background-secondary);
       padding: 20px;
       border-radius: 8px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
@@ -61,7 +61,9 @@ export class ImageViewerElement extends LitElement {
 
     .popup .details {
       font-size: 14px;
-      color: #333;
+      color: var(--color-text-secondary);
+      display: flex;
+      justify-content: space-between;
     }
 
     .popup .close-btn {
@@ -81,8 +83,8 @@ export class ImageViewerElement extends LitElement {
       cursor: pointer;
     }
 
-    .close {
-      cursor: pointer;
+    .close-btn:hover {
+      transform: scale(1.1);
     }
 
     @media (max-width: 600px) {
@@ -124,13 +126,11 @@ export class ImageViewerElement extends LitElement {
     }
   `;
 
-  private _show() {
-    this.open = true;
-  }
-
   private _close() {
-    this.open = false;
     // this.removeAttribute('open');
+    this.open = false;
+    const closeEvent = new CustomEvent('close-popup', { detail: { closed: true } });
+    this.dispatchEvent(closeEvent);
   }
 
   private _handleOverlayClick(event: MouseEvent) {
@@ -138,11 +138,6 @@ export class ImageViewerElement extends LitElement {
     if ((event.target as HTMLElement).classList.contains('overlay')) {
       this._close();
     }
-  }
-
-  private _preventClickPropagation(event: MouseEvent) {
-    // Prevent the click event from propagating to the overlay
-    event.stopPropagation();
   }
 
   render() {

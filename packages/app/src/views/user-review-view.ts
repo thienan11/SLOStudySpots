@@ -60,7 +60,7 @@ export class UserReviewViewElement extends View<Model, Msg> {
 
   connectedCallback() {
     super.connectedCallback();
-    this._authObserver.observe(async ({ user }) => {
+    this._authObserver.observe(({ user }) => {
       if (user && !this.reviewsFetched) {
         console.log("Authenticated user:", user.username);
         this.dispatchMessage([

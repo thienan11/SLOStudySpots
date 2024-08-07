@@ -1,5 +1,3 @@
-import { create } from "node:domain";
-
 export interface StudySpot {
   name: string;
   address: string;

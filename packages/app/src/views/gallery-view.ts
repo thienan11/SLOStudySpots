@@ -21,7 +21,6 @@ export class GalleryViewElement extends View<Model, Msg> {
     return this.model.studySpot;
   }
 
-  @property({ type: Array }) photos: Array<{ url: string; uploadedBy: string; uploadDate: Date }> = [];
   @property({ type: Object }) selectedPhoto: { url: string; uploadedBy: string; uploadDate: Date } | null = null;
 
   constructor() {
@@ -73,7 +72,7 @@ export class GalleryViewElement extends View<Model, Msg> {
     this.selectedPhoto = null;
   }
 
-  render() {
+  render(): TemplateResult {
     const {
       photos
     } = this.studySpot || {};
@@ -108,10 +107,10 @@ export class GalleryViewElement extends View<Model, Msg> {
             (photo: { url: string; uploadedBy: string; uploadDate: Date }) => html`
               <div class="photo" @click=${() => this._viewImage(photo)}>
                 <img src="${photo.url}">
-                <div class="photo-details">
+                <!-- <div class="photo-details">
                   <p>Uploaded by: ${photo.uploadedBy}</p>
                   <p>Upload date: ${new Date(photo.uploadDate).toLocaleDateString()}</p>
-                </div>
+                </div> -->
               </div>
             `
           ) : html`
@@ -125,7 +124,7 @@ export class GalleryViewElement extends View<Model, Msg> {
             uploadedBy="${this.selectedPhoto.uploadedBy}"
             uploadDate="${this.selectedPhoto.uploadDate}"
             ?open="${!!this.selectedPhoto}"
-            @click=${this._closeViewer}
+            @close-popup=${this._closeViewer}
           ></image-viewer>
         ` : ''}
       </main>
@@ -173,13 +172,21 @@ export class GalleryViewElement extends View<Model, Msg> {
         })
         .then(json => {
           console.log("Image has been uploaded to", json.url);
-          // Optionally refresh the gallery or handle the new photo URL
+          alert("Photo uploaded successfully!"); // Success alert
+
+          // clear the selected file
+          this.selectedFile = null;
+
+          // refresh the study spot data to show the new photo
+          this.dispatchMessage(["study-spot/select", { spotid: this.spotid }]);
         })
         .catch(error => {
           console.log("Upload failed", error);
+          alert("Upload failed. Please try again."); // Error alert
         });
     }).catch(error => {
       console.log("File reading failed", error);
+      alert("File reading failed. Please try again.");
     });
   }
   
@@ -202,7 +209,7 @@ export class GalleryViewElement extends View<Model, Msg> {
         border-radius: var(--border-radius);
         text-align: center;
         margin: var(--space-regular);
-        box-shadow: var(--shadow-hover-small);
+        /* box-shadow: var(--shadow-hover-small); */
       }
 
       .photo-upload h2 {

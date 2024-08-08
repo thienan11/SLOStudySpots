@@ -11,7 +11,8 @@
   "scripts": {
     "dev": "nodemon",
     "build": "npx etsc",
-    "start": "npm run build && npm run start:node",
+    "prestart": "echo $GCS_KEY_FILE_BASE64 | base64 --decode > service-account-file.json",
+    "start": "npm run build && npm run prestart && npm run start:node",
     "start:api": "cross-env STATIC=./public npm run start",
     "start:app": "cross-env STATIC=../app/dist npm run start",
     "start:node": "node dist/index.js",

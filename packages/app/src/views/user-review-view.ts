@@ -1,6 +1,6 @@
 import { View, Auth, Observer, define } from "@calpoly/mustang";
 import { css, html, TemplateResult } from "lit";
-import { property, state } from "lit/decorators.js";
+import { state } from "lit/decorators.js";
 import resetCSS from "../css/reset";
 import starsCSS from "../css/stars";
 import { Review, Profile, StudySpot } from "server/models";
@@ -46,14 +46,14 @@ export class UserReviewViewElement extends View<Model, Msg> {
     super("slostudyspots:model");
   }
 
-  private fetchStudySpotsForReviews() {
-    if (this.reviews.length > 0) {
-      // Fetch each study spot and update the model
-      for (const review of this.reviews) {
-        this.dispatchMessage(["study-spot/select", { spotid: review.spotId }]);
-      }
-    }
-  }
+  // private fetchStudySpotsForReviews() {
+  //   if (this.reviews.length > 0) {
+  //     // Fetch each study spot and update the model
+  //     for (const review of this.reviews) {
+  //       this.dispatchMessage(["study-spot/select", { spotid: review.spotId }]);
+  //     }
+  //   }
+  // }
 
   private fetchStudySpots() {
     this.dispatchMessage(["study-spot/index"]);

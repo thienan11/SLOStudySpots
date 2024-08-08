@@ -4,13 +4,16 @@
 :root {
   /* Color Palette */
   --color-primary: #668586; /* Soft teal */
+  --color-primary-transparent: rgba(102, 133, 134, 0.9); /* Soft teal with 50% transparency */
   --color-secondary: #D7A8A2; /* Dusty rose */
   --color-text-primary: #7A6F72; /* Earthy brown */
   --color-text-secondary: #333;
-  --color-background-primary: #FFF8E7; /* Cream */
+  --color-background-primary: #FFF8E7; /* Cream (alt: Light Gray #E0E0E0) */
   --color-background-secondary: #FFFDF6; /* Lighter cream */
   --color-links: #CAB8D9; /* Soft lavender */
   --color-tags: #9CAD92; /* Soothing green */
+  --color-accent: #E6AC8F; /* Dark Peach */
+  --color-background-highlight: #F2F2F2; /* Light gray */
 
   /* Shadows */
   --shadow-hover-large: 0px 8px 15px rgba(0,0,0,0.1);
@@ -31,10 +34,15 @@
 
   /* Borders */
   --border-radius: 8px;
+
+  /* Invert State */
+  --invert-black-to-white: invert(0);
+  --invert-white-to-black: invert(1);
 }
 
 body.dark-mode {
   --color-primary: #33736B;
+  --color-primary-transparent: rgba(51, 115, 107, 0.9); /* Dark mode teal with 50% transparency */
   --color-secondary: #79504F;
   --color-text-primary: #E8E1E2;
   --color-text-secondary: #fff;
@@ -42,8 +50,13 @@ body.dark-mode {
   --color-background-secondary: #404040;
   --color-links: #6E5D84;
   --color-tags: #495D50;
+  --color-accent: #F2D3B2;
+  --color-background-highlight: #333;
 
   --shadow-hover-large: 0px 8px 15px rgba(255,255,255,0.05);
   --shadow-hover-small: 0 2px 5px rgba(255,255,255,0.04);
   --shadow-hover-med: 0 4px 20px rgba(255,255,255,0.07);
+
+  --invert-black-to-white: invert(1);
+  --invert-white-to-black: invert(0);
 }

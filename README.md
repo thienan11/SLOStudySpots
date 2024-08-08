@@ -6,7 +6,7 @@ Monorepo containing all SLOStudySpots related code.
 
 SLOStudySpots is a web application designed to help students and residents of San Luis Obispo find the best study spots in the area. This platform provides users with detailed reviews, ratings, and photos of various locations, including cafes, libraries, and public spaces, making it easier to find the perfect place for study or work.
 
-### Built with
+### Built With
 
 - [![lit][lit]][lit-url]
 - [![typescript][typescript]][typescript-url]
@@ -36,7 +36,7 @@ Then, refer to and follow the individual package READMEs for specific package in
 
 This project requires environment variables to be set up in a `.env` file for proper configuration and operation.
 
-In the `server` package, create a file called `.env` or `.env.local` and refer to the <a href="packages/server/.env.example" style="text-decoration: none; color: inherit;">`.env.example`</a>  file located in the `server` package.
+In the `server` package, create a file called `.env` or `.env.local` and refer to the [`.env.example`](/packages/server/.env.example) file located in the `server` package.
 
 ## Packages
 

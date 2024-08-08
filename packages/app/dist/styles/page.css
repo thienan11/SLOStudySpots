@@ -8,6 +8,7 @@ body {
   /* position: relative; */
   position: relative; /* Needed to position the footer correctly */
   padding-bottom: 50px;
+  padding-top: 50px;
 }
 
 main {

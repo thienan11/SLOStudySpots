@@ -157,6 +157,61 @@ export class RankingsViewElement extends View<Model, Msg> {
       a {
         text-decoration: none;
       }
+
+      @media (max-width: 768px) {
+        .rankings-container {
+          padding: var(--space-small);
+        }
+
+        .ranking {
+          padding: 15px;
+          margin-bottom: 12px;
+        }
+
+        .ranking h3 {
+          font-size: 1.1em;
+          margin-bottom: 8px;
+        }
+
+        .ranking p {
+          font-size: 0.9em;
+        }
+
+        .content {
+          padding-left: 20px; /* Adjust padding for smaller screens */
+        }
+
+        .ranking:before {
+          left: 5px; /* Adjust position for the number */
+          top: 15px;
+          font-size: 1em; /* Adjust font size for the number */
+        }
+      }
+
+      @media (max-width: 480px) {
+        .ranking {
+          padding: 10px;
+          margin-bottom: 8px;
+        }
+
+        .ranking h3 {
+          font-size: 1em;
+        }
+
+        .ranking p {
+          font-size: 0.8em;
+        }
+
+        .content {
+          padding-left: 15px; /* Adjust padding for smaller screens */
+        }
+
+        .ranking:before {
+          left: 3px; /* Adjust position for the number */
+          top: 12px;
+          font-size: 0.9em; /* Adjust font size for the number */
+        }
+      }
     `
   ];
 }

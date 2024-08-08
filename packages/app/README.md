@@ -4,6 +4,8 @@ This package implements a single-page application (SPA), built on the Model-View
 
 ## Running
 
+### Development
+
 Make sure to have all dependencies installed before running.
 
 For development, run the following command in the directory `packages/app`:
@@ -14,17 +16,34 @@ npm run dev
 And in a separate terminal, navigate to `packages/server` and execute:
 
 ```shell
-npm run start
+npm run dev
 ```
 
 These commands will activate both the frontend and backend servers, setting up the full environment for development and testing.
 
-## NOTE (features not implemented yet)
-- No image uploads for study spots (only for avatar as dataURI)
-  - So no photo gallery for study spots
-- Users can't see to their reviews for now (so no editing or deleting reviews)
-- When adding a new study spot, there is no input for hours of operations
-- Clicking tags doesn't filter out spots with same tags
-- Responsive design (overall styling could be better)
+### Production
 
-For future, I'd like to make it so that a study spot can only be posted after approval by an admin.
+For simplicity, we’ll have the backend serve the frontend along with the API. Run the following command in the directory `packages/app` to create a `dist/` directory with static files:
+
+```shell
+npm run build
+```
+
+Now we need to tell our backend to serve these files by running the following in `packages/server`: 
+
+```shell
+npm run start:app
+```
+
+This will enable you to serve the SPA from the server for production.
+
+## Future Features
+- Ability to favorite and view favorited spots
+- Option to add hours of operation when adding a new study spot
+- Filter spots with same tags when clicking on tags
+- Can only one write review per spot (only able to edit or delete after that)
+- Possibly make it so that a study spot can only be posted after approval by an admin.
+
+## Fixes
+- Fix back links for some view (use History?)
+- Improve overall design (mainly responsive design)

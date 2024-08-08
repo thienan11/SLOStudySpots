@@ -1,21 +1,56 @@
 # SLOStudySpots
 
-SLOStudySpots is an interactive web application designed to help students and residents of San Luis Obispo find the best study spots in the area. This user-friendly platform offers detailed information on various locations, including cafes, libraries, and public spaces, where users can study or work comfortably.
+Monorepo containing all SLOStudySpots related code.
 
-Miro Board: https://miro.com/app/board/uXjVKTnltEo=/?share_link_id=757753677716
+## About
 
-Check out the web app here: https://ttran259.unbundled.dev/
+SLOStudySpots is a web application designed to help students and residents of San Luis Obispo find the best study spots in the area. This platform provides users with detailed reviews, ratings, and photos of various locations, including cafes, libraries, and public spaces, making it easier to find the perfect place for study or work.
+
+### Built with
+
+- [![lit][lit]][lit-url]
+- [![typescript][typescript]][typescript-url]
+- [![mongodb][mongodb]][mongodb-url]
+- [![nodejs][nodejs]][nodejs-url]
+- [![express][express]][express-url]
 
 ## Getting Started
 
-First, install dependencies globally from the monorepo root:
+To get a local copy up and running, follow these steps.
 
-```shell
-npm install
-```
+### Installation
 
-Then, refer to the README.md in the following packages:
+1.  Clone the repo
+    ```shell
+    git clone https://github.com/thienan11/SLOStudySpots.git
+    ```
 
-- [Prototype](packages/proto/README.md) uses only static HTML, CSS, and Javascript.
-- [Server](packages/server/README.md) adds a backend API, communication with a database, and authentication.
-- [App](packages/app/README.md) adds routing and state management to the frontend, making it a single-page app.
+2.  From the monorepo root, install NPM packages (dependencies)
+    ```shell
+    npm install
+    ```
+
+Then, refer to and follow the individual package READMEs for specific package information.
+
+### Project Configuration
+
+This project requires environment variables to be set up in a `.env` file for proper configuration and operation.
+
+In the `server` package, create a file called `.env` or `.env.local` and refer to the <a href="packages/server/.env.example" style="text-decoration: none; color: inherit;">`.env.example`</a>  file located in the `server` package.
+
+## Packages
+
+- [Prototype](packages/proto/README.md): uses only static HTML, CSS, and Javascript.
+- [Server](packages/server/README.md): backend Express API, with communication to MongoDB and authentication.
+- [App](packages/app/README.md): frontend single-page app using Lit.
+
+[typescript]: https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white
+[typescript-url]: https://www.typescriptlang.org/
+[lit]: https://img.shields.io/badge/Lit-324FFF?logo=lit&logoColor=fff&style=for-the-badge
+[lit-url]: https://lit.dev/
+[mongodb]: https://img.shields.io/badge/MongoDB-47A248?logo=mongodb&logoColor=fff&style=for-the-badge
+[mongodb-url]: https://www.mongodb.com/
+[express]: https://img.shields.io/badge/Express-000?logo=express&logoColor=fff&style=for-the-badge
+[express-url]: https://expressjs.com/
+[nodejs]: https://img.shields.io/badge/Node.js-5FA04E?logo=nodedotjs&logoColor=fff&style=for-the-badge
+[nodejs-url]: https://nodejs.org/en

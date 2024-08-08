@@ -34,3 +34,6 @@ kram_modules/
 /.yalc
 .yalc
 yalc.lock
+
+# JSON Key files
+slostudyspots*.json

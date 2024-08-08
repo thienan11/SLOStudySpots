@@ -6,7 +6,8 @@ import auth, { authenticateUser } from "./routes/auth";
 import { connect } from "./services/mongo";
 import fs from "node:fs/promises";
 import path from "path";
-import { getFile, saveFile } from "./services/filesystem";
+// import { getFile, saveFile } from "./services/filesystem";
+import { getFile, saveFile } from "./services/cloud-storage";
 
 // MongoDB connection
 connect("slostudyspots");
@@ -23,8 +24,12 @@ app.use(express.static(staticDir));
 app.use(express.raw({ type: "image/*", limit: "32Mb" }));
 app.use(express.json({ limit: "500kb" }));
 
-// JSON parsing middleware
-app.use(express.json());
+// Auth routes
+app.use("/auth", auth);
+
+// Photos routes
+app.post("/photos", saveFile);
+app.get("/photos/:id", getFile);
 
 // Serve NPM packages
 const nodeModules = path.resolve(
@@ -33,13 +38,6 @@ const nodeModules = path.resolve(
 );
 console.log("Serving NPM packages from", nodeModules);
 app.use("/node_modules", express.static(nodeModules));
-
-// Photos routes
-app.post("/photos", saveFile);
-app.get("/photos/:id", getFile);
-
-// Auth routes
-app.use("/auth", auth);
 
 // Profile routes
 app.use("/api/profiles", authenticateUser, profiles);

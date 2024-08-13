@@ -47,3 +47,4 @@ export type Msg =
   | ["review/select", { reviewId: string }]
   | ["review/list-by-user", { userId: string }]
   | ["review/clear"];
+  // | ["token/expired"];

@@ -148,6 +148,14 @@ export default function update(
     case "review/clear":
       apply(model => ({ ...model, reviews: [] }));
       break;
+    // case "token/expired":
+    //   apply((model) => ({
+    //     ...model,
+    //     user: null, // Clear user data
+    //     notification: "Your session has expired. Please log in again.",
+    //   }));
+    //   // Here, you could also trigger a redirect to the login page
+    //   break;
     default:
       const unhandled: never = message[0];
       throw new Error(`Unhandled message "${unhandled}"`);
@@ -170,6 +178,10 @@ function saveProfile(
     body: JSON.stringify(msg.profile)
   })
     .then((response: Response) => {
+      if (response.status === 401) {
+        dispatchTokenExpired();
+        throw new Error("Session expired");
+      }
       if (response.status === 200) return response.json();
       else
         throw new Error(
@@ -190,6 +202,10 @@ function selectProfile(
     headers: Auth.headers(user)
   })
     .then((response: Response) => {
+      if (response.status === 401) {
+        dispatchTokenExpired();
+        throw new Error("Session expired");
+      }
       if (response.status === 200) {
         return response.json();
       }
@@ -452,4 +468,12 @@ function listReviewsByUser(userId: string) {
       }
       return [];
     });
+}
+
+function dispatchTokenExpired() {
+  // console.log("Token expired event dispatched");
+  // const event = new CustomEvent("token/expired");
+  // window.dispatchEvent(event);
+  console.log("Token expired, redirecting to login page.");
+  window.location.href = "/app/login";
 }

@@ -10,32 +10,31 @@ Ensure you are in the `packages/server` directory to execute the following comma
 
 Make sure to have all dependencies installed before running.
 
-To start build the Express server for production:
-
-```shell
-npm run build
-```
-
-To start the server without a frontend:
-
-```shell
-npm run start
-```
-
-To start the server with the Prototype as the frontend:
-
-```shell
-npm run start:proto
-```
-
-To start the server in development mode with the Prototype as
-the frontend:
+To start the server in development mode:
 
 ```shell
 npm run dev
 ```
 
-To start the server with the SPA:
+To build the Express server for production:
+
+```shell
+npm run build
+```
+
+To build and start the server without a frontend:
+
+```shell
+npm run start
+```
+
+To build and start the server with the Prototype as the frontend:
+
+```shell
+npm run start:proto
+```
+
+To build and start the server with the SPA as the frontend:
 
 ```shell
 npm run start:app
@@ -43,15 +42,15 @@ npm run start:app
 
 ## Documentation
 
-The source files for the server are written in Typescript. This
+The source files for the server are written in TypeScript. This
 allows us to provide typesafe interfaces to MongoDB, and
 ultimately provide some type safety for the REST API. They are
 organized into the following directories:
 
-- [models](src/models): Typescript interfaces for each type of
+- [models](src/models): TypeScript interfaces for each type of
   data we are handling.
 - [services](src/services): Backend services which are invoked
   from the endpoints. Many of these interface (via mongoose)
-  with MogoDB to persist data.
+  with MongoDB to persist data.
 - [routes](src/routes): Implementation of endpoints for the REST
   API.

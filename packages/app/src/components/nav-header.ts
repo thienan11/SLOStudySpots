@@ -85,16 +85,19 @@ export class HeaderElement extends LitElement {
                   <ul>
                     <li>
                       <a href="/app/login">
+                        <img src="/icons/avatar.svg" alt="login-icon" class="navbar-icon"/>
                         Login
                       </a>
                     </li>
                     <li>
                       <a href="/app/register">
+                        <img src="/icons/register.svg" alt="register-icon" class="navbar-icon"/>
                         Sign Up
                       </a>
                     </li>
                     <li>
                       <a href="/app/rankings">
+                        <img src="/icons/ranking.svg" alt="ranking-icon" class="navbar-icon"/>
                         Community Rankings
                       </a>
                     </li>

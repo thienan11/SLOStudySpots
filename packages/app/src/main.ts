@@ -22,6 +22,7 @@ import { AddReviewViewElement } from "./views/add-review-view";
 import { AccountViewElement } from "./views/account-view";
 import { UpdateReviewViewElement } from "./views/user-review-edit-view";
 import { GalleryViewElement } from "./views/gallery-view";
+import { FavoriteSpotsViewElement } from "./views/favorite-spots-view";
 
 const routes: Switch.Route[] = [
   {
@@ -92,6 +93,13 @@ const routes: Switch.Route[] = [
     `
   },
   {
+    auth: "protected",
+    path: "/app/my-fav-spots",
+    view: () => html`
+      <favorite-spots-view></favorite-spots-view>
+    `
+  },
+  {
     path: "/app/login",
     view: () => html` <login-view></login-view> `,
   },
@@ -107,6 +115,15 @@ const routes: Switch.Route[] = [
   },
   {
     path: "/",
+    redirect: "/app"
+  },
+  // Wildcard redirect
+  {
+    path: "/app/:path*",
+    redirect: "/app"
+  },
+  {
+    path: "/:path*",
     redirect: "/app"
   }
 ];
@@ -145,5 +162,6 @@ define({
   "user-review-view": UserReviewViewElement,
   "account-view": AccountViewElement,
   "update-review-view": UpdateReviewViewElement,
-  "gallery-view": GalleryViewElement
+  "gallery-view": GalleryViewElement,
+  "favorite-spots-view": FavoriteSpotsViewElement
 });

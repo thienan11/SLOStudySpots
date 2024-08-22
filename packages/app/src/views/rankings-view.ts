@@ -13,6 +13,12 @@ export class RankingsViewElement extends View<Model, Msg> {
   //   return [...(this.model.studySpotIndex || [])].sort((a, b) => b.ratings.overall - a.ratings.overall);
   //   // TODO: for tie breakers, sort by number of reviews
   // }
+    
+  // TODO: Make an endpoint to get top 5 study spots for efficiency
+
+  @state()
+  private itemsToShow = 5;  // Number of items to initially display
+
   get sortedStudySpots(): StudySpot[] {
     return [...(this.model.studySpotIndex || [])].sort((a, b) => {
       // Sort primarily by overall rating
@@ -73,7 +79,7 @@ export class RankingsViewElement extends View<Model, Msg> {
         <section class="rankings-container">
           <h2>Top Rated Study Spots</h2>
           <ol>
-            ${this.sortedStudySpots.map(renderItem)}
+            ${this.sortedStudySpots.slice(0, this.itemsToShow).map(renderItem)}
           </ol>
         </section>
       </main>

@@ -542,6 +542,12 @@ export class StudySpotViewElement extends View<Model, Msg> {
           font-size: 0.75rem;
         } */
       }
+
+      @media (max-width: 768px) {
+        .featured-image {
+          height: 250px; /* Adjust the height for smaller screens */
+        }
+      }
     `
   ];
 }

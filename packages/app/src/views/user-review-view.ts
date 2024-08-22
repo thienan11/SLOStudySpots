@@ -172,7 +172,7 @@ export class UserReviewViewElement extends View<Model, Msg> {
         </section>
         <section class="reviews-list">
           ${this.reviews.length === 0
-            ? html`<p>No reviews available.</p>`
+            ? html`<p class="no-review">No reviews available.</p>`
             : this.reviews.map(review => this.renderReview(review))
           }
         </section>
@@ -321,6 +321,13 @@ export class UserReviewViewElement extends View<Model, Msg> {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
         grid-gap: var(--space-regular);
+      }
+
+      .reviews-list .no-review {
+        grid-column: 1 / -1;
+        text-align: center;
+        font-size: 1.1rem;
+        color: var(--color-text-primary);
       }
 
       .review-container {

@@ -131,6 +131,30 @@ export class LoginViewElement extends LitElement {
       .login-register-container button[slot="submit"]:hover {
         background-color: var(--color-links);
       }
+
+      .login-register-container img {
+        max-width: 100%;
+        height: auto;
+      }
+
+      @media (max-width: 600px) {
+        .login-register-container {
+          padding: var(--space-small);
+          padding-top: 20px; /* Adjust padding-top for smaller screens */
+        }
+
+        .login-register-container .card {
+          padding: var(--space-medium);
+        }
+
+        .login-register-container input {
+          font-size: var(--font-size-body); /* Ensure font size is readable on small screens */
+        }
+
+        .login-register-container button[slot="submit"] {
+          padding: 8px 16px; /* Adjust button padding for better fit on mobile */
+        }
+      }
     `
   ];
 }

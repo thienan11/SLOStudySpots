@@ -3,7 +3,7 @@ import { css, html, TemplateResult } from "lit";
 import { property, state } from "lit/decorators.js";
 import resetCSS from "../css/reset";
 import starsCSS from "../css/stars";
-import { Review, StudySpot } from "server/models";
+import { Review, StudySpot, Profile } from "server/models";
 import { Msg } from "../messages";
 import { Model } from "../model";
 
@@ -25,7 +25,14 @@ export class UpdateReviewViewElement extends View<Model, Msg> {
     return this.model.studySpot;
   }
 
+  @state()
+  get profile(): Profile | undefined {
+    return this.model.profile;
+  }
+
   private oldReview: Review | undefined;
+
+  // private currentUserId: string | undefined;
 
   constructor() {
     super("slostudyspots:model");
@@ -37,9 +44,20 @@ export class UpdateReviewViewElement extends View<Model, Msg> {
   connectedCallback() {
     super.connectedCallback();
     this._authObserver.observe(({ user }) => {
-      if (user && this.reviewId && !this.review) {
-        this.fetchReview(this.reviewId);
+      if (user) {
+        if (!this.profile) {
+          this.dispatchMessage([
+            "profile/select",
+            { userid: user.username }
+          ]);
+        }
+        if (this.reviewId && !this.review) {
+          this.fetchReview(this.reviewId);
+        }
       }
+      // if (user && this.reviewId && !this.review) {
+      //   this.fetchReview(this.reviewId);
+      // }
     });
   }
 
@@ -67,6 +85,15 @@ export class UpdateReviewViewElement extends View<Model, Msg> {
   updated(changedProperties: Map<string | number | symbol, unknown>): void {
     super.updated(changedProperties);
   
+    if (this.review &&
+      (this.review.userId as Profile & { _id: string })._id !== (this.model.profile as Profile & { _id: string })._id) {
+      console.error("Unauthorized access attempt");
+      History.dispatch(this, "history/navigate", {
+        href: `/app` // Redirect to an unauthorized page or handle appropriately
+      });
+      return;
+    }
+
     if (this.review && !this.studySpot) {
       this.fetchStudySpot(this.review.spotId);
     }
